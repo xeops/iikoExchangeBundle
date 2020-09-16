@@ -1,53 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fdfc3c7-f958-468a-9fda-b36c7eb61c14" name="Default Changelist" comment="initial">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/config/packages/dev/monolog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/dev/monolog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/config/packages/prod/deprecations.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/prod/deprecations.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/config/packages/prod/monolog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/prod/monolog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/config/packages/test/monolog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/test/monolog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Contract/ConnectionInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/ConnectionInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Contract/DataSourceDriverInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/DataSourceDriverInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Contract/DataSourceInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/DataSourceInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Contract/MessageInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/MessageInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Contract/ProviderInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/ProviderInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Contract/RequestInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/RequestInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Contract/ResponseInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/ResponseInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/Driver/iikoOlapDriver.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver/iikoOlapDriver.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Connection/iikoConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Connection/iikoConnection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Delco/AggregateFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Delco/AggregateFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Delco/FieldsDirectory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Delco/FieldsDirectory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Delco/FilterFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Delco/FilterFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Delco/GroupFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Delco/GroupFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Sales/AggregateFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Sales/AggregateFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Sales/AggregateFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Sales/AggregateFunctions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Sales/FieldsDirectory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Sales/FieldsDirectory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Sales/FilterFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Sales/FilterFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Sales/GroupFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Sales/GroupFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Transactions/AggregateFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Transactions/AggregateFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Transactions/AggregateFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Transactions/AggregateFunctions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Transactions/FieldsDirectory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Transactions/FieldsDirectory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Transactions/FilterFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Transactions/FilterFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/Olap/Version52/Transactions/GroupFields.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/Olap/Version52/Transactions/GroupFields.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/iikoReportBalanceStores.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/iikoReportBalanceStores.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/iikoReportColumnsRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/iikoReportColumnsRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/iikoReportFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/iikoReportFilter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/iikoReportRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/iikoReportRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Reports/iikoReportRequestDto.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Reports/iikoReportRequestDto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Request/ServerApi1Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Request/ServerApi1Request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Request/ServerApi2Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Request/ServerApi2Request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/src/library/iiko/Request/iikoApiRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Request/iikoApiRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iikoExchangeBundle/tests/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/bootstrap.php" afterDir="false" />
+    <list default="true" id="4fdfc3c7-f958-468a-9fda-b36c7eb61c14" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,10 +57,22 @@
       <option name="presentableId" value="Default" />
       <updated>1600240450046</updated>
     </task>
+    <task id="LOCAL-00001" summary="initial">
+      <created>1600263933864</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600263933864</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2688" y="258" width="374" height="556" key="#com.intellij.ide.util.MemberChooser" timestamp="1600244721657">
@@ -124,10 +91,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2613" y="297" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600245875721" />
-    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600263917105">
+    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600263933755">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600263917105" />
+    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600263933755" />
     <state x="2640" y="454" width="469" height="163" key="ComposerInitDialogKey" timestamp="1600241220639">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -148,5 +115,9 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2384" y="174" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600242326307" />
+    <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600263935239">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600263935239" />
   </component>
 </project>
