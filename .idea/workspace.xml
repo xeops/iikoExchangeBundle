@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fdfc3c7-f958-468a-9fda-b36c7eb61c14" name="Default Changelist" comment="initial">
-      <change beforePath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/library/iiko/Connection/Provider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable path="composer" />
@@ -74,6 +74,7 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
@@ -135,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600284172179</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="initial">
+      <created>1600284498758</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1600284498758</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,9 +154,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="initial" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2688" y="258" width="374" height="556" key="#com.intellij.ide.util.MemberChooser" timestamp="1600244721657">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="672" y="251" width="374" height="556" key="#com.intellij.ide.util.MemberChooser" timestamp="1600285796926">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
+    <state x="672" y="251" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1600285796926" />
     <state x="2688" y="258" width="374" height="556" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600244721657" />
     <state x="2588" y="286" width="574" height="500" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600243651786">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -162,10 +171,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2613" y="297" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600245875721" />
-    <state x="269" y="108" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600284211977">
+    <state x="269" y="108" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600284498566">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="269" y="108" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1600284211977" />
+    <state x="269" y="108" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1600284498566" />
     <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264174505" />
     <state x="2640" y="454" width="469" height="163" key="ComposerInitDialogKey" timestamp="1600241220639">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -183,18 +192,19 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2643" y="247" width="464" height="577" key="Github.UntrackedFilesDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600259749895" />
-    <state x="2447" y="388" width="835" height="536" key="NewPhpClassDialog" timestamp="1600254186374">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="461" y="377" width="851" height="522" key="NewPhpClassDialog" timestamp="1600285726675">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
+    <state x="461" y="377" width="851" height="522" key="NewPhpClassDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1600285726675" />
     <state x="2447" y="388" width="835" height="536" key="NewPhpClassDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600254186374" />
     <state x="2384" y="174" key="SettingsEditor" timestamp="1600242326307">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2384" y="174" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600242326307" />
-    <state x="486" y="267" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600284173909">
+    <state x="486" y="267" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600287370762">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="486" y="267" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1600284173909" />
+    <state x="486" y="267" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1600287370762" />
     <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264176444" />
     <state x="609" y="445" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600283516855">
       <screen x="0" y="0" width="1680" height="1050" />
