@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fdfc3c7-f958-468a-9fda-b36c7eb61c14" name="Default Changelist" comment="">
+    <list default="true" id="4fdfc3c7-f958-468a-9fda-b36c7eb61c14" name="Default Changelist" comment="initial">
+      <change beforePath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
@@ -26,7 +28,35 @@
     <option name="context" value="web-prod" />
     <option name="namespace" value="iikoweb-iikoweb-production" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/vendor/php-http/guzzle6-adapter" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+    </include_path>
+  </component>
   <component name="ProjectId" id="1haDk86GgNTV0eP4ZHpLBX60weP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -91,7 +121,21 @@
       <option name="project" value="LOCAL" />
       <updated>1600264174552</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="initial">
+      <created>1600283524967</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1600283524967</updated>
+    </task>
+    <task id="LOCAL-00006" summary="initial">
+      <created>1600284172178</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1600284172179</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,14 +162,19 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2613" y="297" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600245875721" />
-    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600264174506">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="269" y="108" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600284211977">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
+    <state x="269" y="108" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1600284211977" />
     <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264174505" />
     <state x="2640" y="454" width="469" height="163" key="ComposerInitDialogKey" timestamp="1600241220639">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2640" y="454" width="469" height="163" key="ComposerInitDialogKey/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600241220639" />
+    <state x="276" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1600283853787">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="276" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1680.1050@0.0.1680.1050" timestamp="1600283853787" />
     <state x="2721" y="439" key="Github.ShareDialog" timestamp="1600259743869">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -142,10 +191,15 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2384" y="174" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600242326307" />
-    <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600264176444">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="486" y="267" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600284173909">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
+    <state x="486" y="267" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1600284173909" />
     <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264176444" />
+    <state x="609" y="445" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600283516855">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="609" y="445" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1680.1050@0.0.1680.1050" timestamp="1600283516855" />
     <state x="2543" y="238" width="672" height="678" key="search.everywhere.popup" timestamp="1600264206766">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

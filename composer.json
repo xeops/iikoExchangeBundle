@@ -32,11 +32,5 @@
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php56": "*"
-    },
-    "extra": {
-        "symfony": {
-            "allow-contrib": false,
-            "require": "3.2.*"
-        }
     }
 }
