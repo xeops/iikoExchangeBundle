@@ -8,3 +8,4 @@ parameters:
 services:
 
     iiko_exchange.conection:
+        arguments: ["@gelf.ignore_error_transport"]
