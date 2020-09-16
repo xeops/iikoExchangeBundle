@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fdfc3c7-f958-468a-9fda-b36c7eb61c14" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600264120516</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="initial">
+      <created>1600264174552</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1600264174552</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -105,10 +113,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2613" y="297" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600245875721" />
-    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600264120454">
+    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2" timestamp="1600264174506">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264120454" />
+    <state x="2227" y="111" width="1295" height="850" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264174505" />
     <state x="2640" y="454" width="469" height="163" key="ComposerInitDialogKey" timestamp="1600241220639">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -129,9 +137,13 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2384" y="174" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600242326307" />
-    <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600264123558">
+    <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600264176444">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264123558" />
+    <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264176444" />
+    <state x="2543" y="238" width="672" height="678" key="search.everywhere.popup" timestamp="1600264206766">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2543" y="238" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264206766" />
   </component>
 </project>
