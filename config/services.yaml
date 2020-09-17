@@ -4,8 +4,17 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-
+    - { resource: parameters.yml }
 services:
 
     iiko_exchange.conection:
-        arguments: ["@gelf.ignore_error_transport"]
+        class: iiko\Connection\iikoConnection
+        arguments: ["@logger"]
+        calls:
+            -[setServer, ['%exchanger_server%']]
+            -[setUserName, ['%exchanger_user%]]
+            -[setPasswordHash,['%exchanger_password_hash%]]
+
+    iiko_exchange.provider:
+        class: iiko\Connection\Provider
+        arguments: ['@logger', '@iiko_exchange.conection']

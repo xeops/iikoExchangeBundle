@@ -5,6 +5,8 @@ namespace iiko\Connection;
 
 
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\RequestOptions;
+use iikoExchangeBundle\iikoExchangeBundle\Contract\ConnectionInterface;
 use iikoExchangeBundle\iikoExchangeBundle\Contract\ProviderInterface;
 use iikoExchangeBundle\iikoExchangeBundle\Contract\RequestInterface;
 use Psr\Log\LoggerInterface;
@@ -16,19 +18,29 @@ class Provider implements ProviderInterface
 	 */
 	private $logger;
 	/**
-	 * @var ClientInterface
+	 * @var ConnectionInterface
 	 */
-	private $client;
+	private $connection;
 
-	public function __construct(LoggerInterface $logger, ClientInterface $client)
+	public function __construct(LoggerInterface $logger, ConnectionInterface $connection)
 	{
 		$this->logger = $logger;
-		$this->client = $client;
+		$this->connection = $connection;
 	}
-
 
 	public function sendRequest(RequestInterface $request)
 	{
-		return $request->send();
+		return $this
+			->connection
+			->getClient()
+			->request(
+				$request->getMethod(),
+				$request->getUri(),
+				[
+					RequestOptions::BODY => $request->getBody(),
+					RequestOptions::HEADERS => $request->getHeaders(),
+					RequestOptions::TIMEOUT => $request->getTimeOut()
+				]
+			);
 	}
 }

@@ -85,4 +85,28 @@ class iikoConnection implements ConnectionInterface
 
 		$client->send($request);
 	}
+
+	/**
+	 * @param string $server
+	 */
+	public function setServer(string $server): void
+	{
+		$this->server = $server;
+	}
+
+	/**
+	 * @param mixed $userName
+	 */
+	public function setUserName($userName): void
+	{
+		$this->userName = $userName;
+	}
+
+	/**
+	 * @param mixed $passwordHash
+	 */
+	public function setPasswordHash($passwordHash): void
+	{
+		$this->passwordHash = $passwordHash;
+	}
 }
