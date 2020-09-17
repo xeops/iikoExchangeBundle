@@ -1,5 +1,6 @@
 <?php
 
+namespace xeops\iikoExchangeBundle\Driver;
 
 use iikoExchangeBundle\iikoExchangeBundle\Contract\DataSourceDriverInterface;
 use iikoExchangeBundle\iikoExchangeBundle\Contract\ProviderInterface;

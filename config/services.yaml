@@ -7,6 +7,9 @@ parameters:
     - { resource: parameters.yml }
 services:
 
+    iko_exchange.driver.olap:
+        class: xeops\iikoExchangeBundle\Driver\iikoOlapDriver
+        arguments: ["@logger", "@iiko_exchange.provider"]
     iiko_exchange.conection:
         class: iiko\Connection\iikoConnection
         arguments: ["@logger"]
