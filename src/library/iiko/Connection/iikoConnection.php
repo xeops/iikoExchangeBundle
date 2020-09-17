@@ -4,10 +4,13 @@
 namespace iiko\Connection;
 
 
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
 use iikoExchangeBundle\iikoExchangeBundle\Contract\ConnectionInterface;
 use Monolog\Logger;
@@ -32,49 +35,63 @@ class iikoConnection implements ConnectionInterface
 	 */
 	private $logger;
 
-	private $key = '';
 
-	public function __construct(LoggerInterface  $logger)
+	public function __construct(LoggerInterface $logger)
 	{
 
 		$this->logger = $logger;
 	}
 
-	public function getClient()
+	public function getClient(): ClientInterface
 	{
-		return (new \GuzzleHttp\Client(['base_uri' => $this->server, 'handler' => $this->getHandlers()]));
+		return (new Client(['base_uri' => $this->server, 'handler' => $this->getHandlers(), 'http_errors' => false]));
 	}
+
 
 	private function getHandlers(): HandlerStack
 	{
 		$handlers = HandlerStack::create();
 
-		$handlers->push(Middleware::retry(function ($retries, RequestInterface $request, ?ResponseInterface $response = null, ?\Exception $exception = null)
+		$key = "iikoweb_exchange_unresolved";
+
+		$handlers->push(Middleware::mapRequest(function (RequestInterface $request) use (&$key)
 		{
-			if ($retries === 0 && $response && $response->getStatusCode() === 401)
+			$loginResponse = $this->login();
+			if ($loginResponse->getStatusCode() === 200)
 			{
-				$this->logger->warning("AMO_CRM", ['step' => '401 unauthorized', 'response' => $response->getReasonPhrase(), 'body' => $response->getBody()]);
-				$this->refreshToken();
-				return true;
+				$key = $loginResponse->getBody()->getContents();
 			}
-			return false;
+			else
+			{
+				throw new \Exception($loginResponse->getReasonPhrase(), $loginResponse->getStatusCode());
+			}
+			$request->withUri(Uri::withQueryValue($request->getUri(), 'key', $key));
+
+			return $request;
 
 		}));
-		$handlers->push(Middleware::mapRequest(function (RequestInterface $request)
+
+		$handlers->push(Middleware::mapResponse(function (ResponseInterface $response) use ($key)
 		{
-			return $request->withHeader('Authorization', "{$this->getConnectionInfo('token_type')} {$this->getConnectionInfo('access_token')}");
+			try
+			{
+				$this->invalidateKey($key);
+			}
+			catch (\Exception $exception)
+			{
+				$this->logger->critical(__METHOD__, ['exception' => $exception->getMessage(), 'code' => $exception->getCode()]);
+			}
+
+			return $response;
 		}));
-		if ($this->isDebug)
-		{
-			$handlers->push(Middleware::log(new Logger('amo'), new MessageFormatter('{request} - {response}'), LogLevel::DEBUG));
-		}
+
 
 		return $handlers;
 	}
 
-	private function login()
+	private function login(): ResponseInterface
 	{
-		$client = $this->getClient();
+		$client = (new Client(['base_uri' => $this->server, 'http_errors' => false]));
 
 		$request = new Request(
 			'GET',
@@ -83,7 +100,20 @@ class iikoConnection implements ConnectionInterface
 			["login" => $this->userName, "pass" => $this->passwordHash, "client-type" => "iikoweb-exchange"]
 		);
 
-		$client->send($request);
+		return $client->send($request);
+	}
+
+	private function invalidateKey($key): ResponseInterface
+	{
+		$client = (new Client(['base_uri' => $this->server, 'http_errors' => false]));
+		$request = new Request(
+			'GET',
+			'/resto/api/logout',
+			["Accept" => "text/html,text/plain"],
+			["key" => $key, "client-type" => "iikoweb-exchange"]
+		);
+
+		return $client->send($request);
 	}
 
 	/**

@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fdfc3c7-f958-468a-9fda-b36c7eb61c14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/parameters.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/parameters_test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iikoExchangeBundle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contract/ConnectionInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/ConnectionInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contract/RequestInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contract/RequestInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/library/iiko/Connection/Provider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Connection/Provider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/library/iiko/Connection/iikoConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/iiko/Connection/iikoConnection.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +13,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable path="composer" />
@@ -79,7 +76,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -208,16 +205,22 @@
     </state>
     <state x="461" y="377" width="851" height="522" key="NewPhpClassDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1600285726675" />
     <state x="2447" y="388" width="835" height="536" key="NewPhpClassDialog/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600254186374" />
-    <state x="406" y="169" width="1111" height="722" key="SettingsEditor" timestamp="1600289588249">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state x="464" y="167" width="1270" height="730" key="SettingsEditor" timestamp="1600350698784">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="406" y="169" width="1111" height="722" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1600289588249" />
+    <state x="464" y="167" width="1270" height="730" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080@0.0.1920.1040" timestamp="1600350647257" />
     <state x="2384" y="174" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600242326307" />
+    <state x="464" y="167" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1600350698784" />
     <state x="486" y="267" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1600287381880">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="486" y="267" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1600287381880" />
     <state x="2475" y="275" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1080@1920.0.1920.1080" timestamp="1600264176444" />
+    <state x="721" y="386" width="477" height="299" key="cloudConfig.PluginsDialog" timestamp="1600354499184">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="721" y="386" width="477" height="299" key="cloudConfig.PluginsDialog/1920.0.1920.1080/0.0.1920.1040@0.0.1920.1040" timestamp="1600354499184" />
     <state x="609" y="445" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600283516855">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
