@@ -9,8 +9,10 @@ services:
 
     iko_exchange.driver.olap:
         class: xeops\iikoExchangeBundle\Driver\iikoOlapDriver
-        arguments: ["@logger", "@iiko_exchange.provider"]
-    iiko_exchange.conection:
+        arguments: ["@logger", "@iiko.provider"]
+
+    # This is temporary services for testing in manual mode. iikoWeb override both of this services by own
+    iiko.conection:
         class: iiko\Connection\iikoConnection
         arguments: ["@logger"]
         calls:
@@ -18,6 +20,6 @@ services:
             -[setUserName, ['%exchanger_user%]]
             -[setPasswordHash,['%exchanger_password_hash%]]
 
-    iiko_exchange.provider:
+    iiko.provider:
         class: iiko\Connection\Provider
-        arguments: ['@logger', '@iiko_exchange.conection']
+        arguments: ['@logger', '@iiko.conection']
