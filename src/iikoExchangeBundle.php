@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace iikoExchangeBundle;
 
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

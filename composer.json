@@ -19,8 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "App\\Library\\": "src/library"
+            "iikoExchangeBundle\\": "src/",
+            "iikoExchangeBundle\\Library\\": "src/library"
         }
     },
     "autoload-dev": {
