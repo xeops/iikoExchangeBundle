@@ -1,7 +1,7 @@
 <?php
 
 
-namespace iiko\Connection;
+namespace iikoExchangeBundle\Library\iiko\Connection;
 
 
 use GuzzleHttp\Client;
@@ -12,7 +12,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
-use iikoExchangeBundle\iikoExchangeBundle\Contract\ConnectionInterface;
+use iikoExchangeBundle\Contract\ConnectionInterface;
 use Monolog\Logger;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -65,7 +65,7 @@ class iikoConnection implements ConnectionInterface
 			{
 				throw new \Exception($loginResponse->getReasonPhrase(), $loginResponse->getStatusCode());
 			}
-			$request->withUri(Uri::withQueryValue($request->getUri(), 'key', $key));
+			$request = $request->withUri(Uri::withQueryValue($request->getUri(), 'key', $key));
 
 			return $request;
 

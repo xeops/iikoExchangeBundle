@@ -1,14 +1,14 @@
 <?php
 
 
-namespace iiko\Connection;
+namespace iikoExchangeBundle\Library\iiko\Connection;
 
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
-use iikoExchangeBundle\iikoExchangeBundle\Contract\ConnectionInterface;
-use iikoExchangeBundle\iikoExchangeBundle\Contract\ProviderInterface;
-use iikoExchangeBundle\iikoExchangeBundle\Contract\RequestInterface;
+use iikoExchangeBundle\Contract\ConnectionInterface;
+use iikoExchangeBundle\Contract\ProviderInterface;
+use iikoExchangeBundle\Contract\RequestInterface;
 use Psr\Log\LoggerInterface;
 
 class Provider implements ProviderInterface
@@ -26,6 +26,23 @@ class Provider implements ProviderInterface
 	{
 		$this->logger = $logger;
 		$this->connection = $connection;
+	}
+
+	/**
+	 * Return immutable provider
+	 * @param $connection
+	 * @return $this
+	 */
+	public function withConnection(ConnectionInterface $connection) : ProviderInterface
+	{
+		if($connection === $this->connection)
+		{
+			return $this;
+		}
+		$fetcher = clone $this;
+		$fetcher->connection = $connection;
+
+		return $fetcher;
 	}
 
 	public function sendRequest(RequestInterface $request)

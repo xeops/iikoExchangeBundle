@@ -1,14 +1,16 @@
 <?php
 
 
-namespace iikoExchangeBundle\iikoExchangeBundle\Contract;
+namespace iikoExchangeBundle\Contract;
 
 /**
  * Интерфейс драйвера служит для определения поведения источника
  * Interface Driver
- * @package iikoExchangeBundle\iikoExchangeBundle\Contract
+ * @package iikoExchangeBundle\Contract
  */
 interface DataSourceDriverInterface
 {
-	public function load(RequestInterface $request) : ResponseInterface;
+	public function load(?RequestInterface $request = null) : ResponseInterface;
+
+	public static function getBaseRequest() : RequestInterface;
 }

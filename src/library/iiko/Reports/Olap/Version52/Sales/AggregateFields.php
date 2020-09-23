@@ -1,5 +1,6 @@
 <?php
-namespace xeops\iikoExchange\Drivers\iiko\Reports\Olap\Version52\Sales;
+namespace iikoExchangeBundle\Library\iiko\Reports\Olap\Version52\Sales;
+
 class AggregateFields {
        /** PercentOfSummary.ByCol PERCENT */
        /** % by column */

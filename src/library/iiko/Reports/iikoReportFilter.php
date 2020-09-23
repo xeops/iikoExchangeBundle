@@ -1,6 +1,6 @@
 <?php
 
-namespace xeops\iikoExchange\Drivers\iiko\Reports;
+namespace iikoExchangeBundle\Library\iiko\Reports;
 
 class iikoReportFilter
 {
@@ -34,7 +34,7 @@ class iikoReportFilter
 	{
 
 		return array(
-			"filterType" => "DateRange",
+			"filterType" => self::FILTER_DATERANGE,
 			"periodType" => $period,
 		);
 

@@ -1,5 +1,5 @@
 <?php
-namespace xeops\iikoExchange\Drivers\iiko\Reports\Olap\Version52\Transactions;
+namespace iikoExchangeBundle\Library\iiko\Reports\Olap\Version52\Transactions;
 class FilterFields {
        /** Account.Name STRING */
        /** Account */

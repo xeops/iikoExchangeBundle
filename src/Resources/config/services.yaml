@@ -1,25 +1,20 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
+imports:
     - { resource: parameters.yml }
 services:
 
-    iko_exchange.driver.olap:
-        class: xeops\iikoExchangeBundle\Driver\iikoOlapDriver
-        arguments: ["@logger", "@iiko.provider"]
+    iiko_exchange.olap.sales:
+        class: iikoExchangeBundle\Library\iiko\Request\iikoSales
+        arguments: [ '@logger', '@iko_exchange.iiko.provider' ]
 
     # This is temporary services for testing in manual mode. iikoWeb override both of this services by own
-    iiko.conection:
-        class: iiko\Connection\iikoConnection
+    iko_exchange.iiko.connection:
+        class: iikoExchangeBundle\Library\iiko\Connection\iikoConnection
         arguments: ["@logger"]
         calls:
-            -[setServer, ['%exchanger_server%']]
-            -[setUserName, ['%exchanger_user%]]
-            -[setPasswordHash,['%exchanger_password_hash%]]
+            - [setServer, ['%exchanger_server%']]
+            - [setUserName, ['%exchanger_user%']]
+            - [setPasswordHash,['%exchanger_password_hash%']]
 
-    iiko.provider:
-        class: iiko\Connection\Provider
-        arguments: ['@logger', '@iiko.conection']
+    iko_exchange.iiko.provider:
+        class: iikoExchangeBundle\Library\iiko\Connection\Provider
+        arguments: ['@logger', '@iko_exchange.iiko.connection']

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace iikoExchangeBundle\iikoExchangeBundle\Contract;
+namespace iikoExchangeBundle\Contract;
 
 
 interface MessageInterface

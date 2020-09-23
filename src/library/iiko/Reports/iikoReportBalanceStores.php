@@ -1,6 +1,6 @@
 <?php
 
-namespace xeops\iikoExchange\Drivers\iiko\Reports;
+namespace iikoExchangeBundle\iikoReports;
 
 use IikoApiBundle\Model\Report\BalanceStoreItemDto;
 use IikoApiBundle\Request\ServerApi2Request;
