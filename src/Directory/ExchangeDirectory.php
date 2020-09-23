@@ -4,12 +4,14 @@
 namespace iikoExchangeBundle\Directory;
 
 
+use iikoExchangeBundle\Contract\ExchangeBuilderInterface;
+use iikoExchangeBundle\Contract\ExchangeDirectoryInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Event\BuildExchangeDirectoryEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ExchangeDirectory
+class ExchangeDirectory implements ExchangeDirectoryInterface
 {
 	private $directory = [];
 	/**
@@ -27,18 +29,29 @@ class ExchangeDirectory
 		$this->dispatcher = $dispatcher;
 	}
 
-	public function register(ExchangeInterface $exchange)
-	{
-		$this->directory[$exchange->getCode()] = $exchange;
-	}
-
-	public function getExchanges()
+	public function getExchanges(): array
 	{
 		if (empty($this->directory))
 		{
-			$this->dispatcher->dispatch(BuildExchangeDirectoryEvent::NAME, new BuildExchangeDirectoryEvent($this));
+			$this->invokeDirectory();
 		}
 
 		return $this->directory;
+	}
+
+	protected function invokeDirectory()
+	{
+		$this->dispatcher->dispatch(BuildExchangeDirectoryEvent::NAME, new BuildExchangeDirectoryEvent($this));
+	}
+
+	public function getExchangeByCode(string $code): ExchangeInterface
+	{
+		return $this->getExchanges()[$code];
+	}
+
+	public function registerExchange(ExchangeInterface $exchange): ExchangeDirectoryInterface
+	{
+		$this->directory[$exchange->getCode()] = $exchange;
+		return $this;
 	}
 }

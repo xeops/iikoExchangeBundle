@@ -4,10 +4,12 @@
 namespace iikoExchangeBundle\Event;
 
 
+use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
+use iikoExchangeBundle\Contract\ExchangeDirectoryInterface;
 use iikoExchangeBundle\Directory\ExchangeDirectory;
 use Symfony\Component\EventDispatcher\Event;
 
-class BuildExchangeDirectoryEvent extends Event
+class BuildExchangeDirectoryEvent extends Event implements ExchangeBuildDirectoryEventInterface
 {
 	const NAME = 'iiko_exchange.directory.exchanges.build';
 
@@ -24,7 +26,7 @@ class BuildExchangeDirectoryEvent extends Event
 	/**
 	 * @return ExchangeDirectory
 	 */
-	public function getDirectory(): ExchangeDirectory
+	public function getDirectory(): ExchangeDirectoryInterface
 	{
 		return $this->directory;
 	}

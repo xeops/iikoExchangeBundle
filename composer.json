@@ -7,9 +7,13 @@
         "symfony/monolog-bundle": "^3.2",
         "symfony/yaml": "3.2.*",
         "php-http/guzzle6-adapter": "^1.1",
-        "symfony/config": "~3.0"
+        "symfony/config": "~3.0",
+        "ext-json": "*"
     },
     "require-dev": {
+        "phpunir/phpunit": "9.1.4",
+        "symfony/phpunit-bridge": "5.1.*",
+        "phpunit/php-code-coverage": "9.1.11"
     },
     "config": {
         "preferred-install": {

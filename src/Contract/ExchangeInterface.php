@@ -4,14 +4,11 @@
 namespace iikoExchangeBundle\Contract;
 
 
-interface ExchangeInterface
+interface ExchangeInterface extends ExchangeBuilderInterface
 {
-	public function getCode();
+	public function getCode() : string;
 
-	public function getSchedule();
+	public function register();
 
-	public function getData();
-
-	public function sendData();
-
+	public function process();
 }
