@@ -12,12 +12,11 @@ interface ConnectionInterface
 {
 	public function setAuthData(?AuthDataInterface $authData);
 
-	public function getAuthData($authData) : ?AuthDataInterface;
+	public function getAuthData() : ?AuthDataInterface;
 
 	public function sendRequest(RequestInterface $request): ResponseInterface;
 
 	public function setAuthStorage(AuthStorageInterface $authStorage) : self;
 
 	public function setLogger(LoggerInterface $logger) : self;
-
 }

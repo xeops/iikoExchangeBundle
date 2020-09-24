@@ -4,7 +4,7 @@
 namespace iikoExchangeBundle\Contract;
 
 
-interface UploadProviderInterface extends ProviderInterface
+interface DataUploadDriverInterface extends DataDriverInterface
 {
 	public function upload($data);
 }

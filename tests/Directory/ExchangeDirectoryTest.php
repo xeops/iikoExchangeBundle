@@ -3,10 +3,10 @@
 namespace App\Tests\Directory;
 
 use iikoExchangeBundle\Contract\AdapterInterface;
-use iikoExchangeBundle\Contract\DataRequestInterface;
-use iikoExchangeBundle\Contract\DownloadProviderInterface;
+use iikoExchangeBundle\Contract\DataDownloadRequestInterface;
+use iikoExchangeBundle\Contract\DataDownloadDriverInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
-use iikoExchangeBundle\Contract\UploadProviderInterface;
+use iikoExchangeBundle\Contract\DataUploadDriverInterface;
 use iikoExchangeBundle\Directory\ExchangeDirectory;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -61,12 +61,12 @@ class ExchangeDirectoryTest extends TestCase
 class TestExchange implements ExchangeInterface
 {
 
-	public function setDownloadProvider(DownloadProviderInterface $provider)
+	public function setDownloadProvider(DataDownloadDriverInterface $provider)
 	{
 		// TODO: Implement setDownloadProvider() method.
 	}
 
-	public function setUploadProvider(UploadProviderInterface $provider)
+	public function setUploadProvider(DataUploadDriverInterface $provider)
 	{
 		// TODO: Implement setUploadProvider() method.
 	}
@@ -76,7 +76,7 @@ class TestExchange implements ExchangeInterface
 		// TODO: Implement setAdapter() method.
 	}
 
-	public function addDataRequest(DataRequestInterface $request)
+	public function addDataRequest(DataDownloadRequestInterface $request)
 	{
 		// TODO: Implement addDataRequest() method.
 	}

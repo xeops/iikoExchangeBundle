@@ -6,7 +6,7 @@ namespace iikoExchangeBundle\Contract;
 
 use Psr\Http\Message\RequestInterface;
 
-interface DataRequestInterface
+interface DataDownloadRequestInterface
 {
 	public function getRequest(): RequestInterface;
 

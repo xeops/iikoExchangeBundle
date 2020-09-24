@@ -15,7 +15,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-abstract class BaseConnection implements ConnectionInterface
+abstract class AbstractConnection implements ConnectionInterface
 {
 	/** @var LoggerInterface */
 	protected $logger;

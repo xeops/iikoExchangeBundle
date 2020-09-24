@@ -6,7 +6,7 @@ namespace iikoExchangeBundle\Contract;
 
 use Psr\Http\Message\ResponseInterface;
 
-interface DownloadProviderInterface extends ProviderInterface
+interface DataDownloadDriverInterface extends DataDriverInterface
 {
 	public function download() : ResponseInterface;
 }

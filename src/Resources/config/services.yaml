@@ -1,20 +1,4 @@
 imports:
     - { resource: parameters.yml }
 services:
-
-    iiko_exchange.olap.sales:
-        class: iikoExchangeBundle\Library\iiko\Request\iikoSales
-        arguments: [ '@logger', '@iko_exchange.iiko.provider' ]
-
-    # This is temporary services for testing in manual mode. iikoWeb override both of this services by own
-    iko_exchange.iiko.connection:
-        class: iikoExchangeBundle\Library\iiko\Connection\iikoConnection
-        arguments: ["@logger"]
-        calls:
-            - [setServer, ['%exchanger_server%']]
-            - [setUserName, ['%exchanger_user%']]
-            - [setPasswordHash,['%exchanger_password_hash%']]
-
-    iko_exchange.iiko.provider:
-        class: iikoExchangeBundle\Library\iiko\Connection\Provider
-        arguments: ['@logger', '@iko_exchange.iiko.connection']
+    
