@@ -72,6 +72,8 @@ abstract class AbstractDigestConnection extends AbstractConnection
 		$this->pushLoggerHandler($handlers);
 		$this->pushResponseHandler($handlers);
 		$this->pushRetryHandler($handlers);
+
+		return $handlers;
 	}
 
 	protected function pushLoggerHandler(HandlerStack $handlerStack)
@@ -110,6 +112,10 @@ abstract class AbstractDigestConnection extends AbstractConnection
 
 	protected function pushAddAuthDataHandler(HandlerStack $handlerStack)
 	{
+		if(empty($this->getAuthData()) || $this->getAuthData()->getValue() === null)
+		{
+			$this->login();
+		}
 
 		$handlerStack->push(Middleware::mapRequest(function (RequestInterface $request)
 		{

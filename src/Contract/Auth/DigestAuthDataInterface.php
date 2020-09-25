@@ -16,7 +16,7 @@ interface DigestAuthDataInterface extends AuthDataInterface, DigestAuthDataBuild
 
 	public function getKey(): string;
 
-	public function getValue(): string;
+	public function getValue(): ?string;
 
 	const TYPE_HEADER_KEY = 'HEADER_KEY';
 	const TYPE_QUERY_KEY = 'QUERY_KEY';

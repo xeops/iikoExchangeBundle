@@ -11,6 +11,10 @@ use iikoExchangeBundle\Event\BuildExchangeDirectoryEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * Class ExchangeDirectory
+ * @package iikoExchangeBundle\Directory
+*/
 class ExchangeDirectory implements ExchangeDirectoryInterface
 {
 	private $directory = [];

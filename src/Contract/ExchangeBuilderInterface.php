@@ -6,9 +6,9 @@ namespace iikoExchangeBundle\Contract;
 
 interface ExchangeBuilderInterface
 {
-	public function setDownloadProvider(DataDownloadDriverInterface $provider);
+	public function setDownloadProvider(ProviderInterface $provider);
 
-	public function setUploadProvider(DataUploadDriverInterface $provider);
+	public function setUploadProvider(ProviderInterface $provider);
 
 	public function setAdapter(AdapterInterface $adapter);
 

@@ -25,10 +25,12 @@ abstract class AbstractConnection implements ConnectionInterface
 	public function setLogger(LoggerInterface $logger): ConnectionInterface
 	{
 		$this->logger = $logger;
+		return $this;
 	}
 
 	public function setAuthStorage(AuthStorageInterface $authStorage): ConnectionInterface
 	{
 		$this->authStorage = $authStorage;
+		return $this;
 	}
 }

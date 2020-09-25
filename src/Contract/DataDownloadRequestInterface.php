@@ -8,6 +8,8 @@ use Psr\Http\Message\RequestInterface;
 
 interface DataDownloadRequestInterface
 {
+	public function getCode();
+
 	public function getRequest(): RequestInterface;
 
 	public function getConfig(): ?ConfigInterface;

@@ -7,6 +7,8 @@ namespace iikoExchangeBundle\Library\base\Connection;
 use iikoExchangeBundle\Contract\AuthStorageInterface;
 use iikoExchangeBundle\Contract\ConnectionInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 abstract class AbstractProvider implements ProviderInterface
@@ -31,5 +33,10 @@ abstract class AbstractProvider implements ProviderInterface
 	public function getConnection(): ConnectionInterface
 	{
 		return $this->connection;
+	}
+
+	public function sendRequest(RequestInterface $request): ResponseInterface
+	{
+		return $this->connection->sendRequest($request);
 	}
 }

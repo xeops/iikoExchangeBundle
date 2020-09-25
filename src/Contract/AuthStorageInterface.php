@@ -6,7 +6,7 @@ namespace iikoExchangeBundle\Contract;
 
 interface AuthStorageInterface
 {
-	public function storeAuthData($data);
+	public function storeAuthData( AuthDataInterface $data);
 
-	public function getAuthData();
+	public function getAuthData() : AuthDataInterface;
 }
