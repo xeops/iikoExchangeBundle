@@ -14,12 +14,12 @@ interface DigestAuthDataInterface extends AuthDataInterface, DigestAuthDataBuild
 
 	public function getPassword(): string;
 
-	public function getKey(): string;
+	public function getTokenName(): string;
 
-	public function getValue(): ?string;
+	public function getToken(): ?string;
 
-	const TYPE_HEADER_KEY = 'HEADER_KEY';
-	const TYPE_QUERY_KEY = 'QUERY_KEY';
+	const TOKEN_TYPE_HEADER = 'HEADER';
+	const TOKEN_TYPE_QUERY = 'QUERY';
 
-	public function getType(): string;
+	public function getTokenType(): string;
 }

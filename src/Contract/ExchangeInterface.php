@@ -8,7 +8,7 @@ interface ExchangeInterface extends ExchangeBuilderInterface
 {
 	public function getCode() : string;
 
-	public function register();
+	public function register(ExchangeBuildDirectoryEventInterface $event);
 
 	public function process();
 }

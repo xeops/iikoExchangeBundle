@@ -6,6 +6,7 @@ namespace iikoExchangeBundle\Library\base\Connection;
 
 use iikoExchangeBundle\Contract\AuthStorageInterface;
 use iikoExchangeBundle\Contract\ConnectionInterface;
+use iikoExchangeBundle\Contract\DataRequestInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -21,9 +22,10 @@ abstract class AbstractProvider implements ProviderInterface
 	/** @var ConnectionInterface */
 	protected $connection;
 
-	public function withConnection(ConnectionInterface $connection): ProviderInterface
+	public function withConnection(ConnectionInterface $connection, bool $applyToCurrent = false): ProviderInterface
 	{
-		$new = clone $this;
+		$new = $applyToCurrent ? $this : clone $this;
+
 		$connection->setAuthStorage($this->authStorage)->setLogger($this->logger);
 		$new->connection = $connection;
 
@@ -35,8 +37,19 @@ abstract class AbstractProvider implements ProviderInterface
 		return $this->connection;
 	}
 
-	public function sendRequest(RequestInterface $request): ResponseInterface
+	public function sendRequest(DataRequestInterface $request)
 	{
-		return $this->connection->sendRequest($request);
+		$response = $this->connection->sendRequest($request);
+		if ($response->getStatusCode() === 200)
+		{
+			return $request->processResponse($response->getBody()->__toString());
+		}
+		else
+		{
+			// no need log, because connection must do that
+			return $request->processError($response);
+		}
 	}
+
+
 }

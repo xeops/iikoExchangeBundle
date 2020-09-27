@@ -9,9 +9,9 @@ use Psr\Http\Message\ResponseInterface;
 
 interface ProviderInterface
 {
-	public function sendRequest(RequestInterface $request) : ResponseInterface;
+	public function sendRequest(DataRequestInterface $request);
 
-	public function withConnection(ConnectionInterface $connection) : self;
+	public function withConnection(ConnectionInterface $connection, bool $applyToCurrent = false) : self;
 
 	public function getConnection() : ConnectionInterface;
 }

@@ -10,4 +10,5 @@ composer.lock
 symfony.lock
 /.idea
 .idea
+/src/Resources/config/parameters.yml
 ###< symfony/framework-bundle ###

@@ -1,0 +1,4 @@
+parameters:
+    iiko_exchanger_server: ""
+    iiko_exchanger_user: ""
+    iiko_exchanger_password_hash: ""

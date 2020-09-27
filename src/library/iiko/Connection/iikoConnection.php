@@ -6,8 +6,10 @@ namespace iikoExchangeBundle\Library\iiko\Connection;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
 use iikoExchangeBundle\Contract\Auth\DigestAuthDataInterface;
 use iikoExchangeBundle\Library\base\Connection\AbstractDigestConnection;
+use function GuzzleHttp\Psr7\build_query;
 
 class iikoConnection extends AbstractDigestConnection
 {
@@ -17,16 +19,20 @@ class iikoConnection extends AbstractDigestConnection
 
 		$request = new Request(
 			'GET',
-			'/resto/api/auth',
-			["Accept" => "text/html,text/plain"],
-			["login" => $this->getAuthData()->getUserName(), "pass" => $this->getAuthData()->getPassword(), "client-type" => "iikoweb-exchange"]
+			(new Uri('/resto/api/auth'))->withQuery(build_query(
+				[
+					"login" => $this->getAuthData()->getUserName(),
+					"pass" => $this->getAuthData()->getPassword(),
+					"client-type" => "iikoweb-exchange"
+				]
+			))
 		);
 
 		$response = $client->send($request);
 		if ($response->getStatusCode() === 200)
 		{
 
-			$this->setAuthData($this->getAuthData()->setType(DigestAuthDataInterface::TYPE_HEADER_KEY)->setKey($response->getBody()->__toString()));
+			$this->setAuthData($this->getAuthData()->setTokenType(DigestAuthDataInterface::TOKEN_TYPE_HEADER)->setTokenName($response->getBody()->__toString()));
 		}
 		else
 		{

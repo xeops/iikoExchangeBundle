@@ -102,6 +102,6 @@ class TestConnection extends AbstractDigestConnection
 
 	protected function login()
 	{
-		$this->authStorage->storeAuthData($this->authStorage->getAuthData()->setValue('123'));
+		$this->authStorage->storeAuthData($this->authStorage->getAuthData()->setToken('123'));
 	}
 }

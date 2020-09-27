@@ -12,7 +12,7 @@ use iikoExchangeBundle\Contract\AuthStorageInterface;
  * Class AbstractStorage
  * @package iikoExchangeBundle\Library\base\Connection
  */
-final class AbstractStorage implements AuthStorageInterface
+final class TemporaryStorage implements AuthStorageInterface
 {
 	private $data;
 

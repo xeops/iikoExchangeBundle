@@ -9,7 +9,7 @@ use iikoExchangeBundle\Contract\AuthDataInterface;
 use iikoExchangeBundle\Contract\AuthStorageInterface;
 use iikoExchangeBundle\Library\base\Connection\AbstractConnection;
 use iikoExchangeBundle\Library\base\Connection\AbstractDigestConnection;
-use iikoExchangeBundle\Library\base\Connection\AbstractStorage;
+use iikoExchangeBundle\Library\base\Connection\TemporaryStorage;
 use iikoExchangeBundle\Library\base\Connection\DigestAuthData;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -53,7 +53,7 @@ class AbstractDigestConnectionTest extends TestCase
 		$authData = new DigestAuthData();
 		$authData->setUrl($ul);
 
-		$this->instance->setAuthStorage(new AbstractStorage());
+		$this->instance->setAuthStorage(new TemporaryStorage());
 		$this->instance->setAuthData($authData);
 
 		$this->assertEquals($ul, $this->instance->getAuthData()->getUrl());
@@ -90,6 +90,6 @@ class TestConnection extends AbstractDigestConnection
 
 	protected function login()
 	{
-		$this->authStorage->storeAuthData($this->authStorage->getAuthData()->setValue('123'));
+		$this->authStorage->storeAuthData($this->authStorage->getAuthData()->setToken('123'));
 	}
 }

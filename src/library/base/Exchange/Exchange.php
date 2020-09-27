@@ -6,8 +6,9 @@ namespace iikoExchangeBundle\Library\base\Exchange;
 
 use iikoExchangeBundle\Contract\AdapterInterface;
 use iikoExchangeBundle\Contract\DataDownloadDriverInterface;
-use iikoExchangeBundle\Contract\DataDownloadRequestInterface;
+use iikoExchangeBundle\Contract\DataRequestInterface;
 use iikoExchangeBundle\Contract\DataUploadDriverInterface;
+use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use Psr\Http\Message\RequestInterface;
@@ -20,7 +21,7 @@ abstract class Exchange implements ExchangeInterface
 	protected $downloadProvider;
 	/** @var ProviderInterface */
 	protected $uploadProvider;
-	/** @var DataDownloadRequestInterface[] */
+	/** @var DataRequestInterface[] */
 	protected $requests = [];
 	/** @var AdapterInterface */
 	protected $adapter;
@@ -46,7 +47,7 @@ abstract class Exchange implements ExchangeInterface
 		return $this;
 	}
 
-	public function addDataRequest(DataDownloadRequestInterface $request)
+	public function addDataRequest(DataRequestInterface $request)
 	{
 		$this->requests[$request->getCode()] = $request;
 
@@ -55,9 +56,9 @@ abstract class Exchange implements ExchangeInterface
 
 	abstract public function getCode(): string;
 
-	public function register()
+	public function register(ExchangeBuildDirectoryEventInterface  $event)
 	{
-		// TODO: Implement register() method.
+		$event->getDirectory()->registerExchange($this);
 	}
 
 	public function process()

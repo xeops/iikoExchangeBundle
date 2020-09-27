@@ -14,13 +14,13 @@ class DigestAuthData implements DigestAuthDataInterface
 	protected $url;
 	protected $password;
 	protected $userName;
-	protected $key = 'key';
-	protected $value;
-	protected $type = self::TYPE_HEADER_KEY;
+	protected $tokenName = 'key';
+	protected $token;
+	protected $tokenType = self::TOKEN_TYPE_HEADER;
 
 	public static function restoreFromStorage():AuthDataInterface
 	{
-		// TODO: Implement restoreFromStorage() method.
+
 	}
 
 	public function setUrl(string $url): DigestAuthDataBuilderInterface
@@ -41,21 +41,15 @@ class DigestAuthData implements DigestAuthDataInterface
 		return $this;
 	}
 
-	public function setKey(string $key): DigestAuthDataBuilderInterface
+	public function setTokenName(string $key): DigestAuthDataBuilderInterface
 	{
-		$this->key = $key;
+		$this->tokenName = $key;
 		return $this;
 	}
 
-	public function setValue(string $value): DigestAuthDataBuilderInterface
+	public function setToken(string $value): DigestAuthDataBuilderInterface
 	{
-		$this->value = $value;
-		return $this;
-	}
-
-	public function setType(string $value): DigestAuthDataBuilderInterface
-	{
-		$this->type = $value;
+		$this->token = $value;
 		return $this;
 	}
 
@@ -74,19 +68,24 @@ class DigestAuthData implements DigestAuthDataInterface
 		return $this->password;
 	}
 
-	public function getKey(): string
+	public function getTokenName(): string
 	{
-		return $this->key;
+		return $this->tokenName;
 	}
 
-	public function getValue(): ?string
+	public function getToken(): ?string
 	{
-		return $this->value;
+		return $this->token;
 	}
 
-	public function getType(): string
+	public function setTokenType(string $tokenType): DigestAuthDataBuilderInterface
 	{
-		return $this->type;
+		$this->tokenType = $tokenType;
+		return $this;
+	}
+	public function getTokenType(): string
+	{
+		return self::TOKEN_TYPE_QUERY;
 	}
 
 	public function jsonSerialize()
@@ -95,9 +94,9 @@ class DigestAuthData implements DigestAuthDataInterface
 			'url' => $this->getUrl(),
 			'userName' => $this->getUserName(),
 			'password' => $this->getPassword(),
-			'type' => $this->getType(),
-			'key' => $this->getKey(),
-			'value' => $this->getValue()
+			'type' => $this->getTokenType(),
+			'tokenName' => $this->getTokenName(),
+			'token' => $this->getToken()
 		];
 	}
 }
