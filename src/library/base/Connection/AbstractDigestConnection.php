@@ -9,55 +9,32 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
-use iikoExchangeBundle\Contract\Auth\DigestAuthDataInterface;
+use iikoExchangeBundle\Contract\Auth\TokenAuthDataInterface;
 use iikoExchangeBundle\Contract\AuthDataInterface;
+use iikoExchangeBundle\Contract\Connection\ConnectionInfoInterface;
+use iikoExchangeBundle\Contract\Connection\DigestConnectionInfoInterface;
+use iikoExchangeBundle\Contract\ConnectionInterface;
 use iikoExchangeBundle\Contract\DataRequestInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractDigestConnection extends AbstractConnection
 {
-	/**
-	 * @var DigestAuthDataInterface
-	 */
+	const TOKEN_TYPE_QUERY = 'token_in_query';
+	const TOKEN_TYPE_HEADER = 'token_in_header';
+
+	protected $tokenName = 'key';
+	protected $tokenType = self::TOKEN_TYPE_QUERY;
+	/** @var DigestConnectionInfoInterface */
+	protected $connectionInfo;
+	/** @var TokenAuthDataInterface */
 	protected $authData;
-
-	public function setAuthData(?AuthDataInterface $authData)
-	{
-		if (empty($authData))
-		{
-			throw new \Exception('');
-		}
-		if (!($authData instanceof DigestAuthDataInterface))
-		{
-			throw new \Exception('');
-		}
-
-		$this->authStorage->storeAuthData($authData);
-	}
-
-	/**
-	 * @return DigestAuthDataInterface|null
-	 */
-	public function getAuthData(): ?AuthDataInterface
-	{
-		if (!$this->authData)
-		{
-			$this->authData = $this->authStorage->getAuthData();
-		}
-		return $this->authData;
-	}
-
-	public function sendRequest(DataRequestInterface $request): ResponseInterface
-	{
-		return $this->getClient()->send($request->getRequest());
-	}
 
 	public function getClient(): ClientInterface
 	{
 		return (new Client(
 			[
-				'base_uri' => $this->getAuthData()->getUrl(),
+				'base_uri' => $this->connectionInfo->getHost(),
 				'handler' => $this->getHandlers(),
 				'http_errors' => false
 			]
@@ -90,6 +67,21 @@ abstract class AbstractDigestConnection extends AbstractConnection
 
 			return $request;
 		}));
+
+
+		$handlerStack->push(Middleware::mapResponse(function (ResponseInterface $response)
+		{
+			if ($response->getStatusCode() < 300)
+			{
+				$this->logger->info("EXCHANGE_RESPONSE_SUCCESS", ['code' => $response->getStatusCode()]);
+				$this->logger->debug("EXCHANGE_RESPONSE_SUCCESS", ['response' => $response->getBody()->getContents()]);
+			}
+			else
+			{
+				$this->logger->error("EXCHANGE_RESPONSE_ERROR", ['code' => $response->getStatusCode(), 'body' => $response->getBody()->getContents(), 'reason' => $response->getReasonPhrase()]);
+			}
+			return $response;
+		}));
 	}
 
 	protected function pushRetryHandler(HandlerStack $handlerStack)
@@ -111,19 +103,7 @@ abstract class AbstractDigestConnection extends AbstractConnection
 
 	protected function pushResponseHandler(HandlerStack $handlerStack)
 	{
-		$handlerStack->push(Middleware::mapResponse(function (ResponseInterface $response)
-		{
-			if ($response->getStatusCode() < 300)
-			{
-				$this->logger->info("EXCHANGE_RESPONSE_SUCCESS", ['code' => $response->getStatusCode()]);
-				$this->logger->debug("EXCHANGE_RESPONSE_SUCCESS", ['response' => $response->getBody()->getContents()]);
-			}
-			else
-			{
-				$this->logger->error("EXCHANGE_RESPONSE_ERROR", ['code' => $response->getStatusCode(), 'body' => $response->getBody()->getContents(), 'reason' => $response->getReasonPhrase()]);
-			}
-			return $response;
-		}));
+
 	}
 
 	protected function pushAddAuthDataHandler(HandlerStack $handlerStack)
@@ -135,13 +115,13 @@ abstract class AbstractDigestConnection extends AbstractConnection
 
 		$handlerStack->push(Middleware::mapRequest(function (RequestInterface $request)
 		{
-			if ($this->getAuthData()->getTokenType() === DigestAuthDataInterface::TOKEN_TYPE_QUERY)
+			if ($this->tokenType === self::TOKEN_TYPE_QUERY)
 			{
-				$request = $request->withUri(Uri::withQueryValue($request->getUri(), $this->getAuthData()->getTokenName(), $this->getAuthData()->getToken()));
+				$request = $request->withUri(Uri::withQueryValue($request->getUri(), $this->tokenName, $this->getAuthData()->getToken()));
 			}
-			if ($this->getAuthData()->getTokenType() === DigestAuthDataInterface::TOKEN_TYPE_HEADER)
+			if ($this->tokenType === self::TOKEN_TYPE_HEADER)
 			{
-				$request = $request->withHeader($this->getAuthData()->getTokenName(), $this->getAuthData()->getToken());
+				$request = $request->withHeader($this->tokenName, $this->getAuthData()->getToken());
 			}
 			return $request;
 

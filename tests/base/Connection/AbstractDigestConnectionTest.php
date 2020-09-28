@@ -4,13 +4,13 @@ namespace App\Tests\base\Connection;
 
 use GuzzleHttp\Client;
 use iikoExchangeBundle\Contract\Auth\DigestAuthDataBuilderInterface;
-use iikoExchangeBundle\Contract\Auth\DigestAuthDataInterface;
+use iikoExchangeBundle\Contract\Auth\TokenAuthDataInterface;
 use iikoExchangeBundle\Contract\AuthDataInterface;
 use iikoExchangeBundle\Contract\AuthStorageInterface;
 use iikoExchangeBundle\Library\base\Connection\AbstractConnection;
 use iikoExchangeBundle\Library\base\Connection\AbstractDigestConnection;
-use iikoExchangeBundle\Library\base\Connection\TemporaryStorage;
-use iikoExchangeBundle\Library\base\Connection\DigestAuthData;
+use iikoExchangeBundle\Library\base\Connection\SandboxStorage;
+use iikoExchangeBundle\Library\base\Connection\TokenAuthData;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
@@ -50,11 +50,11 @@ class AbstractDigestConnectionTest extends TestCase
 	{
 		$ul = 'http://localhost.com';
 
-		$authData = new DigestAuthData();
+		$authData = new TokenAuthData();
 		$authData->setUrl($ul);
 
-		$this->instance->setAuthStorage(new TemporaryStorage());
-		$this->instance->setAuthData($authData);
+		$this->instance->setAuthStorage(new SandboxStorage());
+		$this->instance->withAuthData($authData);
 
 		$this->assertEquals($ul, $this->instance->getAuthData()->getUrl());
 

@@ -3,29 +3,25 @@ imports:
 services:
 
     #iiko sandbox services
-    exchange.iiko.auth.digest_auth_data:
-        class: iikoExchangeBundle\Library\base\Connection\DigestAuthData
-        calls:
-            - [setUrl, ["%iiko_exchanger_server%"]]
-            - [setTokenName, ["key"]]
-            - [setUserName, ["%iiko_exchanger_user%"]]
-            - [setPassword, ["%iiko_exchanger_password_hash%"]]
+    exchange.iiko.auth.sandbox.digest_auth_data:
+        class: iikoExchangeBundle\Library\base\Connection\DigestConnectionInfo
+        arguments: ["%iiko_exchanger_server%", "%iiko_exchanger_user%", "%iiko_exchanger_password_hash%"]
 
     exchange.iiko.auth.storage:
-        class: iikoExchangeBundle\Library\base\Connection\TemporaryStorage
-        calls:
-            - [storeAuthData, ["@exchange.iiko.auth.digest_auth_data"]]
+        class: iikoExchangeBundle\Library\base\Connection\SandboxStorage
+
     exchange.iiko.connection:
         class: iikoExchangeBundle\Library\iiko\Connection\iikoConnection
         calls:
             - [setAuthStorage, ["@exchange.iiko.auth.storage"]]
             - [setLogger, ["@logger"]]
+            - [withConnectionInfo, ["@exchange.iiko.auth.sandbox.digest_auth_data", false]]
 
     exchange.iiko.provider:
         class: iikoExchangeBundle\Library\iiko\Connection\iikoProvider
         arguments: ["@logger", "@exchange.iiko.auth.storage"]
         calls:
-            - [ withConnection, ["@exchange.iiko.connection", true]]
+            - [ withConnection, ["@exchange.iiko.connection", false]]
     # Dictionaries
 
     exchange.dictionary.account:
@@ -33,6 +29,7 @@ services:
         arguments: ["@logger"]
         calls:
             - [setType, [!php/const:iikoExchangeBundle\Library\iiko\Model\IikoEntityDto::ENTITY_ACCOUNT]]
+
     exchange.dictionary.payment_type:
         class: iikoExchangeBundle\Library\iiko\Request\BaseDictionaryRequest
         arguments: [ "@logger" ]

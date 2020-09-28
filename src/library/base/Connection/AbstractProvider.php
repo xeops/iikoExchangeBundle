@@ -22,9 +22,9 @@ abstract class AbstractProvider implements ProviderInterface
 	/** @var ConnectionInterface */
 	protected $connection;
 
-	public function withConnection(ConnectionInterface $connection, bool $applyToCurrent = false): ProviderInterface
+	public function withConnection(ConnectionInterface $connection, bool $immutable = true): ProviderInterface
 	{
-		$new = $applyToCurrent ? $this : clone $this;
+		$new = $immutable ? clone $this : $this;
 
 		$connection->setAuthStorage($this->authStorage)->setLogger($this->logger);
 		$new->connection = $connection;

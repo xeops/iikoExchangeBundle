@@ -20,4 +20,6 @@ interface DataRequestInterface
 	public function processResponse($body);
 
 	public function processError(ResponseInterface $response);
+
+	public function getTimeOut() : int;
 }

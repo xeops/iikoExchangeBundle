@@ -11,7 +11,7 @@ interface ProviderInterface
 {
 	public function sendRequest(DataRequestInterface $request);
 
-	public function withConnection(ConnectionInterface $connection, bool $applyToCurrent = false) : self;
+	public function withConnection(ConnectionInterface $connection, bool $immutable = true) : self;
 
 	public function getConnection() : ConnectionInterface;
 }
