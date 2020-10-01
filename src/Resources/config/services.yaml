@@ -22,6 +22,26 @@ services:
         arguments: ["@logger", "@exchange.iiko.auth.storage"]
         calls:
             - [ withConnection, ["@exchange.iiko.connection", false]]
+
+    exchange.iiko.config_storage:
+        class: iikoExchangeBundle\Library\iiko\Config\SandboxConfigStorage
+
+
+    # MAIN SERVICES
+
+    exchange.config.directory:
+        class: iikoExchangeBundle\Library\base\Config\ConfigDirectory
+        arguments: ["@logger", "@event_dispatcher"]
+
+    echange.config.manager:
+        class: Config
+    # OLAP
+
+    exchange.olap.sales.generic:
+        class: iikoExchangeBundle\Library\iiko\Request\OlapSalesDataRequest
+        calls:
+            - [setConfigManager]
+
     # Dictionaries
 
     exchange.dictionary.account:

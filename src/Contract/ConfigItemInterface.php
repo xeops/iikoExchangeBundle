@@ -6,14 +6,21 @@ namespace iikoExchangeBundle\Contract;
 
 interface ConfigItemInterface extends \JsonSerializable
 {
-	public function getName();
+	public function __construct($value = null);
 
-	public function getCode();
+	const TYPE_STRING = 'string';
+	const TYPE_INT = 'int';
+	const TYPE_FLOAT = 'float';
+	const TYPE_DATE_DIFF = 'date_diff';
+	const TYPE_SELECT = 'array';
 
-	public function getType();
+	public function getCode() : string;
 
-	public function getDefaultValue();
+	public function getType() : string;
 
-	public function getDescription();
+	public function getValue();
 
+	public function normalize();
+
+	public function setValue($value);
 }

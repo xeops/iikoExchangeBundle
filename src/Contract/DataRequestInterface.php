@@ -13,10 +13,6 @@ interface DataRequestInterface
 
 	public function getRequest(): RequestInterface;
 
-	public function getConfig(): ?ConfigInterface;
-
-	public function setConfig(ConfigInterface $config) : self;
-
 	public function processResponse($body);
 
 	public function processError(ResponseInterface $response);
