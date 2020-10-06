@@ -13,6 +13,7 @@ interface ConfigItemInterface extends \JsonSerializable
 	const TYPE_FLOAT = 'float';
 	const TYPE_DATE_DIFF = 'date_diff';
 	const TYPE_SELECT = 'array';
+	const TYPE_PASSWORD = 'password';
 
 	public function getCode() : string;
 

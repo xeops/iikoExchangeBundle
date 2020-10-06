@@ -48,10 +48,12 @@ class OlapSalesDataRequest extends AbstractOlapDataRequest implements Configurab
 
 	/**
 	 * @inheritDoc
+	 * @return $this
 	 */
-	public function setConfigManager(ConfigManagerInterface $configManager)
+	public function setConfigManager(ConfigManagerInterface $configManager) : ConfigurableInterface
 	{
 		$this->configManager = $configManager;
+		return $this;
 	}
 
 	/**
@@ -73,6 +75,10 @@ class OlapSalesDataRequest extends AbstractOlapDataRequest implements Configurab
 		$directory->registerConfigItem(self::DOMAIN, self::CONFIG_OPEN_DATE, new DateDiffConfig('now'));
 	}
 
+	/**
+	 * @param string $domain
+	 * @return $this
+	 */
 	public function withDomain(string $domain): ConfigurableInterface
 	{
 		$new = clone $this;

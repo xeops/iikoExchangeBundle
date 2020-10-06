@@ -1,11 +1,4 @@
-imports:
-    - { resource: parameters.yml }
 services:
-
-    #iiko sandbox services
-    exchange.iiko.auth.sandbox.digest_auth_data:
-        class: iikoExchangeBundle\Library\base\Connection\DigestConnectionInfo
-        arguments: ["%iiko_exchanger_server%", "%iiko_exchanger_user%", "%iiko_exchanger_password_hash%"]
 
     exchange.iiko.auth.storage:
         class: iikoExchangeBundle\Library\base\Connection\SandboxStorage
@@ -15,7 +8,6 @@ services:
         calls:
             - [setAuthStorage, ["@exchange.iiko.auth.storage"]]
             - [setLogger, ["@logger"]]
-            - [withConnectionInfo, ["@exchange.iiko.auth.sandbox.digest_auth_data", false]]
 
     exchange.iiko.provider:
         class: iikoExchangeBundle\Library\iiko\Connection\iikoProvider
@@ -33,14 +25,20 @@ services:
         class: iikoExchangeBundle\Library\base\Config\ConfigDirectory
         arguments: ["@logger", "@event_dispatcher"]
 
-    echange.config.manager:
-        class: Config
+    exchange.config.manager:
+        class: iikoExchangeBundle\Library\base\Config\ConfigManager
+        arguments: ["@logger", "@exchange.iiko.config_storage", "@exchange.config.directory", "@event_dispatcher" ]
+
+    exchange.directory:
+        class: iikoExchangeBundle\Directory\ExchangeDirectory
+        arguments: ['@logger', '@event_dispatcher']
+
     # OLAP
 
     exchange.olap.sales.generic:
         class: iikoExchangeBundle\Library\iiko\Request\OlapSalesDataRequest
         calls:
-            - [setConfigManager]
+            - [setConfigManager, ["@exchange.config.manager"]]
 
     # Dictionaries
 

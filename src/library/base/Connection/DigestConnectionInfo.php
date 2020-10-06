@@ -61,4 +61,13 @@ class DigestConnectionInfo implements DigestConnectionInfoInterface
 		return $this->password;
 	}
 
+	public function getConfig(): array
+	{
+		return
+			[
+				"host" => $this->getHost(),
+				"userName" => $this->getUserName(),
+				"password" => $this->getPassword(),
+			];
+	}
 }

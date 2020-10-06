@@ -78,4 +78,36 @@ abstract class Exchange implements ExchangeInterface
 		return $this->uploadProvider->sendRequest($data);
 
 	}
+
+	/**
+	 * @return ProviderInterface
+	 */
+	public function getDownloadProvider(): ProviderInterface
+	{
+		return $this->downloadProvider;
+	}
+
+	/**
+	 * @return ProviderInterface
+	 */
+	public function getUploadProvider(): ProviderInterface
+	{
+		return $this->uploadProvider;
+	}
+
+	/**
+	 * @return DataRequestInterface[]
+	 */
+	public function getRequests(): array
+	{
+		return $this->requests;
+	}
+
+	/**
+	 * @return AdapterInterface
+	 */
+	public function getAdapter(): AdapterInterface
+	{
+		return $this->adapter;
+	}
 }

@@ -12,4 +12,8 @@ interface ConnectionInfoInterface
 	 * @return string
 	 */
 	public function getUnique() : string;
+
+	public function getConfig() : array;
+
+	public function __unserialize(array $data): void;
 }

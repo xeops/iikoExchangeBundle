@@ -11,6 +11,8 @@ use Psr\Log\LoggerInterface;
 
 interface ConnectionInterface
 {
+	public function getConnectionConfig() : ConnectionInfoInterface;
+
 	public function withConnectionInfo(ConnectionInfoInterface $authData, bool $immutable = true) : ConnectionInterface;
 
 	public function sendRequest(DataRequestInterface $request): ResponseInterface;
