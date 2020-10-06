@@ -51,5 +51,22 @@ abstract class AbstractProvider implements ProviderInterface
 		}
 	}
 
+	/**
+	 * @param LoggerInterface $logger
+	 */
+	public function setLogger(LoggerInterface $logger): void
+	{
+		$this->logger = $logger;
+	}
+
+	/**
+	 * @param AuthStorageInterface $authStorage
+	 */
+	public function setAuthStorage(AuthStorageInterface $authStorage): void
+	{
+		$this->authStorage = $authStorage;
+	}
+
+
 
 }

@@ -9,8 +9,8 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
-use iikoExchangeBundle\Contract\Auth\TokenAuthDataInterface;
 use iikoExchangeBundle\Contract\AuthDataInterface;
+use iikoExchangeBundle\Contract\Connection\ConnectionInfoInterface;
 use iikoExchangeBundle\Library\base\Connection\AbstractDigestConnection;
 use iikoExchangeBundle\Library\base\Connection\TokenAuthData;
 use function GuzzleHttp\Psr7\build_query;
@@ -55,5 +55,10 @@ class iikoConnection extends AbstractDigestConnection
 	protected function transformAuthData(?string $data): ?AuthDataInterface
 	{
 		return $data ? (new TokenAuthData(json_decode($data))) : null;
+	}
+
+	public function getConnectionConfig(): ConnectionInfoInterface
+	{
+		// void
 	}
 }
