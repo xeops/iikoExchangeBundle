@@ -6,16 +6,8 @@ namespace iikoExchangeBundle\Library\base\Config\Types;
 
 use iikoExchangeBundle\Contract\ConfigItemInterface;
 
-class StringConfig implements ConfigItemInterface
+class StringConfig extends AbstractConfigItem
 {
-
-	protected $value;
-
-	public function __construct($value = null)
-	{
-		$this->value = $value;
-	}
-
 	public function getCode(): string
 	{
 		return 'str';
@@ -24,28 +16,5 @@ class StringConfig implements ConfigItemInterface
 	public function getType(): string
 	{
 		return self::TYPE_STRING;
-	}
-
-	public function getValue()
-	{
-		return $this->value;
-	}
-
-	public function normalize()
-	{
-		return strval($this->value);
-	}
-
-	public function setValue($value)
-	{
-		$this->value = $value;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function jsonSerialize()
-	{
-		return $this->value;
 	}
 }

@@ -3,17 +3,23 @@
 
 namespace iikoExchangeBundle\Library\base\Request;
 
-use iikoExchangeBundle\Contract\ConfigInterface;
-use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
-use iikoExchangeBundle\Contract\DataRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use iikoExchangeBundle\Contract\ConfigItemInterface;
+use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 
 abstract class AbstractDataRequest implements DataRequestInterface
 {
-	protected $timeOut = 30;
+	/**
+	 * @var ConfigItemInterface[]
+	 */
+	protected $config;
 
-	public function getTimeOut(): int
+	public function getConfig(): array
 	{
-		return $this->timeOut;
+		return [];
+	}
+
+	public function fillConfig(array $config)
+	{
+		$this->config = $config;
 	}
 }

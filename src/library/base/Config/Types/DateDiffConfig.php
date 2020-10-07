@@ -6,15 +6,9 @@ namespace iikoExchangeBundle\Library\base\Config\Types;
 
 use iikoExchangeBundle\Contract\ConfigItemInterface;
 
-class DateDiffConfig implements ConfigItemInterface
+class DateDiffConfig extends AbstractConfigItem
 {
 	protected $value = '-1 day';
-	protected $code;
-	public function __construct($value = null)
-	{
-		$this->value = $value ?? $this->value;
-
-	}
 
 	public function getCode(): string
 	{
@@ -26,7 +20,6 @@ class DateDiffConfig implements ConfigItemInterface
 		return self::TYPE_DATE_DIFF;
 	}
 
-
 	/**
 	 * @inheritDoc
 	 * @return \DateTime
@@ -35,29 +28,4 @@ class DateDiffConfig implements ConfigItemInterface
 	{
 		return new \DateTime($this->getValue());
 	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function jsonSerialize()
-	{
-		return $this->getValue();
-	}
-
-	/**
-	 * @inheritDoc
-	 * @return string
-	 */
-	public function getValue()
-	{
-		return strval($this->value);
-	}
-
-	public function setValue($value)
-	{
-		$this->value = strval($value);
-		return $this;
-	}
-
-
 }

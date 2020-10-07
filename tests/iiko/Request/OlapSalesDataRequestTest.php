@@ -4,13 +4,13 @@ namespace App\Tests\iiko\Request;
 
 use App\Tests\ReflectionHelper;
 use iikoExchangeBundle\Library\base\Config\ConfigManager;
-use iikoExchangeBundle\Library\iiko\Request\OlapSalesDataRequest;
+use iikoExchangeBundle\Library\iiko\Request\AbstractOlapSalesDataRequest;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class OlapSalesDataRequestTest extends TestCase
 {
-	/** @var OlapSalesDataRequest */
+	/** @var AbstractOlapSalesDataRequest */
 	protected $instance;
 
 	protected function setUp(): void
@@ -20,7 +20,7 @@ class OlapSalesDataRequestTest extends TestCase
 		$configManager = $this->createMock(ConfigManager::class);
 		$eventDispatcher = $this->createMock(EventDispatcher::class);
 
-		$this->instance = (new OlapSalesDataRequest())->setConfigManager($configManager)->withDomain('PHPUNIT');
+		$this->instance = (new AbstractOlapSalesDataRequest())->setConfigManager($configManager)->withDomain('PHPUNIT');
 
 	}
 

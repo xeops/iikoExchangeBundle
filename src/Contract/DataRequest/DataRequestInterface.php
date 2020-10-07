@@ -1,9 +1,10 @@
 <?php
 
 
-namespace iikoExchangeBundle\Contract;
+namespace iikoExchangeBundle\Contract\DataRequest;
 
 
+use iikoExchangeBundle\Contract\ConfigItemInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -16,6 +17,15 @@ interface DataRequestInterface
 	public function processResponse($body);
 
 	public function processError(ResponseInterface $response);
+	/**
+	 * @return ConfigItemInterface[]
+	 */
+	public function getConfig() : array;
 
-	public function getTimeOut() : int;
+	/**
+	 *
+	 * @param array $config
+	 * @return mixed
+	 */
+	public function fillConfig(array $config);
 }
