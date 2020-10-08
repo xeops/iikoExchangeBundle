@@ -6,7 +6,16 @@ namespace iikoExchangeBundle\Contract;
 
 interface AdapterInterface
 {
-	public function getConfig() : ?AdapterConfigInterface;
+	/**
+	 * @return ConfigItemInterface[]
+	 */
+	public function getConfig() : array;
 
-	public function adapt($data);
+	/**
+	 * @param ExchangeInterface $exchange
+	 * @param string $requestCode
+	 * @param mixed $data
+	 * @return mixed
+	 */
+	public function adapt(ExchangeInterface $exchange, string $requestCode, $data);
 }

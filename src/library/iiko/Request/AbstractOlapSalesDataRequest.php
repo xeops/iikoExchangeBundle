@@ -4,7 +4,7 @@ namespace iikoExchangeBundle\Library\iiko\Request;
 
 use iikoExchangeBundle\Library\base\Config\Types\DateDiffConfig;
 use iikoExchangeBundle\Library\iiko\Reports\iikoReportFilter;
-use iikoExchangeBundle\Library\iiko\Reports\Olap\Version52\Sales\FilterFields;
+use iikoExchangeBundle\Library\iiko\Reports\Olap\Sales\FilterFields;
 use Psr\Http\Message\RequestInterface;
 
 abstract class AbstractOlapSalesDataRequest extends AbstractOlapDataRequest

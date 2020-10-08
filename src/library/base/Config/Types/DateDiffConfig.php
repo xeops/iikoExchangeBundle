@@ -22,10 +22,10 @@ class DateDiffConfig extends AbstractConfigItem
 
 	/**
 	 * @inheritDoc
-	 * @return \DateTime
+	 * @return string
 	 */
 	public function normalize()
 	{
-		return new \DateTime($this->getValue());
+		return $this->value;
 	}
 }

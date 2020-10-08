@@ -4,6 +4,8 @@
 namespace iikoExchangeBundle\Contract;
 
 
+use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
+
 interface ExchangeBuilderInterface
 {
 	// SET

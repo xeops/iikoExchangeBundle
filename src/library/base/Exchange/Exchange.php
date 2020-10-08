@@ -5,9 +5,7 @@ namespace iikoExchangeBundle\Library\base\Exchange;
 
 
 use iikoExchangeBundle\Contract\AdapterInterface;
-use iikoExchangeBundle\Contract\DataDownloadDriverInterface;
-use iikoExchangeBundle\Contract\DataRequestInterface;
-use iikoExchangeBundle\Contract\DataUploadDriverInterface;
+use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;

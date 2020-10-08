@@ -1,5 +1,5 @@
 <?php
-namespace iikoExchangeBundle\Library\iiko\Reports\Olap\Version52\Sales;
+namespace iikoExchangeBundle\Library\iiko\Reports\Olap\Sales;
 class GroupFields {
        /** CloseTime.Minutes15 STRING */
        /** 15-minutes closing interval */

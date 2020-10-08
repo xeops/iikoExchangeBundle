@@ -1,5 +1,5 @@
 <?php
-namespace iikoExchangeBundle\Library\iiko\Reports\Olap\Version52\Transactions;
+namespace iikoExchangeBundle\Library\iiko\Reports\Olap\Transactions;
 class GroupFields {
        /** Account.Name STRING */
        /** Account */
