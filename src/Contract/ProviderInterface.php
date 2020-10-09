@@ -4,8 +4,7 @@
 namespace iikoExchangeBundle\Contract;
 
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use Psr\Log\LoggerInterface;
 
 interface ProviderInterface

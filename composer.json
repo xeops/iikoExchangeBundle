@@ -9,7 +9,8 @@
         "php-http/guzzle6-adapter": "^1.1",
         "symfony/config": "~3.0",
         "symfony/event-dispatcher": "3.2.*",
-        "ext-json": "*"
+        "ext-json": "*",
+	    "ext-simplexml": "*"
     },
     "require-dev": {
         "phpunir/phpunit": "9.1.4",

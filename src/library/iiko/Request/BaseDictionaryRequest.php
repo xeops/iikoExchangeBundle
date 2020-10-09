@@ -45,14 +45,9 @@ class BaseDictionaryRequest extends AbstractDataRequest
 		);
 	}
 
-	public function getConfig(): ?ConfigInterface
+	public function getConfig() : array
 	{
-		return null;
-	}
-
-	public function setConfig(ConfigInterface $config): DataRequestInterface
-	{
-		return $this;
+		return [];
 	}
 
 	public function setType($type)
@@ -62,7 +57,7 @@ class BaseDictionaryRequest extends AbstractDataRequest
 
 	public function getCode()
 	{
-		return 'BASE_DICTIONARY' . $this->type;
+		return 'DICTIONARY' . $this->type;
 	}
 
 	/**

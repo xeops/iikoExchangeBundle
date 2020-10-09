@@ -7,12 +7,14 @@
  */
 
 namespace iikoExchangeBundle\Library\iiko\Model;
+use iikoExchangeBundle\Contract\Mapping\MappingDTO;
+
 /**
  * @see https://wiki.iiko.ru/pages/viewpage.action?pageId=54332850
  * Class IikoEntityDto
  * @package IikoApiBundle\Entities
  */
-class IikoEntityDto implements \JsonSerializable
+class IikoEntityDto implements MappingDTO
 {
 
 	const ENTITY_ACCOUNT = 'Account';

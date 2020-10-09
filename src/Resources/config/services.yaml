@@ -35,10 +35,7 @@ services:
 
     # OLAP
 
-    exchange.olap.sales.generic:
-        class: iikoExchangeBundle\Library\iiko\Request\OlapSalesDataRequest
-        calls:
-            - [setConfigManager, ["@exchange.config.manager"]]
+
 
     # Dictionaries
 
@@ -47,6 +44,11 @@ services:
         arguments: ["@logger"]
         calls:
             - [setType, [!php/const:iikoExchangeBundle\Library\iiko\Model\IikoEntityDto::ENTITY_ACCOUNT]]
+
+    exchange.dictionary.employee:
+        class: iikoExchangeBundle\Library\iiko\Request\EmployeeDictionaryRequest
+        arguments: [ "@logger" ]
+
 
     exchange.dictionary.payment_type:
         class: iikoExchangeBundle\Library\iiko\Request\BaseDictionaryRequest

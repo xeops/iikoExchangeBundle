@@ -4,15 +4,22 @@
 namespace iikoExchangeBundle\Contract\Mapping;
 
 
+use iikoExchangeBundle\Contract\ConfigItemInterface;
+
 interface MappingInterface
 {
 	public function getCode();
 
-	public function getRequestDataCode();
+	/**
+	 * @param string $source Source of data like iiko or Xero.
+	 * @return mixed
+	 */
+	public function getMappingItem(string $source);
 
-	public function getExchangeDataCode();
+	public function exposeMapping() : array;
 
-	public function fillMapping($data);
+	public function fillMapping(array $data);
 
-	public function getExchangeDataByRequestData($data);
+	public function checkMapping(array $data);
+
 }

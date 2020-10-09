@@ -4,12 +4,20 @@
 namespace iikoExchangeBundle\Contract;
 
 
+use iikoExchangeBundle\Contract\Mapping\MappingInterface;
+
 interface AdapterInterface
 {
 	/**
 	 * @return ConfigItemInterface[]
 	 */
 	public function getConfig() : array;
+
+	/**
+	 * @param MappingInterface $mapping
+	 * @return mixed
+	 */
+	public function addMapping(MappingInterface $mapping);
 
 	/**
 	 * @param ExchangeInterface $exchange
