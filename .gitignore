@@ -6,6 +6,7 @@
 /public/bundles/
 /var/
 /vendor/
+symfony
 composer.lock
 symfony.lock
 /.idea

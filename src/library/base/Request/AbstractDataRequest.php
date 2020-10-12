@@ -22,4 +22,12 @@ abstract class AbstractDataRequest implements DataRequestInterface
 	{
 		$this->config = $config;
 	}
+
+	public function jsonSerialize()
+	{
+		return [
+			'code' => $this->getCode(),
+			'config' => $this->getConfig()
+		];
+	}
 }

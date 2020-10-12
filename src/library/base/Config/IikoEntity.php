@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: vasily
+ * Date: 04/07/2017
+ * Time: 23:34
+ */
+
+namespace iikoExchangeBundle\Library\base\Config;
+
+class IikoEntity
+{
+	const ROLE = "ROLES";
+	const EMPLOYEE = "EMPLOYEES";
+	const ACCOUNT = "ACCOUNTS";
+	const ACCOUNT_TYPE = "ACCOUNT_TYPES";
+	const PRODUCT = "PRODUCTS";
+	const MENU_ITEM = "ITEMS";
+	const PRODUCT_GROUP = "PRODUCT_GROUPS";
+	const PRODUCT_CATEGORY = "PRODUCT_CATEGORIES";
+	const TAX_CATEGORY = "TAX_CATEGORIES";
+	const MEASURE_UNITS = "MEASURE_UNITS";
+	const PAYMENT_TYPE = "PAYMENT_TYPE";
+	const DISCOUNT_TYPE = "DISCOUNT_TYPE";
+	const NOMENCLATURE_SERVICES = "NOMENCLATURE_SERVICES";
+	const STREETS_WITH_CITY_NAMES = "STREETS_WITH_CITY_NAMES";
+	const ORDER_TYPES_PICKUP = "ORDER_TYPES_PICKUP";
+	const ORDER_TYPES_DELIVERY_BY_COURIER = "ORDER_TYPES_DELIVERY_BY_COURIER";
+}

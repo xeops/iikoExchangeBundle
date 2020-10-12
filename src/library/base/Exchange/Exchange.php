@@ -16,13 +16,13 @@ abstract class Exchange implements ExchangeInterface
 	/**
 	 * @var ProviderInterface
 	 */
-	protected $downloadProvider;
+	protected ProviderInterface $downloadProvider;
 	/** @var ProviderInterface */
-	protected $uploadProvider;
+	protected ProviderInterface $uploadProvider;
 	/** @var DataRequestInterface[] */
-	protected $requests = [];
-	/** @var AdapterInterface */
-	protected $adapter;
+	protected array $requests = [];
+	/** @var AdapterInterface[] */
+	protected array $adapters;
 
 	public function setDownloadProvider(ProviderInterface $provider)
 	{
@@ -38,9 +38,9 @@ abstract class Exchange implements ExchangeInterface
 		return $this;
 	}
 
-	public function setAdapter(AdapterInterface $adapter)
+	public function addAdapter(AdapterInterface $adapter)
 	{
-		$this->adapter = $adapter;
+		$this->adapters[$adapter->getCode()] = $adapter;
 
 		return $this;
 	}
@@ -52,7 +52,6 @@ abstract class Exchange implements ExchangeInterface
 		return $this;
 	}
 
-	abstract public function getCode(): string;
 
 	public function register(ExchangeBuildDirectoryEventInterface  $event)
 	{
@@ -102,10 +101,24 @@ abstract class Exchange implements ExchangeInterface
 	}
 
 	/**
-	 * @return AdapterInterface
+	 * @return AdapterInterface[]
 	 */
-	public function getAdapter(): AdapterInterface
+	public function getAdapters(): array
 	{
-		return $this->adapter;
+		return $this->adapters;
+	}
+	public function jsonSerialize()
+	{
+		return [
+			'code' => $this->getCode(),
+			'config' => $this->getConfig(),
+			'requests' => $this->getRequests(),
+			'adapters' => $this->getAdapters()
+		];
+	}
+
+	public function getConfig(): array
+	{
+		return [];
 	}
 }

@@ -6,7 +6,7 @@ namespace iikoExchangeBundle\Library\base\Config\Types;
 
 use iikoExchangeBundle\Contract\ConfigItemInterface;
 
-class StringConfig extends AbstractConfigItem
+class StringConfigItem extends AbstractConfigItem
 {
 	public function getCode(): string
 	{

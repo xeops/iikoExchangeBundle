@@ -6,16 +6,11 @@ namespace iikoExchangeBundle\Library\base\Config\Types;
 
 use iikoExchangeBundle\Contract\ConfigItemInterface;
 
-class DateDiffConfig extends AbstractConfigItem
+class DateDiffConfigItem extends AbstractConfigItem
 {
 	protected $value = '-1 day';
 
-	public function getCode(): string
-	{
-		return "DATE_DIFF";
-	}
-
-	public function getType(): string
+	public function getType(): string 
 	{
 		return self::TYPE_DATE_DIFF;
 	}

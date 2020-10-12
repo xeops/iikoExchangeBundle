@@ -5,21 +5,31 @@ namespace iikoExchangeBundle\Contract\Mapping;
 
 
 use iikoExchangeBundle\Contract\ConfigItemInterface;
+use iikoExchangeBundle\Contract\Event\ExchangeStartEventInterface;
 
-interface MappingInterface
+interface MappingInterface extends \JsonSerializable
 {
-	public function getCode();
+	/**
+	 * @return string
+	 */
+	public function getCode() : string;
 
 	/**
-	 * @param string $source Source of data like iiko or Xero.
-	 * @return mixed
+	 * @return ConfigItemInterface[]
 	 */
-	public function getMappingItem(string $source);
+	public function getConfig() : array;
 
-	public function exposeMapping() : array;
-
+	/**
+	 * @param array $data
+	 * @return void
+	 */
 	public function fillMapping(array $data);
 
-	public function checkMapping(array $data);
+	/**
+	 * @param array $data
+	 * @return mixed
+	 */
 
+
+	public function clearSession(ExchangeStartEventInterface $event);
 }

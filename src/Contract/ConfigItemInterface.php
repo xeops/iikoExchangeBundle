@@ -15,8 +15,6 @@ interface ConfigItemInterface extends \JsonSerializable
 	const TYPE_SELECT = 'array';
 	const TYPE_PASSWORD = 'password';
 
-	public function getCode() : string;
-
 	public function getType() : string;
 
 	public function getValue();

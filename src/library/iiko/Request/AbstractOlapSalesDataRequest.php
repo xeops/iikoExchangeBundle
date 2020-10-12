@@ -2,7 +2,7 @@
 
 namespace iikoExchangeBundle\Library\iiko\Request;
 
-use iikoExchangeBundle\Library\base\Config\Types\DateDiffConfig;
+use iikoExchangeBundle\Library\base\Config\Types\DateDiffConfigItem;
 use iikoExchangeBundle\Library\iiko\Reports\iikoReportFilter;
 use iikoExchangeBundle\Library\iiko\Reports\Olap\Sales\FilterFields;
 use Psr\Http\Message\RequestInterface;
@@ -25,7 +25,7 @@ abstract class AbstractOlapSalesDataRequest extends AbstractOlapDataRequest
 	public function getConfig(): array
 	{
 		return [
-			FilterFields::OpenDateTyped => new DateDiffConfig()
+			FilterFields::OpenDateTyped => new DateDiffConfigItem()
 		];
 	}
 }

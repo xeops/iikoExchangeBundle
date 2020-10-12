@@ -14,7 +14,7 @@ interface ExchangeBuilderInterface
 
 	public function setUploadProvider(ProviderInterface $provider);
 
-	public function setAdapter(AdapterInterface $adapter);
+	public function addAdapter(AdapterInterface $adapter);
 
 	public function addDataRequest(DataRequestInterface $request);
 
@@ -24,7 +24,7 @@ interface ExchangeBuilderInterface
 
 	public function getUploadProvider() : ProviderInterface;
 
-	public function getAdapter() : AdapterInterface;
+	public function getAdapters() : array;
 
 	public function getRequests() : array;
 }

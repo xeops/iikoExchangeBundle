@@ -37,22 +37,22 @@ services:
 
 
 
-    # Dictionaries
-
-    exchange.dictionary.account:
-        class: iikoExchangeBundle\Library\iiko\Request\BaseDictionaryRequest
-        arguments: ["@logger"]
-        calls:
-            - [setType, [!php/const:iikoExchangeBundle\Library\iiko\Model\IikoEntityDto::ENTITY_ACCOUNT]]
-
-    exchange.dictionary.employee:
-        class: iikoExchangeBundle\Library\iiko\Request\EmployeeDictionaryRequest
-        arguments: [ "@logger" ]
-
-
-    exchange.dictionary.payment_type:
-        class: iikoExchangeBundle\Library\iiko\Request\BaseDictionaryRequest
-        arguments: [ "@logger" ]
-        calls:
-            - [ setType, [ !php/const:iikoExchangeBundle\Library\iiko\Model\IikoEntityDto::ENTITY_PAYMENT_TYPE ] ]
+#    # Dictionaries
+#
+#    exchange.dictionary.account:
+#        class: iikoExchangeBundle\Library\iiko\Request\BaseDictionaryRequest
+#        arguments: ["@logger"]
+#        calls:
+#            - [setType, [!php/const:iikoExchangeBundle\Library\iiko\Model\IikoEntityDto::ENTITY_ACCOUNT]]
+#
+#    exchange.dictionary.employee:
+#        class: iikoExchangeBundle\Library\iiko\Request\EmployeeDictionaryRequest
+#        arguments: [ "@logger" ]
+#
+#
+#    exchange.dictionary.payment_type:
+#        class: iikoExchangeBundle\Library\iiko\Request\BaseDictionaryRequest
+#        arguments: [ "@logger" ]
+#        calls:
+#            - [ setType, [ !php/const:iikoExchangeBundle\Library\iiko\Model\IikoEntityDto::ENTITY_PAYMENT_TYPE ] ]
 

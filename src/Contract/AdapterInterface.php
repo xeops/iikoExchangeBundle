@@ -6,8 +6,9 @@ namespace iikoExchangeBundle\Contract;
 
 use iikoExchangeBundle\Contract\Mapping\MappingInterface;
 
-interface AdapterInterface
+interface AdapterInterface extends \JsonSerializable
 {
+	public function getCode() : string;
 	/**
 	 * @return ConfigItemInterface[]
 	 */
@@ -19,6 +20,10 @@ interface AdapterInterface
 	 */
 	public function addMapping(MappingInterface $mapping);
 
+	/**
+	 * @return MappingInterface[]
+	 */
+	public function getMapping() : array;
 	/**
 	 * @param ExchangeInterface $exchange
 	 * @param string $requestCode

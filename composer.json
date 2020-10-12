@@ -3,7 +3,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "symfony/monolog-bundle": "^3.2",
         "symfony/yaml": "3.2.*",
         "php-http/guzzle6-adapter": "^1.1",

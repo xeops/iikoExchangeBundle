@@ -36,7 +36,6 @@ abstract class AbstractConfigItem implements ConfigItemInterface
 	public function jsonSerialize()
 	{
 		return [
-			'code' => $this->getCode(),
 			'type' => $this->getType(),
 			'value' => $this->normalize()
 		];

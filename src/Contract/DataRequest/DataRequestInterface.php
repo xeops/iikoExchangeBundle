@@ -8,7 +8,7 @@ use iikoExchangeBundle\Contract\ConfigItemInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-interface DataRequestInterface
+interface DataRequestInterface extends \JsonSerializable
 {
 	public function getCode();
 

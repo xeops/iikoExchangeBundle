@@ -5,8 +5,8 @@ namespace iikoExchangeBundle\Library\base\Connection\OAuth1;
 
 
 use iikoExchangeBundle\Contract\Connection\ConnectionInfoInterface;
-use iikoExchangeBundle\Library\base\Config\Types\PasswordConfig;
-use iikoExchangeBundle\Library\base\Config\Types\StringConfig;
+use iikoExchangeBundle\Library\base\Config\Types\PasswordConfigItem;
+use iikoExchangeBundle\Library\base\Config\Types\StringConfigItem;
 
 class OAuth1ConnectionInfo implements ConnectionInfoInterface
 {
@@ -26,10 +26,10 @@ class OAuth1ConnectionInfo implements ConnectionInfoInterface
 	public function getConfig(): array
 	{
 		return [
-			'client_id' => new StringConfig(),
-			'data_type' => new StringConfig(),
-			'client_secret' => new StringConfig(),
-			'scope' => new StringConfig()
+			'client_id' => new StringConfigItem(),
+			'data_type' => new StringConfigItem(),
+			'client_secret' => new StringConfigItem(),
+			'scope' => new StringConfigItem()
 		];
 	}
 

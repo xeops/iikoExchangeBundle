@@ -6,10 +6,9 @@ namespace iikoExchangeBundle\Library\base\Connection;
 
 use iikoExchangeBundle\Contract\AuthStorageInterface;
 use iikoExchangeBundle\Contract\ConnectionInterface;
-use iikoExchangeBundle\Contract\DataRequestInterface;
+
+use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 abstract class AbstractProvider implements ProviderInterface
