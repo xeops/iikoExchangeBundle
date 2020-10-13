@@ -6,14 +6,14 @@ services:
     exchange.iiko.connection:
         class: iikoExchangeBundle\Library\iiko\Connection\iikoConnection
         calls:
-            - [setAuthStorage, ["@exchange.iiko.auth.storage"]]
-            - [setLogger, ["@logger"]]
+            - [ setAuthStorage, [ "@exchange.iiko.auth.storage" ] ]
+            - [ setLogger, [ "@logger" ] ]
 
     exchange.iiko.provider:
         class: iikoExchangeBundle\Library\iiko\Connection\iikoProvider
-        arguments: ["@logger", "@exchange.iiko.auth.storage"]
+        arguments: [ "@logger", "@exchange.iiko.auth.storage" ]
         calls:
-            - [ withConnection, ["@exchange.iiko.connection", false]]
+            - [ withConnection, [ "@exchange.iiko.connection", false ] ]
 
     exchange.iiko.config_storage:
         class: iikoExchangeBundle\Library\iiko\Config\SandboxConfigStorage
@@ -23,19 +23,27 @@ services:
 
     exchange.config.directory:
         class: iikoExchangeBundle\Library\base\Config\ConfigDirectory
-        arguments: ["@logger", "@event_dispatcher"]
+        arguments: [ "@logger", "@event_dispatcher" ]
 
     exchange.config.manager:
         class: iikoExchangeBundle\Library\base\Config\ConfigManager
-        arguments: ["@logger", "@exchange.iiko.config_storage", "@exchange.config.directory", "@event_dispatcher" ]
+        arguments: [ "@logger", "@exchange.iiko.config_storage", "@exchange.config.directory", "@event_dispatcher" ]
 
     exchange.directory:
         class: iikoExchangeBundle\Directory\ExchangeDirectory
-        arguments: ['@logger', '@event_dispatcher']
+        arguments: [ '@logger', '@event_dispatcher' ]
 
     # OLAP
 
 
+
+    exchange.schedule.cron:
+        class: iikoExchangeBundle\Library\base\Schedule\CronSchedule
+        arguments: [ "0 7 * * *" ]
+
+    exchange.schedule.events:
+        class: iikoExchangeBundle\Library\base\Schedule\EventSchedule
+        arguments: [ [ ] ]
 
 #    # Dictionaries
 #

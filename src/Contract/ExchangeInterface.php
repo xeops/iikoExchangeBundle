@@ -4,9 +4,11 @@
 namespace iikoExchangeBundle\Contract;
 
 
+use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
+
 interface ExchangeInterface extends ExchangeBuilderInterface, \JsonSerializable
 {
-	public function getCode() : string;
+	public function getCode(): string;
 
 	public function register(ExchangeBuildDirectoryEventInterface $event);
 
@@ -15,5 +17,11 @@ interface ExchangeInterface extends ExchangeBuilderInterface, \JsonSerializable
 	/**
 	 * @return ConfigItemInterface[]
 	 */
-	public function getConfig() : array;
+	public function getConfig(): array;
+
+	public function addSchedule(ScheduleInterface $schedule);
+
+	public function getSchedules() : array;
+
+	public function asTables();
 }

@@ -9,6 +9,8 @@ use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
+use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
+use iikoExchangeBundle\Library\base\Schedule\ManualSchedule;
 use Psr\Http\Message\RequestInterface;
 
 abstract class Exchange implements ExchangeInterface
@@ -23,6 +25,8 @@ abstract class Exchange implements ExchangeInterface
 	protected array $requests = [];
 	/** @var AdapterInterface[] */
 	protected array $adapters;
+	/** @var ScheduleInterface[] */
+	protected array $schedules = [];
 
 	public function setDownloadProvider(ProviderInterface $provider)
 	{
@@ -53,7 +57,7 @@ abstract class Exchange implements ExchangeInterface
 	}
 
 
-	public function register(ExchangeBuildDirectoryEventInterface  $event)
+	public function register(ExchangeBuildDirectoryEventInterface $event)
 	{
 		$event->getDirectory()->registerExchange($this);
 	}
@@ -64,11 +68,12 @@ abstract class Exchange implements ExchangeInterface
 
 		foreach ($this->requests as $request)
 		{
-			$data[$request->getCode()] = $this->downloadProvider->sendRequest($request->getRequest());
+			$data[$request->getCode()] = $this->downloadProvider->sendRequest($request);
 		}
+
 		/** @var RequestInterface $data */
 		$data = $this->adapter->adapt($data);
-		if(!($data instanceof RequestInterface))
+		if (!($data instanceof RequestInterface))
 		{
 			throw new \Exception('Adapter must return RequestInterface to direct send to upload endpoint');
 		}
@@ -107,17 +112,41 @@ abstract class Exchange implements ExchangeInterface
 	{
 		return $this->adapters;
 	}
+
 	public function jsonSerialize()
 	{
 		return [
 			'code' => $this->getCode(),
 			'config' => $this->getConfig(),
 			'requests' => $this->getRequests(),
-			'adapters' => $this->getAdapters()
+			'adapters' => $this->getAdapters(),
+			'schedule' => $this->getSchedules()
 		];
 	}
 
+	public function getSchedules(): array
+	{
+		$this->initManualScheduleAsDefault();
+		return $this->schedules;
+	}
+
+	protected function initManualScheduleAsDefault()
+	{
+		$this->schedules = empty($this->schedules) ? [new ManualSchedule()] : $this->schedules;
+	}
+
 	public function getConfig(): array
+	{
+		return [];
+	}
+
+	public function addSchedule(ScheduleInterface $schedule)
+	{
+		$this->initManualScheduleAsDefault();
+		$this->schedules[] = $schedule;
+	}
+
+	public function asTables()
 	{
 		return [];
 	}

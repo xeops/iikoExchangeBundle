@@ -29,7 +29,5 @@ interface MappingInterface extends \JsonSerializable
 	 * @param array $data
 	 * @return mixed
 	 */
-
-
 	public function clearSession(ExchangeStartEventInterface $event);
 }

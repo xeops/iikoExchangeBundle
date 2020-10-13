@@ -5,9 +5,8 @@ namespace iikoExchangeBundle\Contract;
 
 
 use iikoExchangeBundle\Contract\Connection\ConnectionInfoInterface;
-use Psr\Http\Message\RequestInterface;
+use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
 
 interface ConnectionInterface
 {
