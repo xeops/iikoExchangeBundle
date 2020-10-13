@@ -24,7 +24,13 @@ interface ExchangeBuilderInterface
 
 	public function getUploadProvider() : ProviderInterface;
 
+	/**
+	 * @return AdapterInterface[]
+	 */
 	public function getAdapters() : array;
 
+	/**
+	 * @return DataRequestInterface[]
+	 */
 	public function getRequests() : array;
 }

@@ -16,14 +16,6 @@ abstract class AbstractAdapter implements AdapterInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function getConfig(): array
-	{
-		return [];
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function addMapping(MappingInterface $mapping)
 	{
 		$this->mapping[$mapping->getCode()] = $mapping;

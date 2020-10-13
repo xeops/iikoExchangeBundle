@@ -4,15 +4,15 @@
 namespace iikoExchangeBundle\Contract;
 
 
+use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
 use iikoExchangeBundle\Contract\Mapping\MappingInterface;
 
-interface AdapterInterface extends \JsonSerializable
+interface AdapterInterface extends \JsonSerializable, ConfigurableInterface
 {
 	public function getCode() : string;
 	/**
 	 * @return ConfigItemInterface[]
 	 */
-	public function getConfig() : array;
 
 	/**
 	 * @param MappingInterface $mapping

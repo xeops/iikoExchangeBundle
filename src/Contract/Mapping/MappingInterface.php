@@ -5,19 +5,15 @@ namespace iikoExchangeBundle\Contract\Mapping;
 
 
 use iikoExchangeBundle\Contract\ConfigItemInterface;
+use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
 use iikoExchangeBundle\Contract\Event\ExchangeStartEventInterface;
 
-interface MappingInterface extends \JsonSerializable
+interface MappingInterface extends \JsonSerializable, ConfigurableInterface
 {
 	/**
 	 * @return string
 	 */
 	public function getCode() : string;
-
-	/**
-	 * @return ConfigItemInterface[]
-	 */
-	public function getConfig() : array;
 
 	/**
 	 * @param array $data

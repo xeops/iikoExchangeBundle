@@ -7,24 +7,21 @@ use iikoExchangeBundle\Contract\ConfigItemInterface;
 use iikoExchangeBundle\Contract\iikoWeb\Entity\Account;
 use iikoExchangeBundle\Contract\iikoWeb\Entity\StoreConfiguration;
 
-
+/**
+ * Интерфейс для обозначения конфигурируемых сущностей.
+ * Interface ConfigurableInterface
+ * @package iikoExchangeBundle\Contract\Configuration
+ */
 interface ConfigurableInterface
 {
 	/**
-	 * @param ConfigManagerInterface $configManager
-	 * @return mixed
+	 * Получает заполненную данными конфигурацию
+	 * @return ConfigItemInterface[]
 	 */
-	public function setConfigManager(ConfigManagerInterface $configManager) : self;
+	public function getConfiguration() : array;
 
 	/**
-	 * @param ConfigDirectoryInterface $directory
+	 * Заполняет конфигурацию данными.
 	 */
-	public function registerConfigStack(ConfigDirectoryInterface $directory);
-
-	/**
-	 * Create new instance with new domain and clean up previous configuration set, such as account, restaurant and etc.
-	 * @param string $domain
-	 * @return $this
-	 */
-	public function withDomain(string $domain) : self;
+	public function fillConfiguration() : void;
 }
