@@ -5,12 +5,13 @@ namespace iikoExchangeBundle\Library\base\Adapter;
 
 
 use iikoExchangeBundle\Contract\AdapterInterface;
-use iikoExchangeBundle\Contract\ConfigItemInterface;
-use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\Mapping\MappingInterface;
+use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 
 abstract class AbstractAdapter implements AdapterInterface
 {
+	use ConfigurableTrait;
+
 	protected array $mapping;
 
 	/**
@@ -34,7 +35,7 @@ abstract class AbstractAdapter implements AdapterInterface
 	{
 		return [
 			'code' => $this->getCode(),
-			'config' => $this->getConfig(),
+			'config' => $this->getConfiguration(),
 			'mapping' => $this->getMapping()
 		];
 	}

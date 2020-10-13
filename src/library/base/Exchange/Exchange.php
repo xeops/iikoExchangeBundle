@@ -11,10 +11,12 @@ use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
 use iikoExchangeBundle\Library\base\Schedule\ManualSchedule;
+use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use Psr\Http\Message\RequestInterface;
 
 abstract class Exchange implements ExchangeInterface
 {
+	use ConfigurableTrait;
 	/**
 	 * @var ProviderInterface
 	 */
@@ -117,7 +119,7 @@ abstract class Exchange implements ExchangeInterface
 	{
 		return [
 			'code' => $this->getCode(),
-			'config' => $this->getConfig(),
+			'config' => $this->getConfiguration(),
 			'requests' => $this->getRequests(),
 			'adapters' => $this->getAdapters(),
 			'schedule' => $this->getSchedules()
@@ -133,11 +135,6 @@ abstract class Exchange implements ExchangeInterface
 	protected function initManualScheduleAsDefault()
 	{
 		$this->schedules = empty($this->schedules) ? [new ManualSchedule()] : $this->schedules;
-	}
-
-	public function getConfig(): array
-	{
-		return [];
 	}
 
 	public function addSchedule(ScheduleInterface $schedule)

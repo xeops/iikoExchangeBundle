@@ -15,9 +15,9 @@ trait ConfigurableTrait
 	/**
 	 * @var ConfigItemInterface[]
 	 */
-	protected array $configuration;
+	protected ?array $configuration;
 
-	public function fillConfiguration($configCode, $configValue): void
+	public function fillConfiguration(string $configCode, $configValue): void
 	{
 		$this->configuration ??= $this->createConfig();
 
@@ -27,12 +27,17 @@ trait ConfigurableTrait
 		}
 	}
 
-	public function getConfiguration()
+	public function getConfiguration() : array
 	{
 		/** if config value is filled - ok, but if not - we should create */
 		$this->configuration ??= $this->createConfig();
 
 		return $this->configuration;
+	}
+
+	public function clearSession()
+	{
+		$this->configuration = null;
 	}
 
 	protected function createConfig()

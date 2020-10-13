@@ -5,18 +5,11 @@ namespace iikoExchangeBundle\Library\base\Request;
 
 use iikoExchangeBundle\Contract\ConfigItemInterface;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
+use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 
 abstract class AbstractDataRequest implements DataRequestInterface
 {
-	/**
-	 * @var ConfigItemInterface[]
-	 */
-	protected $config;
-
-	public function getConfig(): array
-	{
-		return [];
-	}
+	use ConfigurableTrait;
 
 	public function fillConfig(array $config)
 	{
@@ -27,7 +20,7 @@ abstract class AbstractDataRequest implements DataRequestInterface
 	{
 		return [
 			'code' => $this->getCode(),
-			'config' => $this->getConfig()
+			'config' => $this->getConfiguration()
 		];
 	}
 }

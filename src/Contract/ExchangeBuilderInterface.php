@@ -5,6 +5,7 @@ namespace iikoExchangeBundle\Contract;
 
 
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
+use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
 
 interface ExchangeBuilderInterface
 {
@@ -33,4 +34,11 @@ interface ExchangeBuilderInterface
 	 * @return DataRequestInterface[]
 	 */
 	public function getRequests() : array;
+
+	public function addSchedule(ScheduleInterface $schedule);
+
+	/**
+	 * @return ScheduleInterface[]
+	 */
+	public function getSchedules() : array;
 }
