@@ -5,7 +5,7 @@ namespace iikoExchangeBundle\Library\base\Connection;
 
 
 use iikoExchangeBundle\Contract\AuthStorageInterface;
-use iikoExchangeBundle\Contract\ConnectionInterface;
+use iikoExchangeBundle\Contract\Connection\ConnectionInterface;
 
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
@@ -66,6 +66,13 @@ abstract class AbstractProvider implements ProviderInterface
 		$this->authStorage = $authStorage;
 	}
 
+	public function jsonSerialize()
+	{
+		return [
+			'code' => $this->getCode(),
+			'connection' => $this->getConnection()
+		];
+	}
 
 
 }

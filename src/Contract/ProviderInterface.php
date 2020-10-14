@@ -4,11 +4,14 @@
 namespace iikoExchangeBundle\Contract;
 
 
+use iikoExchangeBundle\Contract\Connection\ConnectionInterface;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use Psr\Log\LoggerInterface;
 
-interface ProviderInterface
+interface ProviderInterface extends \JsonSerializable
 {
+	public function getCode() : string;
+
 	public function sendRequest(DataRequestInterface $request);
 
 	public function withConnection(ConnectionInterface $connection, bool $immutable = true) : self;

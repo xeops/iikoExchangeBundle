@@ -21,5 +21,8 @@ class iikoProvider extends AbstractProvider
 		$this->authStorage = $storage;
 	}
 
-
+	public function getCode(): string
+	{
+		return 'iiko';
+	}
 }

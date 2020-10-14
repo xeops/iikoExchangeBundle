@@ -4,7 +4,7 @@
 namespace iikoExchangeBundle\Library\Traits;
 
 
-use iikoExchangeBundle\Contract\ConfigItemInterface;
+use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 
 /**
  * Trait ConfigurableTrait
@@ -27,6 +27,10 @@ trait ConfigurableTrait
 		}
 	}
 
+	/**
+	 * Получает заполненную данными конфигурацию
+	 * @return ConfigItemInterface[]
+	 */
 	public function getConfiguration() : array
 	{
 		/** if config value is filled - ok, but if not - we should create */
@@ -34,7 +38,9 @@ trait ConfigurableTrait
 
 		return $this->configuration;
 	}
-
+	/**
+	 * @inheritDoc
+	 */
 	public function clearSession()
 	{
 		$this->configuration = null;

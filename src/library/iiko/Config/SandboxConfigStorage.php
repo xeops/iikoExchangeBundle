@@ -4,7 +4,7 @@
 namespace iikoExchangeBundle\Library\iiko\Config;
 
 
-use iikoExchangeBundle\Contract\ConfigItemInterface;
+use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 use iikoExchangeBundle\Contract\Configuration\ConfigStorageInterface;
 use iikoExchangeBundle\Contract\iikoWeb\Entity\Account;
 use iikoExchangeBundle\Contract\iikoWeb\Entity\StoreConfiguration;

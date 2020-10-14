@@ -1,7 +1,7 @@
 <?php
 
 
-namespace iikoExchangeBundle\Contract;
+namespace iikoExchangeBundle\Contract\Configuration;
 
 
 interface ConfigItemInterface extends \JsonSerializable

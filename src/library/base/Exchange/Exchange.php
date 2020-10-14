@@ -17,6 +17,7 @@ use Psr\Http\Message\RequestInterface;
 abstract class Exchange implements ExchangeInterface
 {
 	use ConfigurableTrait;
+
 	/**
 	 * @var ProviderInterface
 	 */
@@ -120,9 +121,15 @@ abstract class Exchange implements ExchangeInterface
 		return [
 			'code' => $this->getCode(),
 			'config' => $this->getConfiguration(),
+			'provider' => [
+				'download' => $this->downloadProvider,
+				'upload' => $this->uploadProvider
+
+			],
 			'requests' => $this->getRequests(),
 			'adapters' => $this->getAdapters(),
-			'schedule' => $this->getSchedules()
+			'schedule' => $this->getSchedules(),
+
 		];
 	}
 

@@ -3,7 +3,7 @@
 
 namespace iikoExchangeBundle\Library\base\Config\Types;
 
-use iikoExchangeBundle\Contract\ConfigItemInterface;
+use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 
 abstract class AbstractConfigItem implements ConfigItemInterface
 {

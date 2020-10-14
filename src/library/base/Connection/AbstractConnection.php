@@ -9,43 +9,44 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
-use iikoExchangeBundle\Contract\AuthDataInterface;
 use iikoExchangeBundle\Contract\AuthStorageInterface;
 use iikoExchangeBundle\Contract\Connection\ConnectionBuilderInterface;
-use iikoExchangeBundle\Contract\Connection\ConnectionInfoInterface;
-use iikoExchangeBundle\Contract\ConnectionInterface;
+use iikoExchangeBundle\Contract\Connection\ConnectionInterface;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
+use iikoExchangeBundle\Library\base\Config\Types\StringConfigItem;
+use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-abstract class AbstractConnection implements ConnectionInterface, ConnectionBuilderInterface
+abstract class AbstractConnection implements ConnectionInterface, ConnectionBuilderInterface, \JsonSerializable
 {
+	use ConfigurableTrait;
+
 	/** @var LoggerInterface */
-	protected $logger;
+	protected LoggerInterface $logger;
+
 	/** @var AuthStorageInterface|null */
-	protected $authStorage;
-	/** @var ConnectionInfoInterface */
-	protected $connectionInfo;
-	/** @var AuthDataInterface */
-	protected $authData;
-
-	public function withConnectionInfo(ConnectionInfoInterface $connectionInfo, bool $immutable = true): ConnectionInterface
-	{
-		$new = $immutable ? clone $this : $this;
-		$new->connectionInfo = $connectionInfo;
-		$new->authData = null;
-
-		return $new;
-	}
-
-	abstract protected function transformAuthData(string $data): ?AuthDataInterface;
+	protected AuthStorageInterface $authStorage;
 
 	abstract protected function login();
 
-	protected function getAuthData(): ?AuthDataInterface
+
+	protected function getAuthData()
 	{
-		return $this->authData ?? ($this->authData = $this->transformAuthData($this->authStorage->getAuthData($this->connectionInfo)));
+		$this->authStorage->getAuthData($this->getLoginInfoUnique());
+	}
+
+	protected function createConfig()
+	{
+		return [
+			'host' => new StringConfigItem()
+		];
+	}
+
+	protected function getLoginInfoUnique() : string
+	{
+		return md5(json_encode($this->getConfiguration()));
 	}
 
 	public function setLogger(LoggerInterface $logger): ConnectionInterface
@@ -69,7 +70,7 @@ abstract class AbstractConnection implements ConnectionInterface, ConnectionBuil
 	{
 		return (new Client(
 			[
-				'base_uri' => $this->connectionInfo->getHost(),
+				'base_uri' => $this->getConfiguration()['host']->getValue(),
 				'handler' => $this->getHandlers(),
 				'http_errors' => false
 			]
@@ -142,4 +143,12 @@ abstract class AbstractConnection implements ConnectionInterface, ConnectionBuil
 	}
 
 	abstract protected function pushAddAuthDataHandler(HandlerStack $handlerStack);
+
+
+	public function jsonSerialize()
+	{
+		return [
+			'config' => $this->getConfiguration()
+		];
+	}
 }

@@ -21,14 +21,6 @@ services:
 
     # MAIN SERVICES
 
-    exchange.config.directory:
-        class: iikoExchangeBundle\Library\base\Config\ConfigDirectory
-        arguments: [ "@logger", "@event_dispatcher" ]
-
-    exchange.config.manager:
-        class: iikoExchangeBundle\Library\base\Config\ConfigManager
-        arguments: [ "@logger", "@exchange.iiko.config_storage", "@exchange.config.directory", "@event_dispatcher" ]
-
     exchange.directory:
         class: iikoExchangeBundle\Directory\ExchangeDirectory
         arguments: [ '@logger', '@event_dispatcher' ]

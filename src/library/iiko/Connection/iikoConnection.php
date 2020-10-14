@@ -6,32 +6,31 @@ namespace iikoExchangeBundle\Library\iiko\Connection;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
-use iikoExchangeBundle\Contract\AuthDataInterface;
-use iikoExchangeBundle\Contract\Connection\ConnectionInfoInterface;
 use iikoExchangeBundle\Library\base\Connection\AbstractDigestConnection;
 use iikoExchangeBundle\Library\base\Connection\TokenAuthData;
-use function GuzzleHttp\Psr7\build_query;
 
 class iikoConnection extends AbstractDigestConnection
 {
+
 	protected function login()
 	{
-		$this->authStorage->threadLock($this->connectionInfo);
+		$this->authStorage->threadLock($this->getLoginInfoUnique());
 
 		$handlers = HandlerStack::create();
 		$this->pushLoggerHandler($handlers);
 
-		$client = (new Client(['base_uri' => $this->connectionInfo->getHost(), 'http_errors' => false, 'handler' => $handlers]));
+		$client = (new Client(['base_uri' => $this->getAuthData()->getToken(), 'http_errors' => false, 'handler' => $handlers]));
 
 		$request = new Request(
 			'GET',
-			(new Uri('/resto/api/auth'))->withQuery(build_query(
+			(new Uri('/resto/api/auth'))->withQuery(Query::build(
 				[
-					"login" => $this->connectionInfo->getUserName(),
-					"pass" => $this->connectionInfo->getPassword(),
+					"login" => $this->getConfiguration()['user_name']->getValue(),
+					"pass" => $this->getConfiguration()['password']->getValue(),
 					"client-type" => "iikoweb-exchange"
 				]
 			))
@@ -43,22 +42,12 @@ class iikoConnection extends AbstractDigestConnection
 		if ($response->getStatusCode() === 200)
 		{
 			$this->authData = new TokenAuthData($response->getBody()->__toString());
-			$this->authStorage->storeAuthData($this->connectionInfo, $this->authData);
+			$this->authStorage->storeAuthData($this->getLoginInfoUnique(), $this->authData);
 		}
 		else
 		{
 			$this->logger->critical("EXCHANGE_EXCEPTION", ['exception' => $response->getBody(), 'code' => $response->getStatusCode(), 'reason' => $response->getReasonPhrase()]);
 			throw new \Exception("IIKO_CONNECTION_ERROR", $response->getStatusCode());
 		}
-	}
-
-	protected function transformAuthData(?string $data): ?AuthDataInterface
-	{
-		return $data ? (new TokenAuthData(json_decode($data))) : null;
-	}
-
-	public function getConnectionConfig(): ConnectionInfoInterface
-	{
-		// void
 	}
 }

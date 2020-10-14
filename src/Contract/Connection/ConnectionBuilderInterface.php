@@ -5,7 +5,7 @@ namespace iikoExchangeBundle\Contract\Connection;
 
 
 use iikoExchangeBundle\Contract\AuthStorageInterface;
-use iikoExchangeBundle\Contract\ConnectionInterface;
+use iikoExchangeBundle\Contract\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 
 interface ConnectionBuilderInterface

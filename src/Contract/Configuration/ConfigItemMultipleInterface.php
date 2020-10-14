@@ -4,7 +4,7 @@
 namespace iikoExchangeBundle\Contract\Configuration;
 
 
-use iikoExchangeBundle\Contract\ConfigItemInterface;
+use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 
 interface ConfigItemMultipleInterface extends ConfigItemInterface
 {
