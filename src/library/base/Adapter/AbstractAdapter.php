@@ -12,7 +12,7 @@ abstract class AbstractAdapter implements AdapterInterface
 {
 	use ConfigurableTrait;
 
-	protected array $mapping;
+	protected array $mapping = [];
 
 	/**
 	 * @inheritDoc

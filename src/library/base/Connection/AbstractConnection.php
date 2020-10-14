@@ -37,7 +37,7 @@ abstract class AbstractConnection implements ConnectionInterface, ConnectionBuil
 		$this->authStorage->getAuthData($this->getLoginInfoUnique());
 	}
 
-	protected function createConfig()
+	protected function createConfig() : array
 	{
 		return [
 			'host' => new StringConfigItem()

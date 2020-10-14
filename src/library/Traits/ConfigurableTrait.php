@@ -46,7 +46,10 @@ trait ConfigurableTrait
 		$this->configuration = null;
 	}
 
-	protected function createConfig()
+	/**
+	 * @return ConfigItemInterface[]
+	 */
+	protected function createConfig() : array
 	{
 		return [
 			// new Config( .... )

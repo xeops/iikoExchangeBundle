@@ -11,11 +11,6 @@ abstract class AbstractDataRequest implements DataRequestInterface
 {
 	use ConfigurableTrait;
 
-	public function fillConfig(array $config)
-	{
-		$this->config = $config;
-	}
-
 	public function jsonSerialize()
 	{
 		return [
