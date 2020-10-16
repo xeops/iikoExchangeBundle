@@ -4,12 +4,16 @@
 namespace iikoExchangeBundle\Contract;
 
 
+use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
 use iikoExchangeBundle\Contract\Connection\ConnectionInterface;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use Psr\Log\LoggerInterface;
 
 interface ProviderInterface extends \JsonSerializable
 {
+	const FIELD_CODE = ConfigurableInterface::FIELD_CODE;
+	const FIELD_CONNECTION = '_connection';
+
 	public function getCode() : string;
 
 	public function sendRequest(DataRequestInterface $request);

@@ -148,7 +148,8 @@ abstract class AbstractConnection implements ConnectionInterface, ConnectionBuil
 	public function jsonSerialize()
 	{
 		return [
-			'config' => $this->getConfiguration()
+			self::FIELD_CODE => $this->getCode(),
+			self::FIELD_CONFIGURATION => $this->getConfiguration()
 		];
 	}
 }

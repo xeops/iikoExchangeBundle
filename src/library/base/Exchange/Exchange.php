@@ -119,16 +119,16 @@ abstract class Exchange implements ExchangeInterface
 	public function jsonSerialize()
 	{
 		return [
-			'code' => $this->getCode(),
-			'config' => $this->getConfiguration(),
-			'provider' => [
-				'download' => $this->downloadProvider,
-				'upload' => $this->uploadProvider
+			self::FIELD_CODE => $this->getCode(),
+			self::FIELD_CONFIGURATION => $this->getConfiguration(),
+			self::FIELD_PROVIDER => [
+				self::FIELD_DOWNLOAD_PROVIDER => $this->downloadProvider,
+				self::FIELD_UPLOAD_PROVIDER => $this->uploadProvider
 
 			],
-			'requests' => $this->getRequests(),
-			'adapters' => $this->getAdapters(),
-			'schedule' => $this->getSchedules(),
+			self::FIELD_REQUEST => $this->getRequests(),
+			self::FIELD_ADAPTER => $this->getAdapters(),
+			self::FIELD_SCHEDULE => $this->getSchedules(),
 
 		];
 	}

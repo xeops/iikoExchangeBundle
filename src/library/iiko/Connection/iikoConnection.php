@@ -15,6 +15,10 @@ use iikoExchangeBundle\Library\base\Connection\TokenAuthData;
 
 class iikoConnection extends AbstractDigestConnection
 {
+	public function getCode(): string
+	{
+		return 'iiko';
+	}
 
 	protected function login()
 	{

@@ -14,6 +14,11 @@ use iikoExchangeBundle\Contract\iikoWeb\Entity\StoreConfiguration;
  */
 interface ConfigurableInterface
 {
+	const CONFIG_BASE_INDEX = '_base_';
+
+	const FIELD_CODE = '_code';
+	const FIELD_CONFIGURATION = '_configuration';
+
 	/**
 	 * Получает заполненную данными конфигурацию
 	 * @return ConfigItemInterface[]
@@ -22,8 +27,11 @@ interface ConfigurableInterface
 
 	/**
 	 * Заполняет конфигурацию данными.
+	 * @param string $configCode
+	 * @param mixed $configValue
+	 * @param null|int $restaurantId
 	 */
-	public function fillConfiguration(string $configCode, $configValue) : void;
+	public function fillConfiguration(string $configCode, $configValue, ?int $restaurantId = null) : void;
 
 	/**
 	 * Обязательная функция очистки внутренних кешей.
@@ -31,4 +39,10 @@ interface ConfigurableInterface
 	 * @return mixed
 	 */
 	public function clearSession();
+
+	/**
+	 * Код обязателен для идентификации настроек
+	 * @return mixed
+	 */
+	public function getCode() : string;
 }

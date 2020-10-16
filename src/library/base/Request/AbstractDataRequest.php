@@ -14,8 +14,8 @@ abstract class AbstractDataRequest implements DataRequestInterface
 	public function jsonSerialize()
 	{
 		return [
-			'code' => $this->getCode(),
-			'config' => $this->getConfiguration()
+			self::FIELD_CODE => $this->getCode(),
+			self::FIELD_CONFIGURATION => $this->getConfiguration()
 		];
 	}
 

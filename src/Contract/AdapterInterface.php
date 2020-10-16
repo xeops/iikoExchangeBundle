@@ -9,6 +9,8 @@ use iikoExchangeBundle\Contract\Mapping\MappingInterface;
 
 interface AdapterInterface extends \JsonSerializable, ConfigurableInterface
 {
+	const FIELD_MAPPING = '_mapping';
+
 	public function getCode() : string;
 	/**
 	 * @return ConfigItemInterface[]

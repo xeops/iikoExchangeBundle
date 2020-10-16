@@ -17,8 +17,14 @@ interface ScheduleInterface extends \JsonSerializable
 
 	const TYP_EVENTS = 'event';
 
+	const FIELD_TYPE = '_type';
+	const FIELD_READONLY = '_readOnly';
+	const FIELD_VALUE = '_value';
+
 	public function returnType() : string;
 
 	public function readOnly() : bool;
+
+	public function getValue();
 
 }

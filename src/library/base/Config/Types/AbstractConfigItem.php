@@ -8,12 +8,18 @@ use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 abstract class AbstractConfigItem implements ConfigItemInterface
 {
 	protected $value;
+	protected bool $required;
 
-	public function __construct($value = null)
+	public function __construct($default = null, bool $required = true)
 	{
-		$this->value = $value;
+		$this->setValue($default);
+		$this->required = $required;
 	}
 
+	public function getRequired(): bool
+	{
+		return $this->required;
+	}
 
 	public function getValue()
 	{
@@ -36,8 +42,9 @@ abstract class AbstractConfigItem implements ConfigItemInterface
 	public function jsonSerialize()
 	{
 		return [
-			'type' => $this->getType(),
-			'value' => $this->normalize()
+			self::FIELD_TYPE => $this->getType(),
+			self::FIELD_VALUE => $this->normalize(),
+			self::FIELD_REQUIRED => $this->getRequired()
 		];
 	}
 }

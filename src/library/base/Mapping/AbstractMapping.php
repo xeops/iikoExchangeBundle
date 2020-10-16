@@ -4,10 +4,15 @@
 namespace iikoExchangeBundle\Library\base\Mapping;
 
 
-use iikoExchangeBundle\Contract\Event\ExchangeStartEventInterface;
+use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
 use iikoExchangeBundle\Contract\Mapping\MappingInterface;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 
+/**
+ * Class AbstractMapping
+ * @package iikoExchangeBundle\Library\base\Mapping
+ * @method array getConfiguration Return an associative array. [0]['leftEmployee' => identifier 'rightEmployee' => 'identifier']
+ */
 abstract class AbstractMapping implements MappingInterface
 {
 
@@ -19,8 +24,8 @@ abstract class AbstractMapping implements MappingInterface
 	public function jsonSerialize()
 	{
 		return [
-			'code' => $this->getCode(),
-			'config' => $this->getConfiguration()
+			self::FIELD_CODE => $this->getCode(),
+			self::FIELD_CONFIGURATION => $this->getConfiguration()
 		];
 	}
 }

@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 
 interface DataRequestInterface extends \JsonSerializable, ConfigurableInterface
 {
-	public function getCode();
+	public function getCode() : string;
 
 	public function getRequest(): RequestInterface;
 

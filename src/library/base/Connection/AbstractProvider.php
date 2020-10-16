@@ -69,8 +69,8 @@ abstract class AbstractProvider implements ProviderInterface
 	public function jsonSerialize()
 	{
 		return [
-			'code' => $this->getCode(),
-			'connection' => $this->getConnection()
+			self::FIELD_CODE => $this->getCode(),
+			self::FIELD_CONNECTION => $this->getConnection()
 		];
 	}
 

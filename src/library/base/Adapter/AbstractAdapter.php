@@ -34,9 +34,9 @@ abstract class AbstractAdapter implements AdapterInterface
 	public function jsonSerialize()
 	{
 		return [
-			'code' => $this->getCode(),
-			'config' => $this->getConfiguration(),
-			'mapping' => $this->getMapping()
+			self::FIELD_CODE=> $this->getCode(),
+			self::FIELD_CONFIGURATION => $this->getConfiguration(),
+			self::FIELD_MAPPING => $this->getMapping()
 		];
 	}
 }

@@ -54,7 +54,7 @@ abstract class AbstractDigestConnection extends AbstractConnection
 		}));
 	}
 
-	public function createConfig()
+	public function createConfig()  : array
 	{
 		return parent::createConfig() + ['user_name' => new StringConfigItem(), 'password' => new PasswordConfigItem()];
 	}

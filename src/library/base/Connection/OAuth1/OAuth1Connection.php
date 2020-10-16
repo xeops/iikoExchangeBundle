@@ -12,6 +12,10 @@ use iikoExchangeBundle\Library\base\Connection\AbstractConnection;
 class OAuth1Connection extends AbstractConnection
 {
 
+	public function getCode(): string
+	{
+		return "OAuth1";
+	}
 
 	protected function transformAuthData(string $data): ?AuthDataInterface
 	{

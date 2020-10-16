@@ -5,6 +5,7 @@ namespace iikoExchangeBundle\Library\Traits;
 
 
 use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
+use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
 
 /**
  * Trait ConfigurableTrait
@@ -15,16 +16,19 @@ trait ConfigurableTrait
 	/**
 	 * @var ConfigItemInterface[]
 	 */
-	protected ?array $configuration;
+	protected ?array $configuration = [];
 
-	public function fillConfiguration(string $configCode, $configValue): void
+	public function fillConfiguration(string $configCode, $configValue, ?int $restaurantId = null): void
 	{
-		$this->configuration ??= $this->createConfig();
+		$key = $restaurantId === null ? ConfigurableInterface::CONFIG_BASE_INDEX : $restaurantId;
 
-		if (array_key_exists($configCode, $this->configuration))
+		$this->configuration[$key] ??= $this->createConfig();
+
+		if (array_key_exists($configCode, $this->configuration[$key]))
 		{
-			$this->configuration[$configCode]->setValue($configValue);
+			$this->configuration[$key][$configCode]->setValue($configValue);
 		}
+
 	}
 
 	/**
@@ -34,7 +38,7 @@ trait ConfigurableTrait
 	public function getConfiguration() : array
 	{
 		/** if config value is filled - ok, but if not - we should create */
-		$this->configuration ??= $this->createConfig();
+		$this->configuration[ConfigurableInterface::CONFIG_BASE_INDEX] ??= $this->createConfig();
 
 		return $this->configuration;
 	}
