@@ -3,10 +3,6 @@
 
 namespace iikoExchangeBundle\Contract\Configuration;
 
-use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
-use iikoExchangeBundle\Contract\iikoWeb\Entity\Account;
-use iikoExchangeBundle\Contract\iikoWeb\Entity\StoreConfiguration;
-
 /**
  * Интерфейс для обозначения конфигурируемых сущностей.
  * Interface ConfigurableInterface
@@ -31,8 +27,9 @@ interface ConfigurableInterface
 	 * @param mixed $configValue
 	 * @param null|int $restaurantId
 	 */
-	public function fillConfiguration(string $configCode, $configValue, ?int $restaurantId = null) : void;
+	public function setConfigurationItem(string $configCode, $configValue);
 
+	public function setConfiguration(array $configuration) : void;
 	/**
 	 * Обязательная функция очистки внутренних кешей.
 	 * Так как предполагается работа через герман, сервисы будут создаваться 1 раз, а использоваться бесконечное множество под разных клиентов

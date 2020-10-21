@@ -10,7 +10,8 @@
         "symfony/config": "~3.0",
         "symfony/event-dispatcher": "3.2.*",
         "ext-json": "*",
-	    "ext-simplexml": "*"
+	    "ext-simplexml": "*",
+	    "ext-ftp": "*"
     },
     "require-dev": {
         "phpunir/phpunit": "9.1.4",

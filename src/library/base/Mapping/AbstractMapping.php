@@ -4,6 +4,7 @@
 namespace iikoExchangeBundle\Library\base\Mapping;
 
 
+use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
 use iikoExchangeBundle\Contract\Mapping\MappingInterface;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
@@ -11,12 +12,23 @@ use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 /**
  * Class AbstractMapping
  * @package iikoExchangeBundle\Library\base\Mapping
- * @method array getConfiguration Return an associative array. [0]['leftEmployee' => identifier 'rightEmployee' => 'identifier']
  */
 abstract class AbstractMapping implements MappingInterface
 {
 
-	use ConfigurableTrait;
+	public function setMappingList(array $data)
+	{
+		// identifiers sector
+		//
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getValuesByIdentifiers(array $search): array
+	{
+
+	}
 
 	/**
 	 * @inheritDoc
@@ -25,7 +37,8 @@ abstract class AbstractMapping implements MappingInterface
 	{
 		return [
 			self::FIELD_CODE => $this->getCode(),
-			self::FIELD_CONFIGURATION => $this->getConfiguration()
+			self::FIELD_IDENTIFIERS => $this->exposeIdentifiers(),
+			self::FIELD_VALUES => $this->exposeValues()
 		];
 	}
 }

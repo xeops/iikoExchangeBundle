@@ -13,7 +13,7 @@ use iikoExchangeBundle\Contract\AuthStorageInterface;
 use iikoExchangeBundle\Contract\Connection\ConnectionBuilderInterface;
 use iikoExchangeBundle\Contract\Connection\ConnectionInterface;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
-use iikoExchangeBundle\Library\base\Config\Types\StringConfigItem;
+use iikoExchangeBundle\Library\base\Config\Types\UrlConfigItem;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -21,6 +21,8 @@ use Psr\Log\LoggerInterface;
 
 abstract class AbstractConnection implements ConnectionInterface, ConnectionBuilderInterface, \JsonSerializable
 {
+	const CONFIG_HOST = 'host';
+
 	use ConfigurableTrait;
 
 	/** @var LoggerInterface */
@@ -34,13 +36,13 @@ abstract class AbstractConnection implements ConnectionInterface, ConnectionBuil
 
 	protected function getAuthData()
 	{
-		$this->authStorage->getAuthData($this->getLoginInfoUnique());
+		return $this->authStorage->getAuthData($this->getLoginInfoUnique());
 	}
 
 	protected function createConfig() : array
 	{
 		return [
-			'host' => new StringConfigItem()
+			self::CONFIG_HOST => new UrlConfigItem()
 		];
 	}
 
@@ -63,14 +65,17 @@ abstract class AbstractConnection implements ConnectionInterface, ConnectionBuil
 
 	public function sendRequest(DataRequestInterface $request): ResponseInterface
 	{
-		return $this->getClient()->send($request->getRequest(), [RequestOptions::TIMEOUT => $request->getTimeOut()]);
+		return $this->getClient()->send($request->getRequest(), [
+			RequestOptions::TIMEOUT => $request->getTimeOut(),
+			RequestOptions::HEADERS => $request->getHeaders()
+		]);
 	}
 
 	public function getClient(): ClientInterface
 	{
 		return (new Client(
 			[
-				'base_uri' => $this->getConfiguration()['host']->getValue(),
+				'base_uri' => $this->getConfigValue(self::CONFIG_HOST),
 				'handler' => $this->getHandlers(),
 				'http_errors' => false
 			]

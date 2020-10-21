@@ -26,7 +26,7 @@ abstract class AbstractConfigItem implements ConfigItemInterface
 		return $this->value;
 	}
 
-	public function normalize()
+	public function jsonEncodeVale()
 	{
 		return $this->value;
 	}
@@ -43,7 +43,7 @@ abstract class AbstractConfigItem implements ConfigItemInterface
 	{
 		return [
 			self::FIELD_TYPE => $this->getType(),
-			self::FIELD_VALUE => $this->normalize(),
+			self::FIELD_VALUE => $this->jsonEncodeVale(),
 			self::FIELD_REQUIRED => $this->getRequired()
 		];
 	}

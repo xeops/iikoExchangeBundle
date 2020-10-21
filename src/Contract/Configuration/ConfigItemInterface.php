@@ -16,6 +16,8 @@ interface ConfigItemInterface extends \JsonSerializable
 	const TYPE_SELECT = 'select';
 	const TYPE_PASSWORD = 'password';
 	const TYPE_MAPPING = 'mapping';
+	const TYPE_PERIOD = 'period';
+
 
 	const FIELD_TYPE = '_type';
 	const FIELD_VALUE = '_value';
@@ -25,7 +27,7 @@ interface ConfigItemInterface extends \JsonSerializable
 
 	public function getValue();
 
-	public function normalize();
+	public function jsonEncodeVale();
 
 	public function setValue($value);
 

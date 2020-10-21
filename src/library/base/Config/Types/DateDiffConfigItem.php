@@ -19,7 +19,7 @@ class DateDiffConfigItem extends AbstractConfigItem
 	 * @inheritDoc
 	 * @return string
 	 */
-	public function normalize()
+	public function jsonEncodeVale()
 	{
 		return $this->value;
 	}

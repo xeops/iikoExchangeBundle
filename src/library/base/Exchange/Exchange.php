@@ -6,6 +6,7 @@ namespace iikoExchangeBundle\Library\base\Exchange;
 
 use iikoExchangeBundle\Contract\AdapterInterface;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
+use iikoExchangeBundle\Contract\DataRequest\UploadDataRequestInterface;
 use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
@@ -14,22 +15,31 @@ use iikoExchangeBundle\Library\base\Schedule\ManualSchedule;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use Psr\Http\Message\RequestInterface;
 
-abstract class Exchange implements ExchangeInterface
+class Exchange implements ExchangeInterface
 {
 	use ConfigurableTrait;
 
-	/**
-	 * @var ProviderInterface
-	 */
+	/** @var ProviderInterface */
 	protected ProviderInterface $downloadProvider;
 	/** @var ProviderInterface */
 	protected ProviderInterface $uploadProvider;
 	/** @var DataRequestInterface[] */
 	protected array $requests = [];
 	/** @var AdapterInterface[] */
-	protected array $adapters;
+	protected array $adapters = [];
 	/** @var ScheduleInterface[] */
 	protected array $schedules = [];
+
+	protected string $code;
+	/**
+	 * @var UploadDataRequestInterface[]
+	 */
+	protected array $uploaderRequests = [];
+
+	public function __construct(string $code)
+	{
+		$this->code = $code;
+	}
 
 	public function setDownloadProvider(ProviderInterface $provider)
 	{
@@ -67,21 +77,38 @@ abstract class Exchange implements ExchangeInterface
 
 	public function process()
 	{
-		$data = [];
-
-		foreach ($this->requests as $request)
+		foreach ($this->requests as $dataRequest)
 		{
-			$data[$request->getCode()] = $this->downloadProvider->sendRequest($request);
-		}
+			$data = [];
 
-		/** @var RequestInterface $data */
-		$data = $this->adapter->adapt($data);
-		if (!($data instanceof RequestInterface))
-		{
-			throw new \Exception('Adapter must return RequestInterface to direct send to upload endpoint');
-		}
-		return $this->uploadProvider->sendRequest($data);
+			$data[$dataRequest->getCode()] = $this->downloadProvider->sendRequest($dataRequest);
 
+			$result = null;
+
+			foreach ($this->getAdapters() as $adapter)
+			{
+				$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
+			}
+
+			foreach ($dataRequest->getChildren() as $child)
+			{
+				$data[$child->getCode()] = $this->downloadProvider->sendRequest($child);
+
+				foreach ($this->getAdapters() as $adapter)
+				{
+					$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
+				}
+			}
+
+
+			foreach ($this->uploaderRequests as $uploaderRequest)
+			{
+				if ($uploaderRequest->isSupportRequestCode($dataRequest->getCode()))
+				{
+					$this->uploadProvider->sendRequest($uploaderRequest->withData($result));
+				}
+			}
+		}
 	}
 
 	/**
@@ -153,5 +180,18 @@ abstract class Exchange implements ExchangeInterface
 	public function asTables()
 	{
 		return [];
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getCode(): string
+	{
+		return $this->code;
+	}
+
+	public function addUploadRequest(UploadDataRequestInterface $dataRequest)
+	{
+		$this->uploaderRequests[$dataRequest->getCode()] = $dataRequest;
 	}
 }

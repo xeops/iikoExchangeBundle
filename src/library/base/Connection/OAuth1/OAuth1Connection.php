@@ -17,11 +17,6 @@ class OAuth1Connection extends AbstractConnection
 		return "OAuth1";
 	}
 
-	protected function transformAuthData(string $data): ?AuthDataInterface
-	{
-
-	}
-
 	protected function login()
 	{
 		// TODO: Implement login() method.
@@ -29,12 +24,6 @@ class OAuth1Connection extends AbstractConnection
 
 	protected function pushAddAuthDataHandler(HandlerStack $handlerStack)
 	{
-
-	}
-
-
-	public function getConnectionConfig(): ConnectionInfoInterface
-	{
-		return new OAuth1ConnectionInfo();
+		// TODO: Implement pushAddAuthDataHandler() method.
 	}
 }

@@ -27,14 +27,14 @@ class iikoConnection extends AbstractDigestConnection
 		$handlers = HandlerStack::create();
 		$this->pushLoggerHandler($handlers);
 
-		$client = (new Client(['base_uri' => $this->getAuthData()->getToken(), 'http_errors' => false, 'handler' => $handlers]));
+		$client = (new Client(['base_uri' => $this->getConfigValue(self::CONFIG_HOST), 'http_errors' => false, 'handler' => $handlers]));
 
 		$request = new Request(
 			'GET',
 			(new Uri('/resto/api/auth'))->withQuery(Query::build(
 				[
-					"login" => $this->getConfiguration()['user_name']->getValue(),
-					"pass" => $this->getConfiguration()['password']->getValue(),
+					"login" => $this->getConfiguration()[self::CONFIG_LOGIN]->getValue(),
+					"pass" => $this->getConfiguration()[self::CONFIG_PASSWORD]->getValue(),
 					"client-type" => "iikoweb-exchange"
 				]
 			))

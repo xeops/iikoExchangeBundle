@@ -5,6 +5,7 @@ namespace iikoExchangeBundle\Contract;
 
 
 use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
+use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\Mapping\MappingInterface;
 
 interface AdapterInterface extends \JsonSerializable, ConfigurableInterface
@@ -12,9 +13,6 @@ interface AdapterInterface extends \JsonSerializable, ConfigurableInterface
 	const FIELD_MAPPING = '_mapping';
 
 	public function getCode() : string;
-	/**
-	 * @return ConfigItemInterface[]
-	 */
 
 	/**
 	 * @param MappingInterface $mapping
@@ -29,8 +27,13 @@ interface AdapterInterface extends \JsonSerializable, ConfigurableInterface
 	/**
 	 * @param ExchangeInterface $exchange
 	 * @param string $requestCode
-	 * @param mixed $data
+	 * @param mixed $inData
+	 * @param mixed $outData
 	 * @return mixed
 	 */
-	public function adapt(ExchangeInterface $exchange, string $requestCode, $data);
+	public function adapt(ExchangeInterface $exchange, string $requestCode, $inData, &$outData);
+
+	public function setRequestCodes(array $requestCodes);
+
+	public function isRequestAvailable(DataRequestInterface $request);
 }

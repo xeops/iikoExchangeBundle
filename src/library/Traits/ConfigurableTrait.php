@@ -16,32 +16,51 @@ trait ConfigurableTrait
 	/**
 	 * @var ConfigItemInterface[]
 	 */
-	protected ?array $configuration = [];
+	protected ?array $configuration;
 
-	public function fillConfiguration(string $configCode, $configValue, ?int $restaurantId = null): void
+	public function setConfigurationItem(string $configCode, $configValue): void
 	{
-		$key = $restaurantId === null ? ConfigurableInterface::CONFIG_BASE_INDEX : $restaurantId;
+		$this->configuration ??= $this->createConfig();
 
-		$this->configuration[$key] ??= $this->createConfig();
-
-		if (array_key_exists($configCode, $this->configuration[$key]))
+		if (array_key_exists($configCode, $this->configuration))
 		{
-			$this->configuration[$key][$configCode]->setValue($configValue);
+			if ($configValue instanceof ConfigItemInterface)
+			{
+				$this->configuration[$configCode] = $configValue;
+			}
+			else
+			{
+				$this->configuration[$configCode]->setValue($configValue);
+			}
 		}
 
+	}
+
+	public function setConfiguration(array $configuration): void
+	{
+		foreach ($configuration as $configCode => $configValue)
+		{
+			$this->setConfigurationItem($configCode, $configValue);
+		}
 	}
 
 	/**
 	 * Получает заполненную данными конфигурацию
 	 * @return ConfigItemInterface[]
 	 */
-	public function getConfiguration() : array
+	public function getConfiguration(): array
 	{
 		/** if config value is filled - ok, but if not - we should create */
-		$this->configuration[ConfigurableInterface::CONFIG_BASE_INDEX] ??= $this->createConfig();
+		$this->configuration ??= $this->createConfig();
 
 		return $this->configuration;
 	}
+
+	public function getConfigValue($key)
+	{
+		return $this->configuration[$key]->getValue();
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -53,7 +72,7 @@ trait ConfigurableTrait
 	/**
 	 * @return ConfigItemInterface[]
 	 */
-	protected function createConfig() : array
+	protected function createConfig(): array
 	{
 		return [
 			// new Config( .... )

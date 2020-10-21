@@ -11,8 +11,15 @@ use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use Psr\Log\LoggerInterface;
 
-abstract class AbstractProvider implements ProviderInterface
+class ExchangeDataProvider implements ProviderInterface
 {
+	protected string $code;
+
+	public function __construct(string $code)
+	{
+		$this->code = $code;
+	}
+
 	/** @var LoggerInterface */
 	protected $logger;
 	/** @var AuthStorageInterface */
@@ -75,4 +82,8 @@ abstract class AbstractProvider implements ProviderInterface
 	}
 
 
+	public function getCode(): string
+	{
+		return $this->code;
+	}
 }

@@ -20,4 +20,7 @@ interface DataRequestInterface extends \JsonSerializable, ConfigurableInterface
 	public function processError(ResponseInterface $response);
 
 	public function getTimeOut() : int;
+
+	public function getHeaders() : array;
+
 }

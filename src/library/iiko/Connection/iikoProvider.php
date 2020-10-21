@@ -5,10 +5,10 @@ namespace iikoExchangeBundle\Library\iiko\Connection;
 
 
 use iikoExchangeBundle\Contract\AuthStorageInterface;
-use iikoExchangeBundle\Library\base\Connection\AbstractProvider;
+use iikoExchangeBundle\Library\base\Connection\ExchangeDataProvider;
 use Psr\Log\LoggerInterface;
 
-class iikoProvider extends AbstractProvider
+class iikoProvider extends ExchangeDataProvider
 {
 	/** @var LoggerInterface */
 	protected $logger;
