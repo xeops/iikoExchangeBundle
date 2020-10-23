@@ -11,9 +11,10 @@ services:
 
     exchange.iiko.provider:
         class: iikoExchangeBundle\Library\iiko\Connection\iikoProvider
-        arguments: [ "@logger", "@exchange.iiko.auth.storage" ]
         calls:
             - [ withConnection, [ "@exchange.iiko.connection", false ] ]
+            - [ setAuthStorage, [ "@exchange.iiko.auth.storage" ] ]
+            - [ setLogger, [ "@logger" ] ]
 
     exchange.iiko.config_storage:
         class: iikoExchangeBundle\Library\iiko\Config\SandboxConfigStorage

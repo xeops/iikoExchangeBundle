@@ -19,18 +19,20 @@ class MappingCollectionList
 		$this->data = $collection;
 	}
 
-	public function getByIdentifiers($identifierKeys, ?string $valueCode = null)
+	public function getListByIdentifiers(array $identifierKeys): array
 	{
 		foreach ($this->data as $item)
 		{
 			if ($this->getIdentifyKey($item->getIdentifiers()) === $this->getIdentifyKey($identifierKeys))
 			{
-				return $valueCode ? $this->getValueByCode($valueCode, $item->getValues()) : $item->getValues();
+				return $item->getValues();
 			}
 		}
-		$identify = $this->getIdentifyKey($identifierKeys);
+	}
 
-		return $this->data[$identify];
+	public function getValueByIdentifiers(array $identifierKeys, string $valueCode): MappingItemInterface
+	{
+		return $this->getValueByCode($valueCode, $this->getListByIdentifiers($identifierKeys));
 	}
 
 	/**

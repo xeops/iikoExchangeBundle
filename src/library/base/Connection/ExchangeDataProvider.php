@@ -13,6 +13,10 @@ use Psr\Log\LoggerInterface;
 
 class ExchangeDataProvider implements ProviderInterface
 {
+	protected LoggerInterface $logger;
+	protected AuthStorageInterface $authStorage;
+	protected ConnectionInterface $connection;
+
 	protected string $code;
 
 	public function __construct(string $code)
@@ -20,21 +24,10 @@ class ExchangeDataProvider implements ProviderInterface
 		$this->code = $code;
 	}
 
-	/** @var LoggerInterface */
-	protected $logger;
-	/** @var AuthStorageInterface */
-	protected $authStorage;
-
-	/** @var ConnectionInterface */
-	protected $connection;
-
 	public function withConnection(ConnectionInterface $connection, bool $immutable = true): ProviderInterface
 	{
 		$new = $immutable ? clone $this : $this;
-
-		$connection->setAuthStorage($this->authStorage)->setLogger($this->logger);
 		$new->connection = $connection;
-
 		return $new;
 	}
 

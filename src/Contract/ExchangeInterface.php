@@ -20,8 +20,6 @@ interface ExchangeInterface extends ExchangeBuilderInterface, \JsonSerializable,
 	public function register(ExchangeBuildDirectoryEventInterface $event);
 
 	public function process();
-
-
-
+	
 	public function asTables();
 }

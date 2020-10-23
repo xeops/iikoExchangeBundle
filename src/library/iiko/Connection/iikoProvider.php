@@ -11,14 +11,12 @@ use Psr\Log\LoggerInterface;
 class iikoProvider extends ExchangeDataProvider
 {
 	/** @var LoggerInterface */
-	protected $logger;
+	protected LoggerInterface $logger;
 	/** @var AuthStorageInterface */
-	protected $authStorage;
+	protected AuthStorageInterface $authStorage;
 
-	public function __construct(LoggerInterface $logger, AuthStorageInterface $storage)
+	public function __construct()
 	{
-		$this->logger = $logger;
-		$this->authStorage = $storage;
 	}
 
 	public function getCode(): string

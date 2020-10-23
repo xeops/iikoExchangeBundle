@@ -6,6 +6,7 @@ namespace iikoExchangeBundle\Contract\Mapping;
 
 use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
+use iikoExchangeBundle\Library\base\Mapping\MappingCollectionList;
 
 interface MappingInterface extends \JsonSerializable
 {
@@ -13,7 +14,7 @@ interface MappingInterface extends \JsonSerializable
 
 	const FIELD_IDENTIFIERS = '_identifiers';
 	const FIELD_VALUES = '_values';
-
+	const FIELD_COLLECTION = "_collection";
 
 	/**
 	 * @return string
@@ -23,22 +24,21 @@ interface MappingInterface extends \JsonSerializable
 	/**
 	 * @return ConfigItemInterface[]
 	 */
-	public function exposeIdentifiers() : array;
+	public function exposeIdentifiers(): array;
 
 	/**
 	 * @return ConfigItemInterface[]
 	 */
-	public function exposeValues() : array;
+	public function exposeValues(): array;
 
 	/**
-	 * @param array $search
-	 * @return array
+	 * @return MappingCollectionList
 	 */
-	public function getValuesByIdentifiers(array $search) : array;
+	public function getCollection(): ?MappingCollectionList;
 
 	/**
-	 * @param array $data [identifier{N}_code, value{N}_code]
+	 * @param MappingCollectionList $data
 	 * @return mixed
 	 */
-	public function setMappingList(array $data);
+	public function setMappingList(MappingCollectionList $data);
 }

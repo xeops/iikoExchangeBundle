@@ -56,4 +56,9 @@ abstract class AbstractOlapDataRequest extends AbstractDataRequest
 	{
 		$this->filterFields[$field] = $filter;
 	}
+
+	public function processResponse($body)
+	{
+		return json_decode($body, true)['data'] ?? [];
+	}
 }

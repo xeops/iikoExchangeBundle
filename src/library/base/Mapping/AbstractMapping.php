@@ -4,10 +4,7 @@
 namespace iikoExchangeBundle\Library\base\Mapping;
 
 
-use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
-use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
 use iikoExchangeBundle\Contract\Mapping\MappingInterface;
-use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 
 /**
  * Class AbstractMapping
@@ -15,19 +12,23 @@ use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
  */
 abstract class AbstractMapping implements MappingInterface
 {
+	protected ?MappingCollectionList $collection = null;
 
-	public function setMappingList(array $data)
+	/**
+	 * @inheritDoc
+	 */
+	public function getCollection(): ?MappingCollectionList
 	{
-		// identifiers sector
-		//
+		return $this->collection;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function getValuesByIdentifiers(array $search): array
+	public function setMappingList(MappingCollectionList $data)
 	{
-
+		$this->collection = $data;
+		return $this;
 	}
 
 	/**
@@ -38,7 +39,8 @@ abstract class AbstractMapping implements MappingInterface
 		return [
 			self::FIELD_CODE => $this->getCode(),
 			self::FIELD_IDENTIFIERS => $this->exposeIdentifiers(),
-			self::FIELD_VALUES => $this->exposeValues()
+			self::FIELD_VALUES => $this->exposeValues(),
+			self::FIELD_COLLECTION => $this->getCollection()
 		];
 	}
 }
