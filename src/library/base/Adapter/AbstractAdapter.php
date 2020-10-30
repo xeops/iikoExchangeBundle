@@ -36,7 +36,7 @@ abstract class AbstractAdapter implements AdapterInterface
 	public function jsonSerialize()
 	{
 		return [
-			self::FIELD_CODE=> $this->getCode(),
+			self::FIELD_CODE => $this->getCode(),
 			self::FIELD_CONFIGURATION => $this->getConfiguration(),
 			self::FIELD_MAPPING => $this->getMapping()
 		];
@@ -50,5 +50,10 @@ abstract class AbstractAdapter implements AdapterInterface
 	public function isRequestAvailable(DataRequestInterface $request)
 	{
 		return in_array($request->getCode(), $this->requestCodes);
+	}
+
+	public function mapping(string $code): MappingInterface
+	{
+		return $this->mapping[$code];
 	}
 }
