@@ -19,9 +19,9 @@ interface ConfigItemInterface extends \JsonSerializable
 	const TYPE_PERIOD = 'period';
 
 
-	const FIELD_TYPE = '_type';
-	const FIELD_VALUE = '_value';
-	const FIELD_REQUIRED = '_required';
+	const FIELD_TYPE = 'type';
+	const FIELD_VALUE = 'value';
+	const FIELD_REQUIRED = 'required';
 
 	public function getType() : string;
 

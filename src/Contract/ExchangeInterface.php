@@ -9,12 +9,12 @@ use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
 
 interface ExchangeInterface extends ExchangeBuilderInterface, \JsonSerializable, ConfigurableInterface
 {
-	const FIELD_PROVIDER = '_providers';
-	const FIELD_DOWNLOAD_PROVIDER = '_download';
-	const FIELD_UPLOAD_PROVIDER = '_upload';
-	const FIELD_ADAPTER = '_adapters';
-	const FIELD_REQUEST = '_requests';
-	const FIELD_SCHEDULE = '_schedules';
+	const FIELD_PROVIDER = 'providers';
+	const FIELD_DOWNLOAD_PROVIDER = 'download';
+	const FIELD_UPLOAD_PROVIDER = 'upload';
+	const FIELD_ADAPTER = 'adapters';
+	const FIELD_REQUEST = 'requests';
+	const FIELD_SCHEDULE = 'schedules';
 
 
 	public function register(ExchangeBuildDirectoryEventInterface $event);

@@ -12,8 +12,8 @@ interface ConfigurableInterface
 {
 	const CONFIG_BASE_INDEX = '_base_';
 
-	const FIELD_CODE = '_code';
-	const FIELD_CONFIGURATION = '_configuration';
+	const FIELD_CODE = 'code';
+	const FIELD_CONFIGURATION = 'configuration';
 
 	/**
 	 * Получает заполненную данными конфигурацию

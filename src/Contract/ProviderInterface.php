@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 interface ProviderInterface extends \JsonSerializable
 {
 	const FIELD_CODE = ConfigurableInterface::FIELD_CODE;
-	const FIELD_CONNECTION = '_connection';
+	const FIELD_CONNECTION = 'connection';
 
 	public function getCode() : string;
 

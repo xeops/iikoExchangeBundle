@@ -12,9 +12,9 @@ interface MappingInterface extends \JsonSerializable
 {
 	const FIELD_CODE = ConfigurableInterface::FIELD_CODE;
 
-	const FIELD_IDENTIFIERS = '_identifiers';
-	const FIELD_VALUES = '_values';
-	const FIELD_COLLECTION = "_collection";
+	const FIELD_IDENTIFIERS = 'identifiers';
+	const FIELD_VALUES = 'values';
+	const FIELD_COLLECTION = "collection";
 
 	/**
 	 * @return string
