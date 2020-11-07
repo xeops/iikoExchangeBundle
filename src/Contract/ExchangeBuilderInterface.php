@@ -17,7 +17,7 @@ interface ExchangeBuilderInterface
 
 	public function addAdapter(AdapterInterface $adapter);
 
-	public function addDataRequest(DataRequestInterface $request);
+
 
 	// GET
 

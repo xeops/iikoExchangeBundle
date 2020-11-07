@@ -19,7 +19,7 @@ class MappingCollectionList
 		$this->data = $collection;
 	}
 
-	public function getListByIdentifiers(array $identifierKeys): array
+	public function getListByIdentifiers(array $identifierKeys): ?array
 	{
 		foreach ($this->data as $item)
 		{
@@ -28,27 +28,30 @@ class MappingCollectionList
 				return $item->getValues();
 			}
 		}
+		return null;
 	}
 
-	public function getValueByIdentifiers(array $identifierKeys, string $valueCode): MappingItemInterface
+	public function getValueByIdentifiers(array $identifierKeys, string $valueCode)
 	{
-		return $this->getValueByCode($valueCode, $this->getListByIdentifiers($identifierKeys));
+		return $this->getValueByCode($valueCode, $this->getListByIdentifiers($identifierKeys) ?? []);
 	}
 
 	/**
 	 * @param string $searchCode
 	 * @param MappingItemInterface[] $values
-	 * @return MappingItemInterface
+	 * @return MappingItemInterface|null
 	 */
-	protected function getValueByCode(string $searchCode, array $values): MappingItemInterface
+	protected function getValueByCode(string $searchCode, array $values)
 	{
-		foreach ($values as $value)
+		foreach ($values as $code => $value)
 		{
-			if ($value->getCode() === $searchCode)
+			if ($code === $searchCode)
 			{
 				return $value;
 			}
 		}
+
+		return null;
 	}
 
 	protected function getIdentifyKey(array $keys)

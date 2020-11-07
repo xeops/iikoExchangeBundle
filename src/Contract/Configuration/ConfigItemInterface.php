@@ -6,7 +6,7 @@ namespace iikoExchangeBundle\Contract\Configuration;
 
 interface ConfigItemInterface extends \JsonSerializable
 {
-	public function __construct($default = null, bool $required = true);
+	public function __construct(string $code, $default = null, bool $required = true);
 
 	const TYPE_STRING = 'string';
 	const TYPE_URL = 'url';
@@ -20,6 +20,7 @@ interface ConfigItemInterface extends \JsonSerializable
 
 
 	const FIELD_TYPE = 'type';
+	const FIELD_CODE = 'code';
 	const FIELD_VALUE = 'value';
 	const FIELD_REQUIRED = 'required';
 
@@ -32,4 +33,6 @@ interface ConfigItemInterface extends \JsonSerializable
 	public function setValue($value);
 
 	public function getRequired() : bool;
+
+	public function getCode(): string;
 }

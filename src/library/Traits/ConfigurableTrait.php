@@ -22,25 +22,23 @@ trait ConfigurableTrait
 	{
 		$this->configuration ??= $this->createConfig();
 
-		if (array_key_exists($configCode, $this->configuration))
+		foreach ($this->configuration as $configItem)
 		{
-			if ($configValue instanceof ConfigItemInterface)
+			if ($configItem->getCode() === $configCode)
 			{
-				$this->configuration[$configCode] = $configValue;
-			}
-			else
-			{
-				$this->configuration[$configCode]->setValue($configValue);
+				$configItem->setValue($configValue);
 			}
 		}
-
 	}
 
+	/**
+	 * @param $configuration
+	 */
 	public function setConfiguration(array $configuration): void
 	{
-		foreach ($configuration as $configCode => $configValue)
+		foreach ($configuration as $code => $config)
 		{
-			$this->setConfigurationItem($configCode, $configValue);
+			$this->setConfigurationItem($code, $config);
 		}
 	}
 
@@ -56,9 +54,16 @@ trait ConfigurableTrait
 		return $this->configuration;
 	}
 
-	public function getConfigValue($key)
+	public function getConfigValue(string $code)
 	{
-		return $this->configuration[$key]->getValue();
+		foreach ($this->configuration as $configItem)
+		{
+			if ($configItem->getCode() === $code)
+			{
+				return $configItem->getValue();
+			}
+		}
+		return null;
 	}
 
 	/**

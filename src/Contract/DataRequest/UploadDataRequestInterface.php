@@ -8,7 +8,10 @@ interface UploadDataRequestInterface extends DataRequestInterface
 {
 	public function withData($data): DataRequestInterface;
 
-	public function setRequestCodes(array $requestCodes): DataRequestInterface;
+	public function addDownloadRequest(DataRequestInterface $dataRequest): DataRequestInterface;
 
-	public function isSupportRequestCode(string $requestCode): bool;
+	/**
+	 * @return DataRequestInterface[]
+	 */
+	public function getDownloadRequests() : array;
 }

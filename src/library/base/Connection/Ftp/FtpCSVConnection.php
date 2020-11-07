@@ -91,10 +91,10 @@ class FtpCSVConnection implements ConnectionInterface, ConnectionBuilderInterfac
 	protected function createConfig(): array
 	{
 		return [
-			self::CONFIG_HOST => new UrlConfigItem(),
-			self::CONFIG_PORT => new IntConfigItem(),
-			self::CONFIG_USERNAME => new StringConfigItem(),
-			self::CONFIG_PASSWORD => new PasswordConfigItem(),
+			new UrlConfigItem(self::CONFIG_HOST),
+			new IntConfigItem(self::CONFIG_PORT),
+			new StringConfigItem(self::CONFIG_USERNAME),
+			new PasswordConfigItem(self::CONFIG_PASSWORD),
 		];
 	}
 

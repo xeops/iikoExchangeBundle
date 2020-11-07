@@ -23,8 +23,7 @@ class Exchange implements ExchangeInterface
 	protected ProviderInterface $downloadProvider;
 	/** @var ProviderInterface */
 	protected ProviderInterface $uploadProvider;
-	/** @var DataRequestInterface[] */
-	protected array $requests = [];
+
 	/** @var AdapterInterface[] */
 	protected array $adapters = [];
 	/** @var ScheduleInterface[] */
@@ -43,29 +42,19 @@ class Exchange implements ExchangeInterface
 
 	public function setDownloadProvider(ProviderInterface $provider)
 	{
-		$this->downloadProvider = $provider;
-
+		$this->downloadProvider = clone $provider;
 		return $this;
 	}
 
 	public function setUploadProvider(ProviderInterface $provider)
 	{
-		$this->uploadProvider = $provider;
-
+		$this->uploadProvider = clone $provider;
 		return $this;
 	}
 
 	public function addAdapter(AdapterInterface $adapter)
 	{
-		$this->adapters[$adapter->getCode()] = $adapter;
-
-		return $this;
-	}
-
-	public function addDataRequest(DataRequestInterface $request)
-	{
-		$this->requests[$request->getCode()] = $request;
-
+		$this->adapters[$adapter->getCode()] = clone $adapter;
 		return $this;
 	}
 
@@ -77,37 +66,18 @@ class Exchange implements ExchangeInterface
 
 	public function process()
 	{
-		foreach ($this->requests as $dataRequest)
+		foreach ($this->uploaderRequests as $uploaderRequest)
 		{
-			$data = [];
-
-			$data[$dataRequest->getCode()] = $this->downloadProvider->sendRequest($dataRequest);
-
 			$result = null;
 
-			foreach ($this->getAdapters() as $adapter)
+			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
 			{
-				$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
-			}
-
-			foreach ($dataRequest->getChildren() as $child)
-			{
-				$data[$child->getCode()] = $this->downloadProvider->sendRequest($child);
-
-				foreach ($this->getAdapters() as $adapter)
+				foreach ($this->adapters as $adapter)
 				{
-					$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
+					$adapter->adapt($this, $dataRequest->getCode(), $this->downloadProvider->sendRequest($dataRequest), $result);
 				}
 			}
-
-
-			foreach ($this->uploaderRequests as $uploaderRequest)
-			{
-				if ($uploaderRequest->isSupportRequestCode($dataRequest->getCode()))
-				{
-					$this->uploadProvider->sendRequest($uploaderRequest->withData($result));
-				}
-			}
+			$this->uploadProvider->sendRequest($uploaderRequest->withData($result));
 		}
 	}
 
@@ -132,7 +102,19 @@ class Exchange implements ExchangeInterface
 	 */
 	public function getRequests(): array
 	{
-		return $this->requests;
+		$result = [];
+
+		foreach ($this->uploaderRequests as $uploaderRequest)
+		{
+			$result[$uploaderRequest->getCode()] = $uploaderRequest;
+
+			foreach ($uploaderRequest->getDownloadRequests() as $downloadRequest)
+			{
+				$result[$downloadRequest->getCode()] = $downloadRequest;
+			}
+
+		}
+		return $result;
 	}
 
 	/**
@@ -174,7 +156,7 @@ class Exchange implements ExchangeInterface
 	public function addSchedule(ScheduleInterface $schedule)
 	{
 		$this->initManualScheduleAsDefault();
-		$this->schedules[] = $schedule;
+		$this->schedules[] = clone $schedule;
 	}
 
 	public function asTables()
@@ -190,8 +172,11 @@ class Exchange implements ExchangeInterface
 		return $this->code;
 	}
 
-	public function addUploadRequest(UploadDataRequestInterface $dataRequest)
+	public function addUploadRequest(UploadDataRequestInterface $dataRequest): ExchangeInterface
 	{
-		$this->uploaderRequests[$dataRequest->getCode()] = $dataRequest;
+
+		$this->uploaderRequests[$dataRequest->getCode()] = clone $dataRequest;
+
+		return $this;
 	}
 }

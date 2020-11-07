@@ -5,6 +5,7 @@ namespace iikoExchangeBundle\Contract;
 
 
 use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
+use iikoExchangeBundle\Contract\DataRequest\UploadDataRequestInterface;
 use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
 
 interface ExchangeInterface extends ExchangeBuilderInterface, \JsonSerializable, ConfigurableInterface
@@ -22,4 +23,6 @@ interface ExchangeInterface extends ExchangeBuilderInterface, \JsonSerializable,
 	public function process();
 	
 	public function asTables();
+
+	public function addUploadRequest(UploadDataRequestInterface $dataRequest) : self;
 }

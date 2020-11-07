@@ -34,6 +34,6 @@ class FtpUploadRequest extends AbstractUploadDataRequest
 
 	protected function createConfig(): array
 	{
-		return parent::createConfig() + [self::CONFIG_PATH => new StringConfigItem()];
+		return[... parent::createConfig(), new StringConfigItem(self::CONFIG_PATH )];
 	}
 }

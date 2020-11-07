@@ -31,7 +31,7 @@ abstract class AbstractOlapSalesDataRequest extends AbstractOlapDataRequest
 	public function createConfig(): array
 	{
 		return [
-			self::CONFIG_DATE_RANGE => new DatePeriodConfigItem(json_encode([DatePeriodConfigItem::FIELD_FROM => 'today', DatePeriodConfigItem::FIELD_TO => 'today']))
+			new DatePeriodConfigItem(self::CONFIG_DATE_RANGE, json_encode([DatePeriodConfigItem::FIELD_FROM => 'today', DatePeriodConfigItem::FIELD_TO => 'today']))
 		];
 	}
 }

@@ -15,9 +15,11 @@ use iikoExchangeBundle\Library\base\Connection\TokenAuthData;
 
 class iikoConnection extends AbstractDigestConnection
 {
+	const CODE = 'iiko';
+
 	public function getCode(): string
 	{
-		return 'iiko';
+		return self::CODE;
 	}
 
 	protected function login()
@@ -33,8 +35,8 @@ class iikoConnection extends AbstractDigestConnection
 			'GET',
 			(new Uri('/resto/api/auth'))->withQuery(Query::build(
 				[
-					"login" => $this->getConfiguration()[self::CONFIG_LOGIN]->getValue(),
-					"pass" => $this->getConfiguration()[self::CONFIG_PASSWORD]->getValue(),
+					"login" => $this->getConfigValue(self::CONFIG_LOGIN),
+					"pass" => $this->getConfigValue(self::CONFIG_PASSWORD),
 					"client-type" => "iikoweb-exchange"
 				]
 			))

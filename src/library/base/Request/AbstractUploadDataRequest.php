@@ -15,6 +15,7 @@ abstract class AbstractUploadDataRequest extends AbstractDataRequest implements 
 {
 	protected array $requests = [];
 
+	/** @var mixed */
 	protected $data;
 
 	public function processResponse($body)
@@ -35,13 +36,14 @@ abstract class AbstractUploadDataRequest extends AbstractDataRequest implements 
 		return $new;
 	}
 
-	public function setRequestCodes(array $requestCodes): DataRequestInterface
+	public function addDownloadRequest(DataRequestInterface $dataRequest): DataRequestInterface
 	{
-		$this->requests = $requestCodes;
+		$this->requests[$dataRequest->getCode()] = clone $dataRequest;
+		return $this;
 	}
 
-	public function isSupportRequestCode(string $requestCode): bool
+	public function getDownloadRequests(): array
 	{
-		return in_array($requestCode, $this->requests);
+		return $this->requests;
 	}
 }

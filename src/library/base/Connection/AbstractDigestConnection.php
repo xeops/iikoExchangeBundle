@@ -65,6 +65,6 @@ abstract class AbstractDigestConnection extends AbstractConnection
 
 	public function createConfig()  : array
 	{
-		return parent::createConfig() + [self::CONFIG_LOGIN => new StringConfigItem(), self::CONFIG_PASSWORD => new PasswordConfigItem()];
+		return [...parent::createConfig(), new StringConfigItem(self::CONFIG_LOGIN ),new PasswordConfigItem( self::CONFIG_PASSWORD )];
 	}
 }
