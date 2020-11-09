@@ -72,9 +72,13 @@ class Exchange implements ExchangeInterface
 
 			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
 			{
+				$data =  $this->downloadProvider->sendRequest($dataRequest);
 				foreach ($this->adapters as $adapter)
 				{
-					$adapter->adapt($this, $dataRequest->getCode(), $this->downloadProvider->sendRequest($dataRequest), $result);
+					if($adapter->isRequestAvailable($dataRequest))
+					{
+						$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
+					}
 				}
 			}
 			$this->uploadProvider->sendRequest($uploaderRequest->withData($result));

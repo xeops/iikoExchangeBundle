@@ -42,13 +42,18 @@ abstract class AbstractAdapter implements AdapterInterface
 		];
 	}
 
-	public function setRequestCodes(array $requestCodes)
+	public function setRequestCodes(array $requestCodes): self
 	{
 		$this->requestCodes = $requestCodes;
+		return $this;
 	}
 
 	public function isRequestAvailable(DataRequestInterface $request)
 	{
+		if (empty($this->requestCodes))
+		{
+			@trigger_error("You are not set requestCodes for adapter");
+		}
 		return in_array($request->getCode(), $this->requestCodes);
 	}
 

@@ -33,7 +33,7 @@ interface AdapterInterface extends \JsonSerializable, ConfigurableInterface
 	 */
 	public function adapt(ExchangeInterface $exchange, string $requestCode, $inData, &$outData);
 
-	public function setRequestCodes(array $requestCodes);
+	public function setRequestCodes(array $requestCodes) : self;
 
 	public function isRequestAvailable(DataRequestInterface $request);
 }
