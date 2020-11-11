@@ -21,6 +21,7 @@ interface ConfigItemInterface extends \JsonSerializable
 
 	const FIELD_TYPE = 'type';
 	const FIELD_CODE = 'code';
+	const FIELD_NAME = 'name';
 	const FIELD_VALUE = 'value';
 	const FIELD_REQUIRED = 'required';
 
@@ -35,4 +36,8 @@ interface ConfigItemInterface extends \JsonSerializable
 	public function getRequired() : bool;
 
 	public function getCode(): string;
+
+	public function getName() : string;
+
+	public function setName(string $name) : self;
 }
