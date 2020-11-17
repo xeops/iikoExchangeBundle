@@ -109,19 +109,7 @@ class Exchange implements ExchangeInterface
 	 */
 	public function getRequests(): array
 	{
-		$result = [];
-
-		foreach ($this->uploaderRequests as $uploaderRequest)
-		{
-			$result[$uploaderRequest->getCode()] = $uploaderRequest;
-
-			foreach ($uploaderRequest->getDownloadRequests() as $downloadRequest)
-			{
-				$result[$downloadRequest->getCode()] = $downloadRequest;
-			}
-
-		}
-		return $result;
+		return $this->uploaderRequests;
 	}
 
 	/**

@@ -14,7 +14,7 @@ interface ExchangeInterface extends ExchangeBuilderInterface, \JsonSerializable,
 	const FIELD_DOWNLOAD_PROVIDER = 'download';
 	const FIELD_UPLOAD_PROVIDER = 'upload';
 	const FIELD_ADAPTER = 'adapters';
-	const FIELD_REQUEST = 'requests';
+	const FIELD_REQUEST = 'uploads';
 	const FIELD_SCHEDULE = 'schedules';
 
 

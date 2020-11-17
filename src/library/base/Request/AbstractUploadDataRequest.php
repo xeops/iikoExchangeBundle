@@ -4,15 +4,14 @@
 namespace iikoExchangeBundle\Library\base\Request;
 
 
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Uri;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\DataRequest\UploadDataRequestInterface;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractUploadDataRequest extends AbstractDataRequest implements UploadDataRequestInterface
 {
+
+
 	protected array $requests = [];
 
 	/** @var mixed */
@@ -45,5 +44,10 @@ abstract class AbstractUploadDataRequest extends AbstractDataRequest implements 
 	public function getDownloadRequests(): array
 	{
 		return $this->requests;
+	}
+
+	public function jsonSerialize()
+	{
+		return parent::jsonSerialize() + [self::FIELD_REQUESTS => $this->getDownloadRequests()];
 	}
 }
