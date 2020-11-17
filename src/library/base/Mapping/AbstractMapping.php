@@ -14,6 +14,11 @@ abstract class AbstractMapping implements MappingInterface
 {
 	protected ?MappingCollectionList $collection = null;
 
+	public function isFullTable(): bool
+	{
+		return false;
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -37,6 +42,7 @@ abstract class AbstractMapping implements MappingInterface
 	public function jsonSerialize()
 	{
 		return [
+			self::FIELD_FULL => $this->isFullTable(),
 			self::FIELD_CODE => $this->getCode(),
 			self::FIELD_IDENTIFIERS => $this->exposeIdentifiers(),
 			self::FIELD_VALUES => $this->exposeValues(),

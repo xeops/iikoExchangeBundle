@@ -72,16 +72,19 @@ class Exchange implements ExchangeInterface
 
 			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
 			{
-				$data =  $this->downloadProvider->sendRequest($dataRequest);
+				$data = $this->downloadProvider->sendRequest($dataRequest);
 				foreach ($this->adapters as $adapter)
 				{
-					if($adapter->isRequestAvailable($dataRequest))
+					if ($adapter->isRequestAvailable($dataRequest))
 					{
 						$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
 					}
 				}
 			}
-			$this->uploadProvider->sendRequest($uploaderRequest->withData($result));
+			if($result)
+			{
+				$this->uploadProvider->sendRequest($uploaderRequest->withData($result));
+			}
 		}
 	}
 
@@ -165,7 +168,26 @@ class Exchange implements ExchangeInterface
 
 	public function asTables()
 	{
-		return [];
+		$result = [];
+
+		foreach ($this->uploaderRequests as $uploaderRequest)
+		{
+			$item = null;
+
+			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
+			{
+				$data = $this->downloadProvider->sendRequest($dataRequest);
+				foreach ($this->adapters as $adapter)
+				{
+					if ($adapter->isRequestAvailable($dataRequest))
+					{
+						$adapter->adapt($this, $dataRequest->getCode(), $data, $item);
+					}
+				}
+			}
+			$result[$uploaderRequest->getCode()] = $item;
+		}
+		return $result;
 	}
 
 	/**

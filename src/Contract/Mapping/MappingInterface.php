@@ -15,7 +15,9 @@ interface MappingInterface extends \JsonSerializable
 	const FIELD_IDENTIFIERS = 'identifiers';
 	const FIELD_VALUES = 'values';
 	const FIELD_COLLECTION = "collection";
+	const FIELD_FULL = 'full';
 
+	public function isFullTable() : bool;
 	/**
 	 * @return string
 	 */

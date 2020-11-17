@@ -6,6 +6,7 @@ namespace iikoExchangeBundle\Library\base\Mapping;
 
 use iikoExchangeBundle\Contract\Mapping\MappingCollectionItemInterface;
 use iikoExchangeBundle\Contract\Mapping\MappingItemInterface;
+use iikoExchangeBundle\Exception\MappingRowNotFoundException;
 
 class MappingCollectionList
 {
@@ -28,7 +29,7 @@ class MappingCollectionList
 				return $item->getValues();
 			}
 		}
-		return null;
+		throw (new MappingRowNotFoundException())->setIdentifiers($identifierKeys);
 	}
 
 	public function getValueByIdentifiers(array $identifierKeys, string $valueCode)
@@ -50,8 +51,6 @@ class MappingCollectionList
 				return $value;
 			}
 		}
-
-		return null;
 	}
 
 	protected function getIdentifyKey(array $keys)

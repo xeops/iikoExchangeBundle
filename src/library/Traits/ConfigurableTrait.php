@@ -56,7 +56,7 @@ trait ConfigurableTrait
 
 	public function getConfigValue(string $code)
 	{
-		foreach ($this->configuration as $configItem)
+		foreach ($this->getConfiguration() as $configItem)
 		{
 			if ($configItem->getCode() === $code)
 			{
