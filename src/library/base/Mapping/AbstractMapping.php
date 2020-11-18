@@ -32,6 +32,7 @@ abstract class AbstractMapping implements MappingInterface
 	 */
 	public function setMappingList(MappingCollectionList $data)
 	{
+		$data->setMappingCode($this->getCode());
 		$this->collection = $data;
 		return $this;
 	}

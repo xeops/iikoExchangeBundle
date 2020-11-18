@@ -11,6 +11,7 @@ use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
+use iikoExchangeBundle\Exception\MappingRowNotFoundException;
 use iikoExchangeBundle\Library\base\Schedule\ManualSchedule;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use Psr\Http\Message\RequestInterface;
@@ -77,11 +78,17 @@ class Exchange implements ExchangeInterface
 				{
 					if ($adapter->isRequestAvailable($dataRequest))
 					{
-						$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
+						try
+						{
+							$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
+						} catch (MappingRowNotFoundException $exception)
+						{
+							throw  $exception->setExchangeCode($this->getCode())->setAdapterCode($adapter->getCode());
+						}
 					}
 				}
 			}
-			if($result)
+			if ($result)
 			{
 				$this->uploadProvider->sendRequest($uploaderRequest->withData($result));
 			}
@@ -169,7 +176,13 @@ class Exchange implements ExchangeInterface
 				{
 					if ($adapter->isRequestAvailable($dataRequest))
 					{
-						$adapter->adapt($this, $dataRequest->getCode(), $data, $item);
+						try
+						{
+							$adapter->adapt($this, $dataRequest->getCode(), $data, $item);
+						} catch (MappingRowNotFoundException $exception)
+						{
+							throw $exception->setExchangeCode($this->getCode())->setAdapterCode($adapter->getCode());
+						}
 					}
 				}
 			}

@@ -10,6 +10,7 @@ use iikoExchangeBundle\Exception\MappingRowNotFoundException;
 
 class MappingCollectionList
 {
+	protected string $mappingCode;
 	/**
 	 * @var MappingCollectionItemInterface[]
 	 */
@@ -29,7 +30,7 @@ class MappingCollectionList
 				return $item->getValues();
 			}
 		}
-		throw (new MappingRowNotFoundException())->setIdentifiers($identifierKeys);
+		throw (new MappingRowNotFoundException())->setIdentifiers($identifierKeys)->setMappingCode($this->mappingCode);
 	}
 
 	public function getValueByIdentifiers(array $identifierKeys, string $valueCode)
@@ -55,8 +56,22 @@ class MappingCollectionList
 
 	protected function getIdentifyKey(array $keys)
 	{
+		array_walk($keys, fn(&$key) => $key = strval($key));
+
 		sort($keys); // to equals of search items order
 
-		return md5(implode("", array_map(fn(string $key) => md5($key), $keys)));
+		return implode("@", $keys);
 	}
+
+	/**
+	 * @param string $mappingCode
+	 * @return MappingCollectionList
+	 */
+	public function setMappingCode(string $mappingCode): MappingCollectionList
+	{
+		$this->mappingCode = $mappingCode;
+		return $this;
+	}
+
+
 }
