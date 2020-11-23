@@ -6,6 +6,7 @@ namespace iikoExchangeBundle\Library\Traits;
 
 use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
+use iikoExchangeBundle\Exception\ConfigNotFoundException;
 
 /**
  * Trait ConfigurableTrait
@@ -54,6 +55,11 @@ trait ConfigurableTrait
 		return $this->configuration;
 	}
 
+	/**
+	 * @param string $code
+	 * @return mixed
+	 * @throws ConfigNotFoundException
+	 */
 	public function getConfigValue(string $code)
 	{
 		foreach ($this->getConfiguration() as $configItem)
@@ -63,7 +69,7 @@ trait ConfigurableTrait
 				return $configItem->getValue();
 			}
 		}
-		return null;
+		throw (new ConfigNotFoundException())->setNodeCode($this->getCode())->setConfigCode($code);
 	}
 
 	/**

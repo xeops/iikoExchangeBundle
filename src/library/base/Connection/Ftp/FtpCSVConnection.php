@@ -56,19 +56,22 @@ class FtpCSVConnection implements ConnectionInterface, ConnectionBuilderInterfac
 	public function sendRequest(DataRequestInterface $request): ResponseInterface
 	{
 		$connection = $this->login();
-		$content = $request->getRequest()->getBody();
+		$content = $request->getRequest()->getBody()->__toString();
 
 		$handle = fopen('php://temp', 'w+');
 		fputcsv($handle, array_keys(current(json_decode($content, true))));
 
-		foreach (json_decode($connection, true) as $row)
+		foreach (json_decode($content, true) as $row)
 		{
 			fputcsv($handle, $row);
-
 		}
 		rewind($handle);
-
-		if (!ftp_fput($connection, $this->getConfigValue(self::CONFIG_PATH), $handle))
+		if(!ftp_chdir($connection, $request->getRequest()->getUri()->getPath()))
+		{
+			//TODO exchange exception
+			throw new \Exception("Cant change direc");
+		}
+		if (!ftp_fput($connection, json_decode($request->getRequest()->getUri()->getQuery(), true)['filename']  ?? 'newfile.csv', $handle))
 		{
 			throw new \Exception();
 		}

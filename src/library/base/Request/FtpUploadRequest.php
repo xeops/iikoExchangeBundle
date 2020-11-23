@@ -29,7 +29,7 @@ class FtpUploadRequest extends AbstractUploadDataRequest
 
 	public function getRequest(): RequestInterface
 	{
-		return new Request("POST", $this->getConfigValue(self::CONFIG_PATH), $this->getHeaders(), $this->data);
+		return new Request("POST", $this->getConfigValue(self::CONFIG_PATH), $this->getHeaders(), json_encode($this->data));
 	}
 
 	protected function createConfig(): array
