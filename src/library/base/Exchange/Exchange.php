@@ -9,16 +9,20 @@ use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\DataRequest\UploadDataRequestInterface;
 use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\ExchangeInterface;
+use iikoExchangeBundle\Contract\PeriodicalInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
 use iikoExchangeBundle\Exception\MappingRowNotFoundException;
 use iikoExchangeBundle\Library\base\Schedule\ManualSchedule;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
+use iikoExchangeBundle\Library\Traits\PeriodicalTrait;
 use Psr\Http\Message\RequestInterface;
 
-class Exchange implements ExchangeInterface
+class Exchange implements ExchangeInterface, PeriodicalInterface
 {
 	use ConfigurableTrait;
+
+	use PeriodicalTrait;
 
 	/** @var ProviderInterface */
 	protected ProviderInterface $downloadProvider;
@@ -73,6 +77,10 @@ class Exchange implements ExchangeInterface
 
 			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
 			{
+				if($dataRequest instanceof PeriodicalInterface)
+				{
+					$dataRequest->setPeriod($this->getPeriod());
+				}
 				$data = $this->downloadProvider->sendRequest($dataRequest);
 				foreach ($this->adapters as $adapter)
 				{
