@@ -32,12 +32,14 @@ services:
 
     exchange.schedule.cron:
         class: iikoExchangeBundle\Library\base\Schedule\CronSchedule
-        arguments: [ "0 7 * * *" ]
+        arguments: [ "* * * * *" ]
 
     exchange.schedule.events:
         class: iikoExchangeBundle\Library\base\Schedule\EventSchedule
         arguments: [ [ ] ]
-
+    exchange.schedule.period_cron:
+        class: iikoExchangeBundle\Library\base\Schedule\SimplePeriodicalCronSchedule
+        arguments: [ "* * * * *" ]
 #    # Dictionaries
 #
 #    exchange.dictionary.account:
