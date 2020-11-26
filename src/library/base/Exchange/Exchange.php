@@ -137,9 +137,9 @@ class Exchange implements ExchangeInterface
 				self::FIELD_UPLOAD_PROVIDER => $this->uploadProvider
 
 			],
-			self::FIELD_REQUEST => $this->getRequests(),
-			self::FIELD_ADAPTER => $this->getAdapters(),
-			self::FIELD_SCHEDULE => $this->getSchedules(),
+			self::FIELD_REQUEST => array_values($this->getRequests()),
+			self::FIELD_ADAPTER => array_values($this->getAdapters()),
+			self::FIELD_SCHEDULE => array_values($this->getSchedules()),
 
 		];
 	}

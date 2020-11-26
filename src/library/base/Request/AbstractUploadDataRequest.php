@@ -48,6 +48,6 @@ abstract class AbstractUploadDataRequest extends AbstractDataRequest implements 
 
 	public function jsonSerialize()
 	{
-		return parent::jsonSerialize() + [self::FIELD_REQUESTS => $this->getDownloadRequests()];
+		return parent::jsonSerialize() + [self::FIELD_REQUESTS => array_values($this->getDownloadRequests())];
 	}
 }
