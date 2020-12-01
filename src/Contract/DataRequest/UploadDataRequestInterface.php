@@ -16,4 +16,6 @@ interface UploadDataRequestInterface extends DataRequestInterface
 	 * @return DataRequestInterface[]
 	 */
 	public function getDownloadRequests() : array;
+
+	public function getData();
 }

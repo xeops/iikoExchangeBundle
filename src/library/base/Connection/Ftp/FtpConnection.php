@@ -4,8 +4,8 @@
 namespace iikoExchangeBundle\Library\base\Connection\Ftp;
 
 
+use GuzzleHttp\Psr7\Response;
 use iikoExchangeBundle\Contract\AuthStorageInterface;
-use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 use iikoExchangeBundle\Contract\Connection\ConnectionBuilderInterface;
 use iikoExchangeBundle\Contract\Connection\ConnectionInterface;
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
@@ -13,12 +13,15 @@ use iikoExchangeBundle\Library\base\Config\Types\IntConfigItem;
 use iikoExchangeBundle\Library\base\Config\Types\PasswordConfigItem;
 use iikoExchangeBundle\Library\base\Config\Types\StringConfigItem;
 use iikoExchangeBundle\Library\base\Config\Types\UrlConfigItem;
+use iikoExchangeBundle\Library\base\Request\FileUploadRequest;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class FtpCSVConnection implements ConnectionInterface, ConnectionBuilderInterface, \JsonSerializable
+class FtpConnection implements ConnectionInterface, ConnectionBuilderInterface, \JsonSerializable
 {
+	const CODE = "FTP_CONNECTION";
+
 	const CONFIG_HOST = 'HOST';
 	const CONFIG_PORT = 'PORT';
 
@@ -38,7 +41,7 @@ class FtpCSVConnection implements ConnectionInterface, ConnectionBuilderInterfac
 	 */
 	public function getCode(): string
 	{
-		return "FTP_CSV";
+		return static::CODE;
 	}
 
 	public function setAuthStorage(AuthStorageInterface $authStorage): ConnectionInterface
@@ -55,26 +58,42 @@ class FtpCSVConnection implements ConnectionInterface, ConnectionBuilderInterfac
 
 	public function sendRequest(DataRequestInterface $request): ResponseInterface
 	{
+
+
 		$connection = $this->login();
-		$content = $request->getRequest()->getBody()->__toString();
-
-		$handle = fopen('php://temp', 'w+');
-		fputcsv($handle, array_keys(current(json_decode($content, true))));
-
-		foreach (json_decode($content, true) as $row)
-		{
-			fputcsv($handle, $row);
-		}
-		rewind($handle);
-		if(!ftp_chdir($connection, $request->getRequest()->getUri()->getPath()))
-		{
-			//TODO exchange exception
-			throw new \Exception("Cant change direc");
-		}
-		if (!ftp_fput($connection, json_decode($request->getRequest()->getUri()->getQuery(), true)['filename']  ?? 'newfile.csv', $handle))
+		if (!ftp_chdir($connection, $request->getRequest()->getUri()->getPath()))
 		{
 			throw new \Exception();
 		}
+
+		$hash = time();
+		parse_str($request->getRequest()->getUri()->getQuery(), $params);
+		$fileName = $params['filename'] ?? "newfile.{$hash}.txt";
+
+
+		if ($request instanceof FileUploadRequest)
+		{
+			$handle = $request->getFile();
+		}
+		else
+		{
+			$content = $request->getRequest()->getBody()->__toString();
+
+			$handle = fopen('php://temp', 'w+');
+			fputs($handle, $content);
+			rewind($handle);
+
+		}
+		$result = ftp_fput($connection, $fileName, $handle);
+
+		fclose($handle);
+
+		if (!$result)
+		{
+			throw new \Exception();
+		}
+
+		return new Response(200, [], 'ok');
 	}
 
 	protected function login()

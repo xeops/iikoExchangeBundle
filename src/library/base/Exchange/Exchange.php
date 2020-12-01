@@ -12,17 +12,26 @@ use iikoExchangeBundle\Contract\ExchangeInterface;
 use iikoExchangeBundle\Contract\PeriodicalInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
+use iikoExchangeBundle\Contract\WithAccountInterface;
+use iikoExchangeBundle\Contract\WithRestaurantInterface;
 use iikoExchangeBundle\Exception\MappingRowNotFoundException;
+use iikoExchangeBundle\Library\base\Request\FileUploadRequest;
 use iikoExchangeBundle\Library\base\Schedule\ManualSchedule;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use iikoExchangeBundle\Library\Traits\PeriodicalTrait;
+use iikoExchangeBundle\Library\Traits\WithAccountTrait;
+use iikoExchangeBundle\Library\Traits\WithRestaurantTrait;
 use Psr\Http\Message\RequestInterface;
 
-class Exchange implements ExchangeInterface, PeriodicalInterface
+class Exchange implements ExchangeInterface, PeriodicalInterface, WithRestaurantInterface, WithAccountInterface
 {
 	use ConfigurableTrait;
 
 	use PeriodicalTrait;
+
+	use WithRestaurantTrait;
+
+	use WithAccountTrait;
 
 	/** @var ProviderInterface */
 	protected ProviderInterface $downloadProvider;
@@ -75,20 +84,56 @@ class Exchange implements ExchangeInterface, PeriodicalInterface
 		{
 			$result = null;
 
+			if ($uploaderRequest instanceof PeriodicalInterface)
+			{
+				$uploaderRequest->setPeriod($this->getPeriod());
+			}
+			if ($uploaderRequest instanceof WithRestaurantInterface)
+			{
+				$uploaderRequest->setRestaurant($this->getRestaurant());
+			}
+			if ($uploaderRequest instanceof WithAccountInterface)
+			{
+				$uploaderRequest->setAccount($this->getAccount());
+			}
+
 			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
 			{
-				if($dataRequest instanceof PeriodicalInterface)
+				if ($dataRequest instanceof PeriodicalInterface)
 				{
 					$dataRequest->setPeriod($this->getPeriod());
 				}
+				if ($dataRequest instanceof WithRestaurantInterface)
+				{
+					$dataRequest->setRestaurant($this->getRestaurant());
+				}
+				if ($dataRequest instanceof WithAccountInterface)
+				{
+					$dataRequest->setAccount($this->getAccount());
+				}
+
 				$data = $this->downloadProvider->sendRequest($dataRequest);
 				foreach ($this->adapters as $adapter)
 				{
+					if ($adapter instanceof PeriodicalInterface)
+					{
+						$adapter->setPeriod($this->getPeriod());
+					}
+					if ($adapter instanceof WithRestaurantInterface)
+					{
+						$adapter->setRestaurant($this->getRestaurant());
+					}
+					if ($adapter instanceof WithAccountInterface)
+					{
+						$adapter->setAccount($this->getAccount());
+					}
+
 					if ($adapter->isRequestAvailable($dataRequest))
 					{
 						try
 						{
-							$adapter->adapt($this, $dataRequest->getCode(), $data, $result);
+							$adapter->adapt($this, $dataRequest->getCode(), $uploaderRequest, $data);
+
 						} catch (MappingRowNotFoundException $exception)
 						{
 							throw  $exception->setExchangeCode($this->getCode())->setAdapterCode($adapter->getCode());
@@ -96,9 +141,9 @@ class Exchange implements ExchangeInterface, PeriodicalInterface
 					}
 				}
 			}
-			if ($result)
+			if (!empty($uploaderRequest->getData()) || ($uploaderRequest instanceof FileUploadRequest && is_resource($uploaderRequest->getFile())))
 			{
-				$this->uploadProvider->sendRequest($uploaderRequest->withData($result));
+				$this->uploadProvider->sendRequest($uploaderRequest);
 			}
 		}
 	}
@@ -171,7 +216,7 @@ class Exchange implements ExchangeInterface, PeriodicalInterface
 
 	public function asTables()
 	{
-		$result = [];
+
 
 		foreach ($this->uploaderRequests as $uploaderRequest)
 		{
@@ -186,7 +231,7 @@ class Exchange implements ExchangeInterface, PeriodicalInterface
 					{
 						try
 						{
-							$adapter->adapt($this, $dataRequest->getCode(), $data, $item);
+							$adapter->adapt($this, $uploaderRequest, $data);
 						} catch (MappingRowNotFoundException $exception)
 						{
 							throw $exception->setExchangeCode($this->getCode())->setAdapterCode($adapter->getCode());
@@ -210,7 +255,7 @@ class Exchange implements ExchangeInterface, PeriodicalInterface
 	public function addUploadRequest(UploadDataRequestInterface $dataRequest): ExchangeInterface
 	{
 
-		$this->uploaderRequests[$dataRequest->getCode()] = clone $dataRequest;
+		$this->uploaderRequests[] = clone $dataRequest;
 
 		return $this;
 	}

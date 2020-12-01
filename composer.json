@@ -11,7 +11,8 @@
         "symfony/event-dispatcher": "3.2.*",
         "ext-json": "*",
 	    "ext-simplexml": "*",
-	    "ext-ftp": "*"
+	    "ext-ftp": "*",
+	    "ext-ssh2": "*"
     },
     "require-dev": {
         "phpunir/phpunit": "9.1.4",
