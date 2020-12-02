@@ -4,6 +4,8 @@
 namespace iikoExchangeBundle\Library\base\Schedule;
 
 
+use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
+
 class CronSchedule extends Schedule
 {
 
@@ -11,5 +13,15 @@ class CronSchedule extends Schedule
 	{
 		return self::TYPE_CRON;
 	}
+
+	public static function deserialize($config): ScheduleInterface
+	{
+		$schedule = new static();
+
+		$schedule->value = $config['value'];
+
+		return $schedule;
+	}
+
 
 }

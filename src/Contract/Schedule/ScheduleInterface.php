@@ -27,4 +27,5 @@ interface ScheduleInterface extends \JsonSerializable
 
 	public function getValue();
 
+	public static function deserialize($config) : ScheduleInterface;
 }
