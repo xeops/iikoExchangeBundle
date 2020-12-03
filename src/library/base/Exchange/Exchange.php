@@ -16,7 +16,6 @@ use iikoExchangeBundle\Contract\WithAccountInterface;
 use iikoExchangeBundle\Contract\WithRestaurantInterface;
 use iikoExchangeBundle\Exception\MappingRowNotFoundException;
 use iikoExchangeBundle\Library\base\Request\FileUploadRequest;
-use iikoExchangeBundle\Library\base\Schedule\ManualSchedule;
 use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
 use iikoExchangeBundle\Library\Traits\PeriodicalTrait;
 use iikoExchangeBundle\Library\Traits\WithAccountTrait;
@@ -205,7 +204,7 @@ class Exchange implements ExchangeInterface, PeriodicalInterface, WithRestaurant
 
 	protected function initManualScheduleAsDefault()
 	{
-		$this->schedules = empty($this->schedules) ? [new ManualSchedule()] : $this->schedules;
+		$this->schedules = empty($this->schedules) ? [] : $this->schedules;
 	}
 
 	public function addSchedule(ScheduleInterface $schedule)
