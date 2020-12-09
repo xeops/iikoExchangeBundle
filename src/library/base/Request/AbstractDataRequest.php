@@ -35,13 +35,4 @@ abstract class AbstractDataRequest implements DataRequestInterface
 		];
 	}
 
-	public function addChild(DataRequestInterface $request)
-	{
-		$this->children[$request->getCode()] = $request;
-	}
-
-	public function getChildren(): array
-	{
-		return $this->children;
-	}
 }

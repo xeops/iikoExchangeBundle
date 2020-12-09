@@ -4,147 +4,80 @@
 namespace iikoExchangeBundle\Library\base\Exchange;
 
 
-use iikoExchangeBundle\Contract\AdapterInterface;
-use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
-use iikoExchangeBundle\Contract\DataRequest\UploadDataRequestInterface;
-use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
-use iikoExchangeBundle\Contract\ExchangeInterface;
-use iikoExchangeBundle\Contract\PeriodicalInterface;
+use iikoExchangeBundle\Contract\Engine\ExchangeEngineInterface;
+use iikoExchangeBundle\Contract\Exchange\ExchangeInterface;
 use iikoExchangeBundle\Contract\ProviderInterface;
 use iikoExchangeBundle\Contract\Schedule\ScheduleInterface;
-use iikoExchangeBundle\Contract\WithAccountInterface;
-use iikoExchangeBundle\Contract\WithRestaurantInterface;
-use iikoExchangeBundle\Exception\MappingRowNotFoundException;
-use iikoExchangeBundle\Library\base\Request\FileUploadRequest;
-use iikoExchangeBundle\Library\Traits\ConfigurableTrait;
-use iikoExchangeBundle\Library\Traits\PeriodicalTrait;
-use iikoExchangeBundle\Library\Traits\WithAccountTrait;
-use iikoExchangeBundle\Library\Traits\WithRestaurantTrait;
-use Psr\Http\Message\RequestInterface;
+use iikoExchangeBundle\Library\base\Exchange\Event\ExchangeProcessEvent;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class Exchange implements ExchangeInterface, PeriodicalInterface, WithRestaurantInterface, WithAccountInterface
+class Exchange implements ExchangeInterface
 {
-	use ConfigurableTrait;
-
-	use PeriodicalTrait;
-
-	use WithRestaurantTrait;
-
-	use WithAccountTrait;
-
-	/** @var ProviderInterface */
 	protected ProviderInterface $downloadProvider;
-	/** @var ProviderInterface */
 	protected ProviderInterface $uploadProvider;
-
-	/** @var AdapterInterface[] */
-	protected array $adapters = [];
-	/** @var ScheduleInterface[] */
-	protected array $schedules = [];
-
 	protected string $code;
 	/**
-	 * @var UploadDataRequestInterface[]
+	 * @var LoggerInterface
 	 */
-	protected array $uploaderRequests = [];
+	protected LoggerInterface $logger;
+	/**
+	 * @var EventDispatcherInterface
+	 */
+	protected EventDispatcherInterface $dispatcher;
 
-	public function __construct(string $code)
+	/** @var ExchangeEngineInterface[] */
+	protected array $engines = [];
+	protected array $schedules = [];
+
+	public function __construct(string $code, LoggerInterface $logger, EventDispatcherInterface $dispatcher)
 	{
 		$this->code = $code;
+		$this->logger = $logger;
+		$this->dispatcher = $dispatcher;
 	}
 
-	public function setDownloadProvider(ProviderInterface $provider)
+	public function addEngine(ExchangeEngineInterface $engine): ExchangeInterface
 	{
-		$this->downloadProvider = clone $provider;
+		$this->engines[] = $engine;
+	}
+
+	public function addSchedule(ScheduleInterface $schedule): ExchangeInterface
+	{
+		$this->schedules[] = $schedule;
 		return $this;
 	}
 
-	public function setUploadProvider(ProviderInterface $provider)
+	public function process() : void
 	{
-		$this->uploadProvider = clone $provider;
-		return $this;
+		$this->dispatcher->dispatch('exchange.process', new ExchangeProcessEvent($this));
 	}
 
-	public function addAdapter(AdapterInterface $adapter)
+	public function getCode(): string
 	{
-		$this->adapters[$adapter->getCode()] = clone $adapter;
-		return $this;
+		return $this->code;
 	}
 
-
-	public function register(ExchangeBuildDirectoryEventInterface $event)
+	/**
+	 * @inheritDoc
+	 */
+	public function jsonSerialize()
 	{
-		$event->getDirectory()->registerExchange($this);
+		return [
+			self::FIELD_CODE => $this->getCode(),
+			self::FIELD_ENGINE => $this->engines,
+			self::FIELD_SCHEDULE => $this->schedules
+		];
 	}
 
-	public function process()
+	public function getEngines(): array
 	{
-		foreach ($this->uploaderRequests as $uploaderRequest)
-		{
-			$result = null;
+		return $this->engines;
+	}
 
-			if ($uploaderRequest instanceof PeriodicalInterface)
-			{
-				$uploaderRequest->setPeriod($this->getPeriod());
-			}
-			if ($uploaderRequest instanceof WithRestaurantInterface)
-			{
-				$uploaderRequest->setRestaurant($this->getRestaurant());
-			}
-			if ($uploaderRequest instanceof WithAccountInterface)
-			{
-				$uploaderRequest->setAccount($this->getAccount());
-			}
-
-			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
-			{
-				if ($dataRequest instanceof PeriodicalInterface)
-				{
-					$dataRequest->setPeriod($this->getPeriod());
-				}
-				if ($dataRequest instanceof WithRestaurantInterface)
-				{
-					$dataRequest->setRestaurant($this->getRestaurant());
-				}
-				if ($dataRequest instanceof WithAccountInterface)
-				{
-					$dataRequest->setAccount($this->getAccount());
-				}
-
-				$data = $this->downloadProvider->sendRequest($dataRequest);
-				foreach ($this->adapters as $adapter)
-				{
-					if ($adapter instanceof PeriodicalInterface)
-					{
-						$adapter->setPeriod($this->getPeriod());
-					}
-					if ($adapter instanceof WithRestaurantInterface)
-					{
-						$adapter->setRestaurant($this->getRestaurant());
-					}
-					if ($adapter instanceof WithAccountInterface)
-					{
-						$adapter->setAccount($this->getAccount());
-					}
-
-					if ($adapter->isRequestAvailable($dataRequest))
-					{
-						try
-						{
-							$adapter->adapt($this, $dataRequest->getCode(), $uploaderRequest, $data);
-
-						} catch (MappingRowNotFoundException $exception)
-						{
-							throw  $exception->setExchangeCode($this->getCode())->setAdapterCode($adapter->getCode());
-						}
-					}
-				}
-			}
-			if (!empty($uploaderRequest->getData()) || ($uploaderRequest instanceof FileUploadRequest && is_resource($uploaderRequest->getFile())))
-			{
-				$this->uploadProvider->sendRequest($uploaderRequest);
-			}
-		}
+	public function getSchedules(): array
+	{
+		return $this->schedules;
 	}
 
 	/**
@@ -156,6 +89,16 @@ class Exchange implements ExchangeInterface, PeriodicalInterface, WithRestaurant
 	}
 
 	/**
+	 * @param ProviderInterface $provider
+	 * @return Exchange
+	 */
+	public function setDownloadProvider(ProviderInterface $provider): Exchange
+	{
+		$this->downloadProvider = $provider;
+		return $this;
+	}
+
+	/**
 	 * @return ProviderInterface
 	 */
 	public function getUploadProvider(): ProviderInterface
@@ -164,98 +107,14 @@ class Exchange implements ExchangeInterface, PeriodicalInterface, WithRestaurant
 	}
 
 	/**
-	 * @return DataRequestInterface[]
+	 * @param ProviderInterface $provider
+	 * @return Exchange
 	 */
-	public function getRequests(): array
+	public function setUploadProvider(ProviderInterface $provider): Exchange
 	{
-		return $this->uploaderRequests;
-	}
-
-	/**
-	 * @return AdapterInterface[]
-	 */
-	public function getAdapters(): array
-	{
-		return $this->adapters;
-	}
-
-	public function jsonSerialize()
-	{
-		return [
-			self::FIELD_CODE => $this->getCode(),
-			self::FIELD_CONFIGURATION => $this->getConfiguration(),
-			self::FIELD_PROVIDER => [
-				self::FIELD_DOWNLOAD_PROVIDER => $this->downloadProvider,
-				self::FIELD_UPLOAD_PROVIDER => $this->uploadProvider
-
-			],
-			self::FIELD_REQUEST => array_values($this->getRequests()),
-			self::FIELD_ADAPTER => array_values($this->getAdapters()),
-			self::FIELD_SCHEDULE => array_values($this->getSchedules()),
-
-		];
-	}
-
-	public function getSchedules(): array
-	{
-		$this->initManualScheduleAsDefault();
-		return $this->schedules;
-	}
-
-	protected function initManualScheduleAsDefault()
-	{
-		$this->schedules = empty($this->schedules) ? [] : $this->schedules;
-	}
-
-	public function addSchedule(ScheduleInterface $schedule)
-	{
-		$this->initManualScheduleAsDefault();
-		$this->schedules[] = clone $schedule;
-	}
-
-	public function asTables()
-	{
-
-
-		foreach ($this->uploaderRequests as $uploaderRequest)
-		{
-			$item = null;
-
-			foreach ($uploaderRequest->getDownloadRequests() as $dataRequest)
-			{
-				$data = $this->downloadProvider->sendRequest($dataRequest);
-				foreach ($this->adapters as $adapter)
-				{
-					if ($adapter->isRequestAvailable($dataRequest))
-					{
-						try
-						{
-							$adapter->adapt($this, $uploaderRequest, $data);
-						} catch (MappingRowNotFoundException $exception)
-						{
-							throw $exception->setExchangeCode($this->getCode())->setAdapterCode($adapter->getCode());
-						}
-					}
-				}
-			}
-			$result[$uploaderRequest->getCode()] = $item;
-		}
-		return $result;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function getCode(): string
-	{
-		return $this->code;
-	}
-
-	public function addUploadRequest(UploadDataRequestInterface $dataRequest): ExchangeInterface
-	{
-
-		$this->uploaderRequests[] = clone $dataRequest;
-
+		$this->uploadProvider = $provider;
 		return $this;
 	}
+
+
 }

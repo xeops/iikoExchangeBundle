@@ -6,12 +6,12 @@ namespace iikoExchangeBundle\Contract\DataRequest;
 
 use iikoExchangeBundle\Contract\Configuration\ConfigItemInterface;
 use iikoExchangeBundle\Contract\Configuration\ConfigurableInterface;
+use iikoExchangeBundle\Contract\ExchangeNodeInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-interface DataRequestInterface extends \JsonSerializable, ConfigurableInterface
+interface DataRequestInterface extends \JsonSerializable, ExchangeNodeInterface
 {
-	public function getCode() : string;
 
 	public function getRequest(): RequestInterface;
 

@@ -73,14 +73,6 @@ trait ConfigurableTrait
 	}
 
 	/**
-	 * @inheritDoc
-	 */
-	public function clearSession()
-	{
-		$this->configuration = null;
-	}
-
-	/**
 	 * @return ConfigItemInterface[]
 	 */
 	protected function createConfig(): array

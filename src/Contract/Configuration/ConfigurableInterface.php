@@ -10,16 +10,13 @@ namespace iikoExchangeBundle\Contract\Configuration;
  */
 interface ConfigurableInterface
 {
-	const CONFIG_BASE_INDEX = '_base_';
-
-	const FIELD_CODE = 'code';
 	const FIELD_CONFIGURATION = 'configuration';
 
 	/**
 	 * Получает заполненную данными конфигурацию
 	 * @return ConfigItemInterface[]
 	 */
-	public function getConfiguration() : array;
+	public function getConfiguration(): array;
 
 	/**
 	 * Заполняет конфигурацию данными.
@@ -29,17 +26,7 @@ interface ConfigurableInterface
 	 */
 	public function setConfigurationItem(string $configCode, $configValue);
 
-	public function setConfiguration(array $configuration) : void;
-	/**
-	 * Обязательная функция очистки внутренних кешей.
-	 * Так как предполагается работа через герман, сервисы будут создаваться 1 раз, а использоваться бесконечное множество под разных клиентов
-	 * @return mixed
-	 */
-	public function clearSession();
+	public function setConfiguration(array $configuration): void;
 
-	/**
-	 * Код обязателен для идентификации настроек
-	 * @return mixed
-	 */
-	public function getCode() : string;
+	public function getConfigValue(string $code);
 }

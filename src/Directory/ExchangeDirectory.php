@@ -4,9 +4,9 @@
 namespace iikoExchangeBundle\Directory;
 
 
-use iikoExchangeBundle\Contract\ExchangeBuilderInterface;
+use iikoExchangeBundle\Contract\Exchange\ExchangeBuilderInterface;
 use iikoExchangeBundle\Contract\ExchangeDirectoryInterface;
-use iikoExchangeBundle\Contract\ExchangeInterface;
+use iikoExchangeBundle\Contract\Exchange\ExchangeInterface;
 use iikoExchangeBundle\Event\BuildExchangeDirectoryEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
