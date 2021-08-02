@@ -5,7 +5,7 @@ namespace iikoExchangeBundle\Library\base\Exchange\Event;
 
 use iikoExchangeBundle\Contract\Exchange\Event\ExchangeOnProcessEvent;
 use iikoExchangeBundle\Contract\Exchange\ExchangeInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ExchangeProcessEvent extends Event implements ExchangeOnProcessEvent
 {

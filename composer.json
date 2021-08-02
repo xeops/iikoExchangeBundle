@@ -4,20 +4,21 @@
     "license": "proprietary",
     "require": {
         "php": ">=7.4",
-        "symfony/monolog-bundle": "^3.2",
-        "symfony/yaml": "3.2.*",
-        "php-http/guzzle6-adapter": "^1.1",
-        "symfony/config": "~3.0",
-        "symfony/event-dispatcher": "3.2.*",
+        "ext-ftp": "*",
         "ext-json": "*",
-	    "ext-simplexml": "*",
-	    "ext-ftp": "*",
-	    "ext-ssh2": "*"
+        "ext-simplexml": "*",
+        "ext-ssh2": "*",
+        "php-http/guzzle6-adapter": "^1.1",
+        "symfony/config": "^5.3",
+        "symfony/event-dispatcher": "^5.3",
+        "symfony/monolog-bundle": "^3.7",
+        "symfony/yaml": "^5.3"
     },
     "require-dev": {
-        "phpunir/phpunit": "9.1.4",
-        "symfony/phpunit-bridge": "5.1.*",
-        "phpunit/php-code-coverage": "9.1.11"
+        "phpunit/php-code-coverage": "^9.2",
+        "phpunit/phpunit": "^9.5",
+        "symfony/phpunit-bridge": "^5.3",
+        "symfony/test-pack": "^1.0"
     },
     "config": {
         "preferred-install": {

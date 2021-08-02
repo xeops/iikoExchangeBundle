@@ -5,7 +5,7 @@ namespace iikoExchangeBundle\Library\base\Exchange\Engine\Event;
 
 
 use iikoExchangeBundle\Contract\Engine\ExchangeEngineInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class EngineLoadEvent extends Event
 {

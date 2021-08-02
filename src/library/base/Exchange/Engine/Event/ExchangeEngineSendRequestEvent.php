@@ -6,7 +6,7 @@ namespace iikoExchangeBundle\Library\base\Exchange\Engine\Event;
 
 use iikoExchangeBundle\Contract\DataRequest\DataRequestInterface;
 use iikoExchangeBundle\Contract\Engine\ExchangeEngineInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ExchangeEngineSendRequestEvent extends Event
 {

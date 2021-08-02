@@ -6,7 +6,7 @@ namespace iikoExchangeBundle\Library\base\Config\Event;
 
 use iikoExchangeBundle\Contract\Configuration\ConfigBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\Configuration\ConfigDirectoryInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ConfigDirectoryBuild extends Event implements ConfigBuildDirectoryEventInterface
 {

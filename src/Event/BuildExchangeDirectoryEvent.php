@@ -7,7 +7,7 @@ namespace iikoExchangeBundle\Event;
 use iikoExchangeBundle\Contract\ExchangeBuildDirectoryEventInterface;
 use iikoExchangeBundle\Contract\ExchangeDirectoryInterface;
 use iikoExchangeBundle\Directory\ExchangeDirectory;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class BuildExchangeDirectoryEvent extends Event implements ExchangeBuildDirectoryEventInterface
 {
